@@ -6,21 +6,17 @@ if(!empty($_POST)) {
 
     $name= $_POST['name']; 
     try{
-
         $e  = User::UsernameAvailable($name);
-        //$e->setEmail($text);
-        //$e-> EmailAvailable();
 
         if ($e == false){
-
             $result=[
-                    "status" => "auwtch",
-                    "message" => "Don't copy 💩"
+                "status" => "auwtch",
+                "message" => "This one is taken"
                     ];
         }else {
             $result=[
                 "status" => "success",
-                "message" => "E-mail not found ✌🏻" 
+                "message" => "Not taken yet" 
                     ];
         }
     }
@@ -32,7 +28,7 @@ if(!empty($_POST)) {
     }
 
     
-            echo json_encode($result);
+        echo json_encode($result);
            
     
         }

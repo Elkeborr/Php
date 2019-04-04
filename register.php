@@ -43,7 +43,7 @@ if ( !empty($_POST) ){
                 <h2 form__title>Sign up for an account</h2>
                 
                 <div class="email__error">
-			<p id="error"></p>
+			        <p id="email__error"></p>
 				</div>
 				<div class="form__field">
 					<label for="email">Email</label>
@@ -57,6 +57,12 @@ if ( !empty($_POST) ){
 					<label for="lastname">Lastname</label>
 					<input type="text" id="lastname" name="lastname">
                 </div>
+
+                <div class="email__error">
+			        <p id="username__error"></p>
+                </div>
+                
+
                 <div class="form__field">
 					<label for="username">Username</label>
 					<input type="text" id="username" name="username">
@@ -95,8 +101,8 @@ $("#email").on("keyup", (e)=> {
 		dataType: 'json'
 		})
   		.done((res) =>  {
-		if(res.status == "auwtch"){
-		$("#error").html(res.message);
+		if(res.status == "Mistake"){
+		$("#email_error").html(res.message);
     }
     		
 });
@@ -115,7 +121,9 @@ $("#username").on("keyup", (e)=> {
 		})
   		.done((res) =>  {
 		if(res.status == "auwtch"){
-		$("#error").html(res.message);
+		$("#username_error").html(res.message);
+        }else {
+        $("#username_error").html();
     }
     		
 });
