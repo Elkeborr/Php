@@ -9,6 +9,8 @@ private $userName;
 private $password;
 private $passwordConformation;
 
+
+
 //----------------------- GETTER & SETTER -----------------------//
 /**
  * Get the value of email
@@ -174,7 +176,7 @@ public function register (){
 public static function EmailAvailable($email)
 {
     
-    $conn = new PDO ('mysql:host=localhost;dbname=netflix;',"root","root",null);
+    $conn = Db::getInstance();
     $stm = $conn->prepare('SELECT * FROM users WHERE email = :email');
     $stm->bindParam(":email",$email);
     //zegt of gelukt is of ni
@@ -192,7 +194,24 @@ public static function EmailAvailable($email)
 
 
 
+public static function UsernameAvailable($username)
+{
+    
+    $conn = Db::getInstance();
+    $stm = $conn->prepare('SELECT * FROM users WHERE username = :username');
+    $stm->bindParam(":username",$username);
+    //zegt of gelukt is of ni
+    $stm->execute();
+    //assoc: heel de tabel me zelf gekozen naam
+    $result = $stm->fetch(PDO::FETCH_ASSOC);
 
+    if (!$result){
+        return true;
+    }else {
+        return false;
+    }
+  
+}
 
 
 

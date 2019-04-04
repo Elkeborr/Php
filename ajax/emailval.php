@@ -7,20 +7,18 @@ if(!empty($_POST)) {
     $text= $_POST['text']; 
     try{
 
-        $e  = User::EmailAvailable($text);
-        //$e->setEmail($text);
-        //$e-> EmailAvailable();
+       // $e  = User::EmailAvailable($text);
 
-        if ($e == false){
+        if(filter_var($_POST['text'], FILTER_VALIDATE_EMAIL)){
 
             $result=[
-                    "status" => "auwtch",
-                    "message" => "Don't copy 💩"
+                    "status" => "success",
+                    "message" => "Email is an email"
                     ];
         }else {
             $result=[
-                "status" => "success",
-                "message" => "E-mail not found ✌🏻" 
+                "status" => "Mistake",
+                "message" => "E-mail is not an email" 
                     ];
         }
     }
