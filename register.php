@@ -5,7 +5,7 @@ include_once("bootstrap.php");
 
 if (!empty($_POST['submit'])){
 	// checked of alle velden leeg zijn of niet,als er 1 leeg is kan men niet  registreren
-if ( empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname']) 
+	if ( empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname']) 
 	|| empty($_POST['lastname'])|| empty($_POST['username'])){
 		$error = true;
 	}

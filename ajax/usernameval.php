@@ -8,7 +8,6 @@ if(!empty($_POST)) {
 
     try{
         $e  = User::UsernameAvailable($name);
-        
         if ($e == false){
             $result=[
                 "status" => "auwtch",
@@ -29,7 +28,7 @@ if(!empty($_POST)) {
     }
 
     
-        echo json_encode($result);
+    echo json_encode($result);
            
     
         }
