@@ -9,7 +9,7 @@ private $userName;
 private $password;
 private $passwordConformation;
 
-
+//----------------------- GETTER & SETTER -----------------------//
 /**
  * Get the value of email
  */ 
@@ -130,3 +130,6 @@ $this->passwordConformation = $passwordConformation;
 return $this;
 }
 }
+
+//----------------------- FUNCTIES -----------------------//
+

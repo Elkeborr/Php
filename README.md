@@ -33,7 +33,7 @@ Tegen gaan : https
 Lijst van wachtwoorden en usernames laten loopen 
 Tegen gaan: 3 wachtwoord mogelijkheden 
 
-### databank beveiligen
+### Databank beveiligen
 (Dit doen we wel pas op het einde)
 een @ symbool => @new mysqli("localhost","root", "root", "project");
 
