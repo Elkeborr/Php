@@ -154,7 +154,7 @@ public function register (){
                     // De databank aanspreken
                     $conn = Db::getInstance();
                     // Opslagen in de databank
-                    $stm = $conn -> prepare ("INSERT into users (email,firstname,lastname,username,password) VALUES (:email,:firstname,:lastname,:username:password)");
+                    $stm = $conn -> prepare ("INSERT into users (email,firstname,lastname,username,password) VALUES (:email,:firstname,:lastname,:username,:password)");
                     // Waarden koppelen aan invul velden (bindParam=  veiligere manier)
                     $stm  -> bindParam(":email",$this->email);
                     $stm  -> bindParam(":firstname",$this->firstName);

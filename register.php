@@ -13,9 +13,14 @@ if ( !empty($_POST) ){
         $user->setFirstName($_POST['firstname']);
         $user->setLastName($_POST['lastname']);
         $user->setUserName($_POST['username']);
-		$user->setPasswordConformation($_POST['password_confirmation']);
-		//user registreren 
-		$user->register();
+        $user->setPasswordConformation($_POST['password_confirmation']);
+        
+        if ($user->register()){
+             header('Location: index.php');
+        }else{
+            $error = true;
+        }
+		
 	}
 
 ?>
@@ -30,6 +35,15 @@ if ( !empty($_POST) ){
 </head>
 <body>
 <div class="form form--login">
+            <?php if (isset($error)): ?>
+				<div class="form__error">
+					<p>
+						Sorry, something went wrong! Try again later
+					</p>
+				</div>
+            <?php endif; ?>
+                
+
 			<form action="" method="post">
 				<h2 form__title>Sign up for an account</h2>
 				<div class="form__field">
@@ -66,3 +80,30 @@ if ( !empty($_POST) ){
 	</div>
 </body>
 </html>
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+
+// Elke keer als er een toets word ingevuld checken e of de email
+$("#email").on("keyup", (e)=> {
+	let text = $("#email").val();
+	$.ajax({
+	    method: "POST",
+		url: "ajax/getusername.php",
+		data: {text: text},
+		dataType: 'json'
+		})
+  		.done((res) =>  {
+		if(res.status == "auwtch"){
+		$("#error").html(res.message);
+    }
+    		
+});
+		e.preventDefault();
+
+});
+
+</script>
+
