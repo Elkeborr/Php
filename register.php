@@ -1,3 +1,25 @@
+<?php 
+
+//Connectie klasses
+include_once("bootstrap.php");
+
+
+if ( !empty($_POST) ){
+
+		// Gegevens in de classe user steken
+		$user = new User ();
+		$user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+        $user->setFirstName($_POST['firstname']);
+        $user->setLastName($_POST['lastname']);
+        $user->setUserName($_POST['username']);
+		$user->setPasswordConformation($_POST['password_confirmation']);
+		//user registreren 
+		$user->register();
+	}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
