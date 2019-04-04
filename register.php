@@ -16,11 +16,15 @@
                 </div>
                 <div class="form__field">
 					<label for="firstname">Firstname</label>
-					<input type="text" id="email" name="email">
+					<input type="text" id="firstname" name="firstname">
                 </div>
                 <div class="form__field">
 					<label for="lastname">Lastname</label>
-					<input type="text" id="email" name="email">
+					<input type="text" id="lastname" name="lastname">
+                </div>
+                <div class="form__field">
+					<label for="username">Username</label>
+					<input type="text" id="username" name="username">
 				</div>
 				<div class="form__field">
 					<label for="password">Password</label>
