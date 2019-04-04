@@ -14,13 +14,8 @@ if ( !empty($_POST) ){
         $user->setLastName($_POST['lastname']);
         $user->setUserName($_POST['username']);
         $user->setPasswordConformation($_POST['password_confirmation']);
-        
-        if ($user->register()){
-             header('Location: index.php');
-        }else{
-            $error = true;
-        }
-		
+
+    		
 	}
 
 ?>
@@ -45,7 +40,11 @@ if ( !empty($_POST) ){
                 
 
 			<form action="" method="post">
-				<h2 form__title>Sign up for an account</h2>
+                <h2 form__title>Sign up for an account</h2>
+                
+                <div class="email__error">
+			<p id="error"></p>
+				</div>
 				<div class="form__field">
 					<label for="email">Email</label>
 					<input type="text" id="email" name="email">
@@ -86,13 +85,32 @@ if ( !empty($_POST) ){
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
 
-// Elke keer als er een toets word ingevuld checken e of de email
+//Email- validation
 $("#email").on("keyup", (e)=> {
 	let text = $("#email").val();
 	$.ajax({
 	    method: "POST",
-		url: "ajax/getusername.php",
+		url: "ajax/emailval.php",
 		data: {text: text},
+		dataType: 'json'
+		})
+  		.done((res) =>  {
+		if(res.status == "auwtch"){
+		$("#error").html(res.message);
+    }
+    		
+});
+		e.preventDefault();
+
+});
+
+//Username- validation
+$("#username").on("keyup", (e)=> {
+	let text = $("#username").val();
+	$.ajax({
+	    method: "POST",
+		url: "ajax/usernameval.php",
+		data: {name: name},
 		dataType: 'json'
 		})
   		.done((res) =>  {
