@@ -13,9 +13,9 @@ if ( !empty($_POST) ){
         $user->setFirstName($_POST['firstname']);
         $user->setLastName($_POST['lastname']);
         $user->setUserName($_POST['username']);
-        $user->setPasswordConformation($_POST['password_confirmation']);
+       
 
-    		
+        //$user->register();
 	}
 
 ?>
@@ -72,10 +72,7 @@ if ( !empty($_POST) ){
 					<input type="password" id="password" name="password">
 				</div>
 
-                <div class="form__field">
-					<label for="password_confirmation">Confirm your password</label>
-					<input type="password" id="password_confirmation" name="password_confirmation">
-				</div>
+                
 
 				<div class="form__field">
 					<input type="submit" value="Sign me up!" class="btn btn--primary">	
@@ -92,15 +89,15 @@ if ( !empty($_POST) ){
 <script>
 
 //Email- validation
-$("#email").on("keyup", (e)=> {
-	let text = $("#email").val();
+$("#email").on("keyup", function (e){
+	var text = $("#email").val();
 	$.ajax({
 	    method: "POST",
 		url: "ajax/emailval.php",
 		data: {text: text},
 		dataType: 'json'
 		})
-  		.done((res) =>  {
+  		.done((function (res)  {
 		if(res.status == "Mistake"){
 		$("#email_error").html(res.message);
     }
@@ -111,15 +108,15 @@ $("#email").on("keyup", (e)=> {
 });
 
 //Username- validation
-$("#username").on("keyup", (e)=> {
-	let name = $("#username").val();
+$("#username").on("keyup", function (e) {
+	var name = $("#username").val();
 	$.ajax({
 	    method: "POST",
 		url: "ajax/usernameval.php",
 		data: {name: name},
 		dataType: 'json'
 		})
-  		.done((res) =>  {
+  		.done((function (res)  {
 		if(res.status == "auwtch"){
 		$("#username_error").html(res.message);
         }else {

@@ -7,7 +7,7 @@ private $firstName;
 private $lastName;
 private $userName;
 private $password;
-private $passwordConformation;
+
 
 
 
@@ -112,25 +112,7 @@ $this->password = $password;
 return $this;
 }
 
-/**
- * Get the value of passwordConformation
- */ 
-public function getPasswordConformation()
-{
-return $this->passwordConformation;
-}
 
-/**
- * Set the value of passwordConformation
- *
- * @return  self
- */ 
-public function setPasswordConformation($passwordConformation)
-{
-$this->passwordConformation = $passwordConformation;
-
-return $this;
-}
 
 
 //----------------------- FUNCTIES -----------------------//
