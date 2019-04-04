@@ -14,7 +14,7 @@ Als Joris in ons systeem kan hacken verliezen we -5.
 
 ### SQL-injectie
 
-SQl typen in een bepaald veld.
+SQl typen in een bepaald veld.*
 Tegen gaan: real_escape_string()
 BV; $email = $conn -> real_escape_string($_POST['Email']);
 
