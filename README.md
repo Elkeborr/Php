@@ -8,7 +8,7 @@ Stap 3: Codeer 💻
 Stap 4: Commit met een duidelijke naam 🤓
 Stap 5: Push 🥊
 
-##Hacken
+## Hacken
 
 Als Joris in ons systeem kan hacken verliezen we -5.
 
