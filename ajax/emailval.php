@@ -25,7 +25,7 @@ if(!empty($_POST)) {
            
         }else{
             $result=[
-                "status" => "Mistake",
+                "status" => "mistake",
                 "message" => "Email isn't a email"
                 ];
         }

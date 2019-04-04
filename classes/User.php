@@ -9,8 +9,6 @@ private $userName;
 private $password;
 
 
-
-
 //----------------------- GETTER & SETTER -----------------------//
 /**
  * Get the value of email

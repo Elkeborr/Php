@@ -3,20 +3,23 @@
 //Connectie klasses
 include_once("bootstrap.php");
 
-
-if ( !empty($_POST) ){
-
+if (!empty($_POST['submit'])){
+	// checked of alle velden leeg zijn of niet,als er 1 leeg is kan men niet  registreren
+if ( empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname']) 
+	|| empty($_POST['lastname'])|| empty($_POST['username'])){
+		$error = true;
+	}
+	else {
 		// Gegevens in de classe user steken
 		$user = new User ();
 		$user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->setFirstName($_POST['firstname']);
-        $user->setLastName($_POST['lastname']);
-        $user->setUserName($_POST['username']);
-       
-
-        //$user->register();
-	}
+		$user->setPassword($_POST['password']);
+		$user->setFirstName($_POST['firstname']);
+		$user->setLastName($_POST['lastname']);
+		$user->setUserName($_POST['username']);
+	   
+		$user->register();
+	}}
 
 ?>
 
@@ -30,21 +33,22 @@ if ( !empty($_POST) ){
 </head>
 <body>
 <div class="form form--login">
-            <?php if (isset($error)): ?>
-				<div class="form__error">
-					<p>
-						Sorry, something went wrong! Try again later
-					</p>
-				</div>
-            <?php endif; ?>
+            
                 
 
 			<form action="" method="post">
-                <h2 form__title>Sign up for an account</h2>
-                
-                <div class="email__error">
-			        <p id="email__error"></p>
+				<h2 form__title>Sign up for an account</h2>
+
+				<?php if (isset($error)): ?>
+                <div class="form__error">
+					<p> Formulier bevat lege elementen, zorg dat alles ingevuld is</p>
 				</div>
+				<?php endif; ?>
+
+				<div class="email__error">
+			        <p id="email_error"></p>
+                </div>
+
 				<div class="form__field">
 					<label for="email">Email</label>
 					<input type="text" id="email" name="email">
@@ -58,11 +62,10 @@ if ( !empty($_POST) ){
 					<input type="text" id="lastname" name="lastname">
                 </div>
 
-                <div class="email__error">
-			        <p id="username__error"></p>
+                <div class="username__error">
+			        <p id="username_error"></p>
                 </div>
                 
-
                 <div class="form__field">
 					<label for="username">Username</label>
 					<input type="text" id="username" name="username">
@@ -75,7 +78,7 @@ if ( !empty($_POST) ){
                 
 
 				<div class="form__field">
-					<input type="submit" value="Sign me up!" class="btn btn--primary">	
+					<input type="submit" name="submit"value="Sign me up!" class="btn btn--primary">	
 				</div>
 			</form>
 		</div>
@@ -98,14 +101,15 @@ $("#email").on("keyup", function (e){
 		dataType: 'json'
 		})
   		.done((function (res)  {
-		if(res.status == "Mistake"){
-		$("#email_error").html(res.message);
-    }
-    		
-});
-		e.preventDefault();
-
-});
+		if(res.status == "mistake"){
+        $("#email_error").html(res.message);
+        }
+    }));
+    e.preventDefault();
+        });
+             
+        
+    
 
 //Username- validation
 $("#username").on("keyup", function (e) {
@@ -120,13 +124,13 @@ $("#username").on("keyup", function (e) {
 		if(res.status == "auwtch"){
 		$("#username_error").html(res.message);
         }else {
-        $("#username_error").html();
-    }
-    		
-});
-		e.preventDefault();
+        $("#username_error").html();}
+    
+		  }));
+    e.preventDefault();
+        });
 
-});
+
 
 </script>
 
