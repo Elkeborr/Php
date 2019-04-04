@@ -5,9 +5,10 @@ require_once("../bootstrap.php");
 if(!empty($_POST)) {
 
     $name= $_POST['name']; 
+
     try{
         $e  = User::UsernameAvailable($name);
-
+        
         if ($e == false){
             $result=[
                 "status" => "auwtch",

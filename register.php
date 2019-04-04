@@ -112,7 +112,7 @@ $("#email").on("keyup", (e)=> {
 
 //Username- validation
 $("#username").on("keyup", (e)=> {
-	let text = $("#username").val();
+	let name = $("#username").val();
 	$.ajax({
 	    method: "POST",
 		url: "ajax/usernameval.php",

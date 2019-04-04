@@ -198,7 +198,7 @@ public static function UsernameAvailable($username)
 {
     
     $conn = Db::getInstance();
-    $stm = $conn->prepare('SELECT * FROM users WHERE username = :username');
+    $stm = $conn->prepare('SELECT * FROM users WHERE userName = :username');
     $stm->bindParam(":username",$username);
     //zegt of gelukt is of ni
     $stm->execute();
