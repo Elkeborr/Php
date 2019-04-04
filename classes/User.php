@@ -129,7 +129,49 @@ $this->passwordConformation = $passwordConformation;
 
 return $this;
 }
-}
+
 
 //----------------------- FUNCTIES -----------------------//
 
+/* databank connectie hier laten werken */
+public static function getAll(){
+    $conn = Db::getInstance();
+    $result = $conn->query("select * from posts ");
+
+    // fetch all records from the database and return them as objects of this __CLASS__ (Post)
+    return $result->fetchAll(PDO::FETCH_CLASS, __CLASS__);
+}
+
+public function register (){
+
+  /* Het gebruik bewust vertragen door het passwoord meerdere 
+  keren te laten encrypteren  */
+    $options =[
+        'cost' => 12 //2^12
+        ];
+                $password = password_hash($this->password, PASSWORD_DEFAULT,$options);
+                try {
+                    // De databank aanspreken
+                    $conn = Db::getInstance();
+                    // Opslagen in de databank
+                    $stm = $conn -> prepare ("INSERT into users (email,firstname,lastname,username,password) VALUES (:email,:firstname,:lastname,:username:password)");
+                    // Waarden koppelen aan invul velden (bindParam=  veiligere manier)
+                    $stm  -> bindParam(":email",$this->email);
+                    $stm  -> bindParam(":firstname",$this->firstName);
+                    $stm  -> bindParam(":lastname",$this->lastName);
+                    $stm  -> bindParam(":username",$this->userName);
+                    $stm  -> bindParam(":password",$password);
+                    // Uitvoeren
+                    $result = $stm ->execute();
+                    // Gelukt = true
+                    return $result;
+                } catch (Throwable $t){
+                    // Mislukt = false
+                  return false;
+                }
+
+
+}
+
+
+}
