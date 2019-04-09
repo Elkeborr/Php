@@ -8,11 +8,8 @@
 </head>
 <body>
     <h1> Hello </h1>
-<<<<<<< HEAD
     <h2>test</h2>
-=======
     <p>yuuu</p>
->>>>>>> 633c2f3c5dad7457af2f03e3e33db4dd6d1d551f
     
 </body>
 </html>
