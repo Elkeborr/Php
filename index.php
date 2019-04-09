@@ -8,7 +8,6 @@
 </head>
 <body>
     <h1> Hello </h1>
-<<<<<<< HEAD
     <h2>test</h2>
 =======
     <p>yuuu</p>
