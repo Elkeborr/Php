@@ -1,7 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
 
-  <h3>Profiel</h3>
-      
- 
+  <!------------------------PROFIELTEKST--------------------------->
+<h3>Biografie</h3>
+
+<?php
+
+$tekst="";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+if (empty($_POST["tekst"])) {
+    $tekst = "";
+  } else {
+    $tekst = test_input($_POST["tekst"]);
+  }
+}
+function test_input($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
+  }
+
+  ?>
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+<textarea name="Tekst" rows="5" cols="40"><?php echo $tekst;?></textarea>
+<br><br>
+  <input type="submit" name="submit" value="Submit">  
+</form>
+
+  <!------------------------PROFIELFOTO--------------------------->
+
+<h3>Profielfoto</h3>
       <div class="row">
 	   <?php
 	        $output_dir = "img/";
@@ -55,12 +94,8 @@
 						      echo  '<b>Error !</b> ' .$sp->error ;
 						      echo  '<a href="#" class="close">&times;</a>';
 						    echo '</div>';
+					    }   
 					    }
-					    
-					    
-					    
-					    }
-					    
 			    }	
 			    else{
 			    
@@ -70,7 +105,6 @@
 				echo '</div>';
 		 
 			    }
-
 		    }	    
 	         ?>
 
@@ -80,9 +114,17 @@
 		      <div class="large-12 columns">
 			<span style="color:red;">Maximun Image Size 100KB</span><br/><br/>
 			<input type="file" name="myfile"  required/>
-			
-
 			<button type="submit" name="upload" class="tiny button radius success">Upload</button>
 		    </form>
 
+    
+</body>
+</html>
+
+
+
+
+
+  
+ 
  
