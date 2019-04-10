@@ -27,7 +27,7 @@
 			echo "OK!";
 			session_start();
 			$_SESSION['userid'] = $user['id'];
-			header('Location: index.php';)
+			header('Location:index.php');
 
 		}else{
 		// nee -> error
