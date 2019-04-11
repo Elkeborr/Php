@@ -8,6 +8,8 @@
 -- PHP-versie: 7.2.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 --
@@ -48,3 +50,37 @@ ALTER TABLE `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+
+--DEEL Upload
+
+--
+-- Table structure for table `images_with_fields`
+--
+
+CREATE TABLE `images_with_fields` (
+  `id` int(11) NOT NULL,
+  `image` varchar(100) COLLATE utf8_bin NOT NULL,
+  `image_text` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `images_with_fields`
+--
+ALTER TABLE `images_with_fields`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `images_with_fields`
+--
+ALTER TABLE `images_with_fields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;COMMIT;
+
