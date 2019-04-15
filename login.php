@@ -1,6 +1,5 @@
 <?php
 	
-	phpinfo();
 	die();//=>dispaly_errors?
 
 	if(!empty($_POST)){

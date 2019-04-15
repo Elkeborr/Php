@@ -1,6 +1,6 @@
 <?php 
   $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-  $statement = $conn->prepare("SELECT * FROM images_with_fields");
+  $statement = $conn->prepare("SELECT* FROM images_with_fields");
   $statement->execute();
   $collection = $statement->fetchAll();
 ?>
