@@ -19,6 +19,10 @@ if (!empty($_POST['submit'])){
 		$user->setUserName($_POST['username']);
 	   
 		$user->register();
+
+		session_start();
+			$_SESSION['userid'] = $user['id'];
+			header('Location:index.php');
 	}}
 
 ?>
@@ -29,14 +33,19 @@ if (!empty($_POST['submit'])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<link rel="stylesheet" href="css/login.css">
 	<link rel="stylesheet" href="css/style.css">
+
     <title>Registreer</title>
 </head>
 <body>
-<div class="form form--login">
-            
-                
-
+<div class="container">
+		<div class="wrap">
+		
+		<div class="foto--register"> </div>
+		<div class="form--register">
+		
+	
 			<form action="" method="post">
 				<h2 form__title>Sign up for an account</h2>
 
@@ -78,12 +87,13 @@ if (!empty($_POST['submit'])){
 
                 
 
-				<div class="form__field">
-					<input type="submit" name="submit"value="Sign me up!" class="btn btn--primary">	
+				<div class="form__btn">
+					<input type="submit" name="submit"value="Sign me up!" >	
 				</div>
 			</form>
 		</div>
 	</div>
+</div>
 </body>
 </html>
 

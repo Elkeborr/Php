@@ -41,13 +41,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
+  <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/style.css">
+
 </head>
 <body>
 	
-	<div class="container--login">
-		<div class="wrap--login">
-		<div class="form form--login">
+	<div class="container">
+		<div class="wrap">
+		<div class="form--login">
 			<form action="" method="post">
 				<h2 class="form__title">Sign In</h2>
 
