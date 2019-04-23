@@ -60,18 +60,39 @@
 				<?php endif; ?>
 
 				<div class="form__field">
+				
 					<label for="Email">Email</label>
 					<input type="text" name="email">
+					
 				</div>
 				<div class="form__field">
+				
 					<label for="Password">Password</label>
 					<input type="password" name="password">
 				</div>
 
-				<div class="form__field">
-					<input type="submit" value="Sign in" class="btn btn--primary">	
-					<input type="checkbox" id="rememberMe"><label for="rememberMe" class="label__inline">Remember me</label>
+				<div class="box">
+				<div class="form__checkbox">
+					<input type="checkbox" id="rememberMe">
+					<label for="rememberMe" class="label__inline">Remember me</label>
 				</div>
+				<div>
+							<a href="#" class="txt1">
+								Forgot Password?
+							</a>
+						</div>
+				</div>
+
+				<div class="btn">
+						<button class="form__btn">
+							Login
+						</button>
+					</div>
+
+
+
+
+
 
 				<div>
 					<p>No account yet?<a href="register.php">Sign up here</a></p>
