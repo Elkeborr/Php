@@ -20,9 +20,7 @@ if (!empty($_POST['submit'])){
 	   
 		$user->register();
 
-		session_start();
-			$_SESSION['userid'] = $user['id'];
-			header('Location:index.php');
+	
 	}}
 
 ?>

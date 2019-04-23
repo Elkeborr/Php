@@ -119,17 +119,7 @@
         font-size: 13px;
     }
   
-  .btn {
-      width: 100%;
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-top: 20px;
-    }
+
   
   .form__btn {
       display: -webkit-box;
@@ -150,10 +140,12 @@
   
       letter-spacing: 1px;
     
-      -webkit-transition: all 0.4s;
-      -o-transition: all 0.4s;
-      -moz-transition: all 0.4s;
-      transition: all 0.4s;
+
+    }
+    .form__btn input{
+     background: none;
+     color: #ffff;
+     font-size: 12px;
     }
   
   .form__btn:hover {
