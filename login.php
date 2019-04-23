@@ -1,6 +1,6 @@
 <?php
-	
-	die();//=>dispaly_errors?
+
+	//die();//=>dispaly_errors?
 
 	if(!empty($_POST)){
 		// email en password opvragen
@@ -35,18 +35,21 @@
 
 	}
 
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>IMDFlix</title>
+  <title>Login</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	<div class="netflixLogin">
+	
+	<div class="container--login">
+		<div class="wrap--login">
 		<div class="form form--login">
 			<form action="" method="post">
-				<h2 form__title>Sign In</h2>
+				<h2 class="form__title">Sign In</h2>
 
 				<?php if (isset($error)): ?>
 				<div class="form__error">
@@ -74,7 +77,10 @@
 					<p>No account yet?<a href="register.php">Sign up here</a></p>
 				</div>
 			</form>
+		
 		</div>
+		<div class="foto--login"> </div>
+	</div>
 	</div>
 </body>
 </html>

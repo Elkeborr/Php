@@ -3,6 +3,20 @@
   $statement = $conn->prepare("SELECT* FROM images_with_fields");
   $statement->execute();
   $collection = $statement->fetchAll();
+
+/*Op deze manier gaat de website starten 
+met login enkel als er een sessie gestart is 
+dan zal de index tevoorschijn komen
+*/
+session_start();
+if(isset($_SESSION ['email'])){
+
+}else {
+  header ("Location: login.php");
+}
+
+include_once("data.inc.php"); 
+
 ?>
 
 <!DOCTYPE html>
