@@ -33,11 +33,8 @@ if(isset($_SESSION ['email'])){
 </head>
 <body>
 
+<?php include_once("nav.inc.php"); ?>
 <h1>PLANTSPIRATIE</h1>
-
-<a href="profiel.php">Profiel</a>
-<a href="login.php">login</a>
-<a href="register.php">Registreer</a>
 
 <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
     <input type="file" name="image" capture="camera" required><br>
@@ -48,7 +45,12 @@ if(isset($_SESSION ['email'])){
 <div class="collection">
     <?php foreach($collection as $c): ?>
         <a href="detail.php?id=<?php echo $c['id']; ?>" class="collection__item" style="background-image:url(<?php echo $c['image']; ?>)"></a>
-    <?php endforeach; ?>
+    <?php endforeach; ?> 
+
+
+
+
+
 </div>
     
 </body>
