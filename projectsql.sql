@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2019 at 07:02 PM
+-- Generation Time: Apr 24, 2019 at 07:10 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -21,6 +21,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `project_php`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `images_with_fields`
+--
+
+CREATE TABLE `images_with_fields` (
+  `id` int(11) NOT NULL,
+  `image` varchar(100) COLLATE utf8_bin NOT NULL,
+  `image_text` text COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userimage`
+--
+
+CREATE TABLE `userimage` (
+  `id` int(11) UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -43,6 +65,12 @@ CREATE TABLE `users` (
 --
 
 --
+-- Indexes for table `images_with_fields`
+--
+ALTER TABLE `images_with_fields`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -52,6 +80,11 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
+--
+-- AUTO_INCREMENT for table `images_with_fields`
+--
+ALTER TABLE `images_with_fields`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `users`
 --
