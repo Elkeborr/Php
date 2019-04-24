@@ -19,7 +19,8 @@ if (!empty($_POST['submit'])){
 		$user->setUserName($_POST['username']);
 	   
 		$user->register();
-
+/* Een sassion start met User, dit moet dan ook in de index controleren of
+de sessie gestart is of niet (if rond de register zetten)*/ 
 	
 	}}
 
