@@ -25,17 +25,7 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
 
   <h3>Profielfoto</h3>
 
-<form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
-    <input type="file" name="image" capture="camera" required><br>
-    <br><textarea name="description" cols="40" rows="4" placeholder="Description" required></textarea><br>
-    <input type="submit" value="upload" name="upload" class="input">  
-</form>      
-  
-<div class="collection">
-    <?php foreach($collection as $c): ?>
-        <a href="detail.php?id=<?php echo $c['id']; ?>" class="collection__item" style="background-image:url(<?php echo $c['image']; ?>)"></a>
-    <?php endforeach; ?>
-</div>
+
 
   <!------------------------PROFIELTEKST--------------------------->
 <h3>Biografie</h3>
