@@ -8,6 +8,7 @@
 met login enkel als er een sessie gestart is 
 dan zal de index tevoorschijn komen
 => we  zetten dit nog evn uit omdat we anders moeilijker aan de p kunnen
+*/
 session_start();
 if(isset($_SESSION ['email'])){
 
@@ -15,7 +16,7 @@ if(isset($_SESSION ['email'])){
   header ("Location: login.php");
   include_once("data.inc.php"); 
 }
-*/
+
 
 
 

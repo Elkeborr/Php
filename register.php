@@ -18,7 +18,11 @@ if (!empty($_POST['submit'])){
 		$user->setLastName($_POST['lastname']);
 		$user->setUserName($_POST['username']);
 	   
-		$user->register();
+		if ($user->register()){
+			session_start();
+			$_SESSION['email'] = true;
+			header('Location:index.php');
+		}
 /* Een sassion start met User, dit moet dan ook in de index controleren of
 de sessie gestart is of niet (if rond de register zetten)*/ 
 	
@@ -51,7 +55,7 @@ de sessie gestart is of niet (if rond de register zetten)*/
 
 				<?php if (isset($error)): ?>
                 <div class="form__error">
-					<p> Formulier bevat lege elementen, zorg dat alles ingevuld is</p>
+					<p> Something is missing in the form, pleas fill everything in </p>
 				</div>
 				<?php endif; ?>
 

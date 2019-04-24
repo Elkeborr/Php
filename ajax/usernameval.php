@@ -11,7 +11,7 @@ if(!empty($_POST)) {
         if ($e == false){
             $result=[
                 "status" => "auwtch",
-                "message" => "This one is taken"
+                "message" => "Already taken"
                     ];
         }else {
             $result=[
