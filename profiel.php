@@ -28,14 +28,6 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
 
 <form method="post" enctype="multipart/form-data">
 <table>
-<tr>
-<td>name:</td>
-<td><input type="text" name="name" value="<?php echo $name ?>"/></td>
-</tr>
-<tr>
-<td>email</td>
-<td><input type="text" name="email" value="<?php echo $email ?>"/></td>
-</tr>
 
 <tr>
 <td>image</td>
@@ -79,6 +71,96 @@ function test_input($data) {
   <input type="submit" name="submit" value="Submit">  
 </form>
 
+  <!------------------------PASSWORD--------------------------->
+  <h3> Gegevens wijzigen </h3>
+
+
+
+<br>
+
+<form method="POST" action="profiel.php" enctype="multipart/form-data">
+<table>
+<tr>
+<td>Old password:</td>
+<td><input type="text" name="oldpassword"/></td>
+</tr>
+<tr>
+<td>New password</td>
+<td><input type="text" name="newpassword"/></td>
+</tr>
+<tr>
+<td>Change password</td>
+<td><input type="submit" name="submit"/></td>
+</tr>
+</table>
+</form>
+
+
+
+<?php
+
+if ($_POST['submit'])
+{
+
+$oldpassword = $_POST['oldpassword'];
+$newpassword = $_POST['newpassword'];
+
+}
+
+$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
+  $statement = $conn->prepare("SELECT password FROM users") or die("didn't work");
+  $statement->execute();
+  $collection = $statement->fetchAll();
+
+
+
+
+
+/*echo"<form action ='profiel.php' method='POST'>
+Old password: <input type='text' name='oldpassword'><br>
+New password: <input type='password' name='newpassword'><br>
+Repeat new password: <input type='password' name='repeatnewpassword'><br>
+<input type='submit' name='submit' value='Change password'>
+
+</form>
+
+";*/
+
+?>
+
+  <!------------------------PASSWORD--------------------------->
+
+  <br>
+  <br>
+  
+  <form method="POST" action="profiel.php" enctype="multipart/form-data">
+<table>
+<tr>
+<td>Old email:</td>
+<td><input type="text" name="oldemail"/></td>
+</tr>
+<tr>
+<td>New email</td>
+<td><input type="text" name="newemail"/></td>
+</tr>
+<tr>
+<td>Change email</td>
+<td><input type="submit" name="submit"/></td>
+</tr>
+</table>
+</form>
+
+<?php
+
+if ($_POST['submit'])
+{
+
+$oldpassword = $_POST['oldpassword'];
+$newpassword = $_POST['newpassword'];
+
+}
+
+?>
 
 
 
