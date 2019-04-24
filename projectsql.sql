@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 24, 2019 at 01:57 PM
+-- Generation Time: Apr 24, 2019 at 07:02 PM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -25,31 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `images_with_fields`
---
-
-CREATE TABLE `images_with_fields` (
-  `id` int(11) NOT NULL,
-  `image` varchar(100) COLLATE utf8_bin NOT NULL,
-  `image_text` text COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `userimage`
---
-
-CREATE TABLE `userimage` (
-  `id` int(11) UNSIGNED NOT NULL,
-  `user` varchar(200) NOT NULL,
-  `url` text NOT NULL,
-  `lastUpload` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `users`
 --
 
@@ -59,24 +34,13 @@ CREATE TABLE `users` (
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `userName` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `profileImage` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `images_with_fields`
---
-ALTER TABLE `images_with_fields`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `userimage`
---
-ALTER TABLE `userimage`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `users`
@@ -88,11 +52,6 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `images_with_fields`
---
-ALTER TABLE `images_with_fields`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `users`
 --
