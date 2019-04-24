@@ -26,6 +26,28 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
   <h3>Profielfoto</h3>
 
 
+<form method="post" enctype="multipart/form-data">
+<table>
+<tr>
+<td>name:</td>
+<td><input type="text" name="name" value="<?php echo $name ?>"/></td>
+</tr>
+<tr>
+<td>email</td>
+<td><input type="text" name="email" value="<?php echo $email ?>"/></td>
+</tr>
+
+<tr>
+<td>image</td>
+<td><input type="file" name="image" /></td>
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td><input type="submit" name="submit" value="submit" /></td>
+</tr>
+</table>
+
+
 
   <!------------------------PROFIELTEKST--------------------------->
 <h3>Biografie</h3>
