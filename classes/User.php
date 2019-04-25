@@ -7,7 +7,7 @@ private $firstName;
 private $lastName;
 private $userName;
 private $password;
-private $profileImage;
+
 
 
 
@@ -112,25 +112,7 @@ $this->password = $password;
 return $this;
 }
 
-/**
- * Get the value of profileImage
- */ 
-public function getProfileImage()
-{
-return $this->profileImage;
-}
 
-/**
- * Set the value of profileImage
- *
- * @return  self
- */ 
-public function setProfileImage($profileImage)
-{
-$this->profileImage = $profileImage;
-
-return $this;
-}
 
 
 
@@ -158,14 +140,14 @@ public function register (){
                     // De databank aanspreken
                     $conn = Db::getInstance();
                     // Opslagen in de databank
-                    $stm = $conn -> prepare ("INSERT into users (email,firstname,lastname,username,password,profileImage) VALUES (:email,:firstname,:lastname,:username,:password,:profileImage)");
+                    $stm = $conn -> prepare ("INSERT into users (email,firstname,lastname,username,password) VALUES (:email,:firstname,:lastname,:username,:password)");
                     // Waarden koppelen aan invul velden (bindParam= veiligere manier)
                     $stm  -> bindParam(":email",$this->email);
                     $stm  -> bindParam(":firstname",$this->firstName);
                     $stm  -> bindParam(":lastname",$this->lastName);
                     $stm  -> bindParam(":username",$this->userName);
                     $stm  -> bindParam(":password",$password);
-                    $stm  -> bindParam(":profileImage",$profileImage);
+                   
                     
                     // Uitvoeren
                     $result = $stm ->execute();

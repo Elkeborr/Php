@@ -45,7 +45,7 @@ de sessie gestart is of niet (if rond de register zetten)*/
     <title>Registreer</title>
 </head>
 <body>
-<div class="container">
+<div class="container--login">
 		<div class="wrap">
 		
 		<div class="foto--register"> </div>
