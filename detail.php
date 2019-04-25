@@ -20,19 +20,12 @@ $collection = $statement->fetchAll();
 </head>
 <body>
   
-  
-  
-  
   <div class="collection">
             <?php foreach($collection as $c): ?>
               <img src="<?php echo $c['id']; ?>" class="collection__detail" style="background-image:url(<?php echo $c['image']; ?>)" alt="">
               <p class="collectionDetails__desc"><?php echo $c['image_text']; ?></p>
             <?php endforeach; ?>
   </div>
-
-  
-  
-
 
 </body>
 </html>
