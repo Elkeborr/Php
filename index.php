@@ -52,7 +52,7 @@ if(isset($_SESSION ['email'])){
 <!-------AFBEELDINGEN SHOWEN------->
 <?php if (isset($error)): ?>
     <div class="form__error">
-			<p> No friends yet, what a bummer! Search for them and share nature with them! </p>
+			<p> No followers yet, what a bummer! Search for them and share nature with them! </p>
 		</div>
 	<?php endif; ?>
 
