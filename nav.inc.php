@@ -9,8 +9,8 @@ include_once("bootstrap.php");
 
 <nav class="navbar">
    
-    <a href="profiel.php"><img src="" alt="profileImage"></a>
-    <a href="profiel.php">Profiel</a>
+    <a href="profiel.php"><img src="images/hero_login.jpg" alt="profileImage"></a>
+    <a href="profiel.php">Username</a>
 
     <a href="index.php" class="logo">Plantspiratie</a>
     
