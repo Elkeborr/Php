@@ -25,6 +25,7 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
 
   <!------------------------PROFIELFOTO--------------------------->
 
+<div class="container">
   <h3>Profielfoto</h3>
 
 
@@ -41,7 +42,7 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
 <td><input type="submit" name="submit" value="submit" /></td>
 </tr>
 </table>
-
+</div>
 
 
   <!------------------------PROFIELTEKST--------------------------->
