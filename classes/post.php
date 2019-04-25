@@ -59,7 +59,7 @@
             // Alle post laden van de gevolgde personen
             $statement = $conn->prepare("SELECT images_with_fields.image,images_with_fields.image_text FROM 
             images_with_fields,followers WHERE
-            followers.user_id1=:id AND followers.user_id2=images_with_fields.user_id");
+            followers.user_id1=:id AND followers.user_id2=images_with_fields.user_id  LIMIT 2");
             $statement->bindValue(":id", $id); 
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -77,5 +77,11 @@
         }
  */
 
+
+
+
+
+
+ 
        
     }
