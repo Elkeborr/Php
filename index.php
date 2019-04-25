@@ -63,7 +63,7 @@ if(isset($_SESSION ['email'])){
         <a href="detail.php?id=<?php echo $c['id']; ?>" class="collection__item" style="background-image:url(<?php echo $c['image']; ?>)"></a>
         <p><?php echo $c['image_text']; ?></p>
     <?php endforeach; ?> 
-    <?php endif; ?>
+  <?php endif; ?>
 </div>
 <a class="load--more" href="#">Load More</a>
 </body>
