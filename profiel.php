@@ -1,6 +1,6 @@
 <?php
 $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-  $statement = $conn->prepare("SELECT* FROM images_with_fields");
+  $statement = $conn->prepare("SELECT* FROM users");
   $statement->execute();
   $collection = $statement->fetchAll();
 
@@ -105,6 +105,7 @@ if ($_POST['submit'])
 $oldpassword = $_POST['oldpassword'];
 $newpassword = $_POST['newpassword'];
 
+echo"$newpassword/$oldpassword";
 }
 
 $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
