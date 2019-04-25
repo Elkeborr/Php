@@ -3,7 +3,7 @@
 require_once("../bootstrap.php");
 
 $row = $_POST['row'];
-var_dump($row);
+
 $rowperpage = 3;
 
 // selecting posts
