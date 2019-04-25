@@ -65,7 +65,9 @@ body
   padding: 0.7em; 
   background-color:#ffff;
   height: 60px;
-  
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .navbar a{
