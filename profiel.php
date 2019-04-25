@@ -6,6 +6,8 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
 
   ?>
 
+<?php include_once("nav.inc.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,7 +28,8 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
   <h3>Profielfoto</h3>
 
 
-<form method="post" enctype="multipart/form-data">
+
+<form method="post" enctype="multipart/form-data" action="uploadProfilePic.php">
 <table>
 
 <tr>
