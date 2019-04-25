@@ -1,3 +1,13 @@
+<?php
+
+//Connectie klasses
+include_once("bootstrap.php");
+
+
+
+
+?>
+
 <nav class="navbar">
     <a href="index.php" class="logo">Plantspiratie</a>
     <a href="profiel.php">Profiel</a>
