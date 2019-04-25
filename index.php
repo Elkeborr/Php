@@ -1,31 +1,21 @@
 <?php 
-  $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-  $statement = $conn->prepare("SELECT* FROM images_with_fields");
-  $statement->execute();
-  $collection = $statement->fetchAll();
+  //Connectie klasses
+include_once("bootstrap.php");
+
+// Controleren of we al ingelogd zijn, functie van gemaakt
+User::checkLogin();
+
+
+$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
+$statement = $conn->prepare("SELECT* FROM images_with_fields");
+$statement->execute();
+$collection = $statement->fetchAll();
 
   if(!empty($collection)){
     $show = true;
   }else{
     $error = true;
   }
-
-/*Op deze manier gaat de website starten 
-met login enkel als er een sessie gestart is 
-dan zal de index tevoorschijn komen
-=> we  zetten dit nog evn uit omdat we anders moeilijker aan de p kunnen
-*/
-session_start();
-if(isset($_SESSION ['email'])){
-
-}else {
-  header ("Location: login.php");
-  include_once("data.inc.php"); 
-}
-
-
-
-
 
 ?>
 

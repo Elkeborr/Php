@@ -20,7 +20,7 @@ if (!empty($_POST['submit'])){
 		
 		if ($user->register()){
 			session_start();
-			$_SESSION['email'] = true;
+			$_SESSION['email'] = $email;
 			header('Location:index.php');
 		}
 		

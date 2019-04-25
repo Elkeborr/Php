@@ -118,6 +118,8 @@ return $this;
 
 //----------------------- FUNCTIES -----------------------//
 
+
+
 /* databank connectie hier laten werken */
 public static function getAll(){
     $conn = Db::getInstance();
@@ -125,6 +127,16 @@ public static function getAll(){
 
     // fetch all records from the database and return them as objects of this __CLASS__ (Post)
     return $result->fetchAll(PDO::FETCH_CLASS, __CLASS__);
+}
+
+
+public static function checkLogin(){
+    if(!isset($_SESSION)) { 
+        session_start(); 
+    }
+    if(!isset($_SESSION['email'])){
+        header('Location: login.php');
+    }
 }
 
 public function register (){

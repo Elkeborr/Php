@@ -19,7 +19,7 @@
 		if( password_verify($password, $user['password'])){
 		// ja -> login
 			session_start();
-			$_SESSION['email'] = $user['email'];
+			$_SESSION['email'] = $email;
 			header('Location:index.php');
 
 		}else{
