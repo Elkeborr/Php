@@ -17,13 +17,15 @@ if (!empty($_POST['submit'])){
 		$user->setFirstName($_POST['firstname']);
 		$user->setLastName($_POST['lastname']);
 		$user->setUserName($_POST['username']);
-	   
+		
 		if ($user->register()){
 			session_start();
 			$_SESSION['email'] = true;
 			header('Location:index.php');
 		}
-/* Een sassion start met User, dit moet dan ook in de index controleren of
+		
+		/*
+Een sassion start met User, dit moet dan ook in de index controleren of
 de sessie gestart is of niet (if rond de register zetten)*/ 
 	
 	}}
@@ -92,7 +94,7 @@ de sessie gestart is of niet (if rond de register zetten)*/
                 
 
 				<div class="form__btn">
-					<input type="submit" name="submit"value="Sign me up!" >	
+					<input type="submit" name="submit" value="Sign me up!" >	
 				</div>
 			</form>
 		</div>

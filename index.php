@@ -4,6 +4,12 @@
   $statement->execute();
   $collection = $statement->fetchAll();
 
+  if(!empty($collection)){
+    $show = true;
+  }else{
+    $error = true;
+  }
+
 /*Op deze manier gaat de website starten 
 met login enkel als er een sessie gestart is 
 dan zal de index tevoorschijn komen
@@ -16,6 +22,7 @@ if(isset($_SESSION ['email'])){
   header ("Location: login.php");
   include_once("data.inc.php"); 
 }*/
+
 
 
 
@@ -41,13 +48,23 @@ if(isset($_SESSION ['email'])){
     <br><textarea name="description" cols="40" rows="4" placeholder="Description" required></textarea><br>
     <input type="submit" value="upload" name="upload" class="input">  
 </form>      
-  
+ 
+<!-------AFBEELDINGEN SHOWEN------->
+<?php if (isset($error)): ?>
+    <div class="form__error">
+			<p> No friends yet, what a bummer! Search for them and share nature with them! </p>
+		</div>
+	<?php endif; ?>
+
+  <?php if (isset($show)): ?>
 <div class="collection">
     <?php foreach($collection as $c): ?>
         <a href="detail.php?id=<?php echo $c['id']; ?>" class="collection__item" style="background-image:url(<?php echo $c['image']; ?>)"></a>
+        <p><?php echo $c['image_text']; ?></p>
     <?php endforeach; ?> 
+    <?php endif; ?>
 
-
+<a class="load-more">Load More</a>
 
 
 
