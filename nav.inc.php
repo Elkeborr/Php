@@ -5,16 +5,18 @@ include_once("bootstrap.php");
 
 
 
-
 ?>
 
 <nav class="navbar">
-    <a href="index.php" class="logo">Plantspiratie</a>
+   
+    <a href="profiel.php"><img src="" alt="profileImage"></a>
     <a href="profiel.php">Profiel</a>
+
+    <a href="index.php" class="logo">Plantspiratie</a>
     
     <form action="" method="get">
       <input type="text" name="search">
     </form>
     
-    <a href="logout.php" class="navbar__logout">Hi ... , logout?</a>
+    <a href="logout.php" class="navbar__logout">logout</a>
 </nav>

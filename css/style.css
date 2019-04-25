@@ -56,3 +56,43 @@ body
   background-color: goldenrod;
 }
 
+/*-------- NAVIGATIE --------*/
+
+.navbar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em; 
+  
+}
+
+.navbar a{
+  text-decoration: none;
+}
+
+.navbar .logo
+{
+  margin-left: auto;
+  margin-right: auto;
+  color:#273B09;
+  
+
+}
+
+
+
+.navbar input
+{
+  width: 100%;
+  max-width: 200px;
+
+  color: white;
+  padding: 0.5em;
+  border: 1px solid #273B09;
+}
+
+a.navbar__logout
+{
+  margin-left: 2em;
+  margin-right: 0;
+}
