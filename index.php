@@ -13,7 +13,7 @@ $statement->execute();
 $collection = $statement->fetchAll();
 */
   $posts = Post::getAll();
-  var_dump(session_id());
+ 
   if(!empty($posts)){
     $show = true;
   }else{
