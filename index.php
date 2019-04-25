@@ -59,7 +59,7 @@ if(isset($_SESSION ['email'])){
 	<?php endif; ?>
 
   <?php if (isset($show)): ?>
-<<<<<<< HEAD
+
 <div class="collection">
   
     <?php foreach($collection as $c): ?>
