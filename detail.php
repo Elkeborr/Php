@@ -10,6 +10,7 @@ $statement->execute();
 $collection = $statement->fetchAll();
 
 
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
