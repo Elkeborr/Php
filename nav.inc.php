@@ -15,8 +15,10 @@ include_once("bootstrap.php");
 
     <a href="index.php" class="logo">Plantspiratie</a>
     
-    <form action="" method="get">
+    <form action="search.php" method="get">
       <input type="text" name="search">
+      <input type="submit" name="submit" value="search">
+
     </form>
     
     <a href="logout.php" class="navbar__logout">logout</a>
