@@ -41,14 +41,16 @@ if(isset($_SESSION ['email'])){
 <body>
 
 <?php include_once("nav.inc.php"); ?>
-<h1>PLANTSPIRATIE</h1>
 
-<form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
+<div class="upload">
+
+  <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
     <input type="file" name="image" capture="camera" required><br>
     <br><textarea name="description" cols="40" rows="4" placeholder="Description" required></textarea><br>
     <input type="submit" value="upload" name="upload" class="input">  
-</form>      
- 
+  </form>      
+</div>
+
 <!-------AFBEELDINGEN SHOWEN------->
 <?php if (isset($error)): ?>
     <div class="form__error">
