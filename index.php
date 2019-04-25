@@ -47,9 +47,10 @@ if(isset($_SESSION ['email'])){
   
 <div class="collection">
     <?php foreach($collection as $c): ?>
-        <a href="detail.php?id=<?php echo $c['id']; ?>" class="collection__item" style="background-image:url(<?php echo $c['image']; ?>)"></a>
+        <a href="detail.php?id=<?php  echo $c['id']; ?>" class="collection__item" style="background-image:url(<?php  echo $c['image']; ?>)"></a>
     <?php endforeach; ?>
 </div>
+
     
 </body>
 </html>
