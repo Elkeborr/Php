@@ -1,14 +1,12 @@
 <?php
 
-	//die();//=>dispaly_errors?
-
 	if(!empty($_POST)){
 		// email en password opvragen
 		$email = $_POST['email'];
 		$password = $_POST['password'];
 
 		//hash opvragen, op basis van email
-		$conn = new PDO("mysql:host=localhost;dbname=netflix;", "root", "root", null);
+		$conn = new PDO("mysql:host=localhost;dbname=project_php;", "root", "root", null);
 		
 
 		// check of rehash van password gelijk is aan hash uit db
@@ -16,21 +14,17 @@
 		$statement->bindParam(":email", $email);
 		$result = $statement->execute();
 
-		$user = $result->fetch(PDO::FETCH_ASSOC);
-
-
+		$user = $statement -> fetch(PDO::FETCH_ASSOC);
 
 		if( password_verify($password, $user['password'])){
 		// ja -> login
-
-			echo "OK!";
 			session_start();
-			$_SESSION['userid'] = $user['id'];
+			$_SESSION['email'] = $user['email'];
 			header('Location:index.php');
 
 		}else{
 		// nee -> error
-			echo "Email or password is wrong, try again.";
+			$error = true;
 		}
 
 	}
@@ -57,7 +51,7 @@
 				<?php if (isset($error)): ?>
 				<div class="form__error">
 					<p>
-						Sorry, we can't log you in with that email address and password. Can you try again?
+						Sorry, we can't log you in with that email address or password. Can you try again?
 					</p>
 				</div>
 				<?php endif; ?>

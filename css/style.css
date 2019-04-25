@@ -56,3 +56,63 @@ body
   background-color: goldenrod;
 }
 
+/*-------- NAVIGATIE --------*/
+
+.navbar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.7em; 
+  background-color:#ffff;
+  height: 60px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar a{
+  text-decoration: none;
+
+}
+
+.navbar .logo
+{
+  margin-left: auto;
+  margin-right: auto;
+  color:#273B09;
+  
+
+}
+
+.navbar img{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.navbar input
+{
+  width: 100%;
+  max-width: 200px;
+
+  color: white;
+  padding: 0.5em;
+  border: 1px solid #273B09;
+}
+
+a.navbar__logout
+{
+  margin-left: 2em;
+  margin-right: 0;
+}
+
+.upload{
+  margin-top:100px;
+}
+
+/*-----load more-----*/
+
+.load--more{
+
+}

@@ -7,6 +7,8 @@ private $firstName;
 private $lastName;
 private $userName;
 private $password;
+private $profileImage;
+
 
 
 //----------------------- GETTER & SETTER -----------------------//
@@ -110,6 +112,25 @@ $this->password = $password;
 return $this;
 }
 
+/**
+ * Get the value of profileImage
+ */ 
+public function getProfileImage()
+{
+return $this->profileImage;
+}
+
+/**
+ * Set the value of profileImage
+ *
+ * @return  self
+ */ 
+public function setProfileImage($profileImage)
+{
+$this->profileImage = $profileImage;
+
+return $this;
+}
 
 
 
@@ -118,7 +139,7 @@ return $this;
 /* databank connectie hier laten werken */
 public static function getAll(){
     $conn = Db::getInstance();
-    $result = $conn->query("select * from posts ");
+    $result = $conn->query("select * from users ");
 
     // fetch all records from the database and return them as objects of this __CLASS__ (Post)
     return $result->fetchAll(PDO::FETCH_CLASS, __CLASS__);
@@ -132,19 +153,23 @@ public function register (){
         'cost' => 12 //2^12
         ];
                 $password = password_hash($this->password, PASSWORD_DEFAULT,$options);
-                try {
+                $profileImage="Jpeg";
+            try {
                     // De databank aanspreken
                     $conn = Db::getInstance();
                     // Opslagen in de databank
-                    $stm = $conn -> prepare ("INSERT into users (email,firstname,lastname,username,password) VALUES (:email,:firstname,:lastname,:username,:password)");
-                    // Waarden koppelen aan invul velden (bindParam=  veiligere manier)
+                    $stm = $conn -> prepare ("INSERT into users (email,firstname,lastname,username,password,profileImage) VALUES (:email,:firstname,:lastname,:username,:password,:profileImage)");
+                    // Waarden koppelen aan invul velden (bindParam= veiligere manier)
                     $stm  -> bindParam(":email",$this->email);
                     $stm  -> bindParam(":firstname",$this->firstName);
                     $stm  -> bindParam(":lastname",$this->lastName);
                     $stm  -> bindParam(":username",$this->userName);
                     $stm  -> bindParam(":password",$password);
+                    $stm  -> bindParam(":profileImage",$profileImage);
+                    
                     // Uitvoeren
                     $result = $stm ->execute();
+                
                     // Gelukt = true
                     return $result;
                 } catch (Throwable $t){
@@ -192,6 +217,10 @@ public static function UsernameAvailable($username)
     }
   
 }
+
+
+
+
 
 
 
