@@ -147,7 +147,7 @@ public function register (){
         'cost' => 12 //2^12
         ];
                 $password = password_hash($this->password, PASSWORD_DEFAULT,$options);
-                $profileImage="Jpeg";
+                
             try {
                     // De databank aanspreken
                     $conn = Db::getInstance();
