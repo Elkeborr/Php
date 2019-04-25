@@ -11,6 +11,9 @@ $collection = $statement->fetchAll();
 
 
 ?>
+
+<?php include_once("nav.inc.php"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
