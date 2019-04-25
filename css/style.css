@@ -6,10 +6,15 @@
 
 body
 {
-  background-color: white;
-  color: black;
+
+  color: white;
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   margin: 0;
+
+  background-image: url(images/forest-haze-hd-wallpaper-39811.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+
 
 }
 
@@ -34,15 +39,17 @@ body
 .collection__detail{
   background-size: contain;
   background-repeat: no-repeat;
-  height: 500px;
+  height: 400px;
+  margin-left: 30px;
   background-position: center center;
 }
 
 .collectionDetails__desc
 {
-  color: black;
+  color:white;
   background-position: center center;
-  font-size: 8em;
+  font-size: 2em;
+  font-weight: bold;
 }
 
 .form{
@@ -51,6 +58,40 @@ body
   width: 400px;
   margin: 0 auto;
 }
+
+.formComment{
+  margin-top: 20px;
+  margin-left: 110px;
+}
+
+.formComment__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 20px;
+  width: 20%;
+  height: 50px;
+  border-radius: 10px;
+  background: #709255;
+  color: #fff;
+  font-size: 18px;
+  margin-top: 16px;
+}
+.formComment__btn:hover {
+  background: #333333;
+}
+.formComment__input {
+      display: block;
+      width: 100px;
+      background: transparent;
+      font-size: 18px;
+      color: #555555;
+      line-height: 1.2;
+      margin-left: 24px;
+      margin-bottom: 10px;
+      border-bottom: solid #709255 1px;
+}
+
 
 .input{
   background-color: goldenrod;
