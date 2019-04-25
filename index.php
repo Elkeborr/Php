@@ -1,4 +1,5 @@
 <?php 
+
   //Connectie klasses
 include_once("bootstrap.php");
 
@@ -6,12 +7,14 @@ include_once("bootstrap.php");
 User::checkLogin();
 
 
-$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
+/*$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
 $statement = $conn->prepare("SELECT* FROM images_with_fields");
 $statement->execute();
 $collection = $statement->fetchAll();
-
-  if(!empty($collection)){
+*/
+  $posts = Post::getAll();
+  
+  if(!empty($posts)){
     $show = true;
   }else{
     $error = true;
@@ -52,9 +55,9 @@ $collection = $statement->fetchAll();
 
 <div class="collection">
   
-    <?php foreach($collection as $c): ?>
-        <a href="detail.php?id=<?php echo $c['id']; ?>" class="collection__item" style="background-image:url(<?php echo $c['image']; ?>)"></a>
-        <p><?php echo $c['image_text']; ?></p>
+    <?php foreach($posts as $p): ?>
+        <a href="detail.php?id=<?php echo $p['id']; ?>" class="collection__item" style="background-image:url(<?php echo $p['image']; ?>)"></a>
+        <p><?php echo $p['image_text']; ?></p>
     <?php endforeach; ?> 
   <?php endif; ?>
 </div>
