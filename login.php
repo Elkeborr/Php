@@ -42,7 +42,7 @@
 </head>
 <body>
 	
-	<div class="container">
+	<div class="container--login">
 		<div class="wrap">
 		<div class="form--login">
 			<form action="" method="post">

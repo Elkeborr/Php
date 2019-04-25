@@ -10,6 +10,7 @@ $statement->execute();
 $collection = $statement->fetchAll();
 
 
+
 ?>
 
 <?php include_once("nav.inc.php"); ?>
