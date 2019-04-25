@@ -2,32 +2,46 @@
 
 require_once("../bootstrap.php");
 
-$row = $_POST['row'];
 
-$rowperpage = 3;
+//$showLimit = 2;
+/* selecting posts
+$conn = Db::getInstance();
+$query = $conn->prepare( 'SELECT * FROM images_with_fields LIMIT '.$showLimit);
+$query->execute();
+$result = $query->fetchAll(PDO::FETCH_ASSOC);*/
 
-// selecting posts
-$query = 'SELECT * FROM posts limit '.$row.','.$rowperpage;
-$result = mysqli_query($con,$query);
 
-$html = '';
 
-while($row = mysqli_fetch_array($result)){
-    $id = $row['id'];
-    $title = $row['title'];
-    $content = $row['content'];
-    $shortcontent = substr($content, 0, 160)."...";
-    $link = $row['link'];
-    // Creating HTML structure
-    $html .= '<div id="post_'.$id.'" class="post">';
-    $html .= '<h1>'.$title.'</h1>';
-    $html .= '<p>'.$shortcontent.'</p>';
-    $html .= '<a href="'.$link.'" target="_blank" class="more">More</a>';
-    $html .= '</div>';
+if(!empty($_GET)) {
 
-}
+   try{
+       $e  = Post::getAll();
+        if($e==true){
+                $result=[
+                    "status" => "succes",
+                    "message" => "Hier zijn de afbeeldingen"
+                    ];
+                
+            }else {
+                $result=[
+                    "status" => "false",
+                    "message" => "Oepsie poepsie"
+                    ];
+            }
+           
+        }
+    catch(Throwable $t){
+        $result=[
+            "status" => "error",
+            "message" => "er is iet fout gelopen"
+            ];
+    }
 
-echo $html;
+    
+    echo json_encode($result);
+           
+    
+        }
 
 
 
