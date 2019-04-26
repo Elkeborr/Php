@@ -28,15 +28,19 @@ else
     {
         $description = $_POST["description"];
 
- //move uploaded file
+     //move uploaded file
         $newfilename = "images/" . $_FILES["image"]["name"]; 
+   //id
+        $stm = $conn-> prepare ("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+        $stm->execute();
+        $id=$stm->fetch(PDO::FETCH_COLUMN);
  
  if(move_uploaded_file($_FILES["image"]["tmp_name"], $newfilename))
  {
 
 $insert = $conn->query("INSERT into 
-                        images_with_fields (image, image_text) 
-                        VALUES ('".$newfilename."', '".$description."')");
+                        images_with_fields (image, image_text,user_id) 
+                        VALUES ('".$newfilename."', '".$description."', '".$id."')");
 header('location:index.php');
  /*$msg = "Upload gelukt!";
  echo "<img src=" . $newfilename . " />";*/

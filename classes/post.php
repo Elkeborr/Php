@@ -51,15 +51,18 @@
         */
         public static function getAll() {
             $conn = Db::getInstance();
+
             // ID uit de database halen
             $stm = $conn-> prepare ("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
             $stm->execute();
             $id=$stm->fetch(PDO::FETCH_COLUMN);
     
             // Alle post laden van de gevolgde personen
-            $statement = $conn->prepare("SELECT images_with_fields.image,images_with_fields.image_text FROM 
-            images_with_fields,followers WHERE
-            followers.user_id1=:id AND followers.user_id2=images_with_fields.user_id  LIMIT 2");
+            $statement = $conn->prepare("SELECT images_with_fields.image,images_with_fields.image_text,images_with_fields.user_id
+                FROM images_with_fields,followers WHERE followers.user_id1=:id AND followers.user_id2=images_with_fields.user_id 
+                UNION SELECT images_with_fields.image,images_with_fields.image_text,images_with_fields.user_id FROM images_with_fields,followers 
+                WHERE  images_with_fields.user_id =:id  LIMIT 10");
+
             $statement->bindValue(":id", $id); 
             $statement->execute();
             return $statement->fetchAll(PDO::FETCH_ASSOC);
