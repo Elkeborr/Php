@@ -35,28 +35,30 @@ $collection = $statement->fetchAll();
 
 <?php include_once("nav.inc.php"); ?>
 
+<!-------UPLOADEN VAN AFBEELDING------->
+
 <div class="upload">
 
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
-    <input type="file" name="image" capture="camera" required><br>
+    <input type="file" name="image" capture="camera" required/><br>
     <br><textarea name="description" cols="40" rows="4" placeholder="Description" required></textarea><br>
-    <input type="submit" value="upload" name="upload" class="input">  
+    <input type="submit" value="upload" name="upload" class="input"/>  
   </form>      
 </div>
 
 <!-------AFBEELDINGEN SHOWEN------->
+
 <?php if (isset($error)): ?>
     <div class="form__error">
-			<p> No followers yet, what a bummer! Search for them and share nature with them! </p>
+			<p> No followers yet, what a bummer! Search for them and share nature! </p>
 		</div>
 	<?php endif; ?>
 
   <?php if (isset($show)): ?>
 
 <div class="collection">
-  
     <?php foreach($posts as $p): ?>
-        <a href="detail.php?id=<?php echo $p['id']; ?>" class="collection__item" style="background-image:url(<?php echo $p['image']; ?>)"></a>
+        <a href="detail.php?id=<?php echo $p['id']; ?>" > <img  class="collection__item" src="<?php echo $p['image']; ?>" alt="Post"></a>
         <p><?php echo $p['image_text']; ?></p>
     <?php endforeach; ?> 
   <?php endif; ?>

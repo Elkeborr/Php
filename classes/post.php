@@ -50,6 +50,7 @@
             Alle posts van de databank halen
         */
         public static function getAll() {
+            
             $conn = Db::getInstance();
 
             // ID uit de database halen
