@@ -6,35 +6,37 @@
 
 body
 {
- 
   font-family: "Helvetica Neue", Helvetica, sans-serif;
   margin: 0;
 
-  background-image: url(../images/forest-haze-hd-wallpaper-39811.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-
-
 }
+
+/*-----POST INDEX-----*/
 
 .collection
 {
   margin-top: 2em;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 1em;
+  display:flex;
+  flex-flow: row wrap;
+  padding:5px;
+  justify-content: space-evenly;
+
+}
+.collection--image {
+  height: auto;
+  width: 400px;
+
+}
+.profile__image{
+  
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
 }
 
-.collection__item
-{
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 300px;
-  background-position: center center;
-  max-width: 700px;
-  background-color: lightgoldenrodyellow;
-}
 
+/*DETAIL PAGINA*/
 .collection__detail{
   background-size: contain;
   background-repeat: no-repeat;
@@ -42,7 +44,6 @@ body
   margin-left: 30px;
   background-position: center center;
 }
-
 .collectionDetails__desc
 {
   color:white;
