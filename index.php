@@ -61,7 +61,7 @@ $collection = $statement->fetchAll();
     <?php foreach($posts as $p): ?>
     <div class="collection__item">
         <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image"src="<?php echo $p['image']; ?>" alt="Post"></a>
-       <!--- <img class="profile__image" scr="images/hero_login.jpg">---> <p><?php echo $p['image_text']; ?></p>
+        <!--<img class="profile__image" scr="images/hero_login.jpg">---> <p><?php echo $p['image_text']; ?></p>
   </div>
     <?php endforeach; ?> 
   <?php endif; ?>
