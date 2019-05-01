@@ -51,12 +51,7 @@ body
   font-weight: bold;
 }
 
-.form{
-  text-align: center;
-  background-color: lightgoldenrodyellow;
-  width: 400px;
-  margin: 0 auto;
-}
+
 
 .formComment{
   margin-top: 20px;
@@ -151,10 +146,47 @@ a.navbar__logout
 
 .upload{
   margin-top:100px;
+  text-align: center;
+  width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding:10px;
+}
+
+.upload h3{
+  text-align: center;
+  color: #273B09;
+
+}
+
+.upload input:last-child{
+  color:white;
+  background-color: #273B09;
+  border:none;
+  padding:10px;
+  width: 30%;
+  margin-top:10px;
 }
 
 /*-----load more-----*/
+#load--more{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+  margin: 16px auto 16px auto;
+  width: 40%;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #709255;
+  color: #fff;
+  font-size: 18px;
+}
 
+#load--more:hover{
+  background-color:#273B09;
+  transition: 0.3s;
+}
 /*-----profiel-----*/
 .container{
   margin-top: 100px;
