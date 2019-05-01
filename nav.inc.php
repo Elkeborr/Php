@@ -26,7 +26,7 @@ $username=$statement->fetch(PDO::FETCH_COLUMN);
     <a href="index.php" class="logo">Plantspiratie</a>
     
     <form action="search.php?go" method="get">
-      <input type="text" name="search">
+      <input type="text" name="search" class="search">
       <input type="submit" name="submit" value="search">
 
     </form>

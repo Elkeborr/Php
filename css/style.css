@@ -99,7 +99,7 @@ body
   justify-content: center;
   align-items: center;
   padding: 0.7em; 
-  background-color:#ffff;
+  background-color:black;
   height: 60px;
   position: fixed;
   top: 0;
@@ -133,7 +133,7 @@ body
   width: 100%;
   max-width: 200px;
 
-  color: white;
+  color: black;
   padding: 0.5em;
   border: 1px solid #273B09;
 }
@@ -166,6 +166,11 @@ a.navbar__logout
   padding:10px;
   width: 30%;
   margin-top:10px;
+}
+
+.search{
+  color: black;
+  padding: 20px;
 }
 
 /*-----load more-----*/
