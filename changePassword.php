@@ -1,33 +1,4 @@
 
-<?php 
-
-$validate = new Validate();
-$validation = $validate->check($_POST, array(
-    'oldpassword' => array(
-        'required' => true,
-        'min' => 6
-    ),
-    'newpassword' => array(
-        'required' => true,
-        'min' => 6
-    ),
-    'repeatNewpassword' => array(
-        'required' => true,
-        'min' => 6,
-        'matches' => 'oldpassword'
-    )
-));
-
-if($validation->passed()){
-    //change password 
-
-}
-else{
-    foreach($validation->erros() as $error){
-        echo $error, '<br>';
-    }
-}
-?>
 
 
 <form method="POST" action="changePassword.php">
@@ -39,7 +10,7 @@ else{
 
 
 
-
+<?php
  if(!empty($_POST)){
 		// email en password opvragen
 		$oldpassword = $_POST['oldpassword'];
@@ -64,4 +35,6 @@ else{
 			$_SESSION['password'] = $newpassword;
 			header('Location:profiel.php');
 
-		}}
+        }}
+        
+        ?>

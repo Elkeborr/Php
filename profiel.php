@@ -122,7 +122,7 @@ function test_input($data) {
 
 
 
-  <!------------------------PASSWORD--------------------------->
+  <!------------------------PASSWOORD EN EMAIL WIJZIGEN--------------------------->
   <h3> Gegevens wijzigen </h3>
 
 <ul>
@@ -130,82 +130,6 @@ function test_input($data) {
 <li><a href="changeEmail.php">Verander email</a></li>
 </ul>
 
-
-
-<br>
-
-<form method="POST" action="profiel.php">
-   Old password: <input type="password" name="oldpassword"><br/>
-   New password: <input type="password" name="newpassword"><br/>
-   <input type="submit" value="submit" name="submit">
-</form>
-
-
-
-<?php
-  
-  if(!empty($_POST)){
-		// email en password opvragen
-		$oldpassword = $_POST['oldpassword'];
-		$newpassword = $_POST['newpassword'];
-
-		//hash opvragen, op basis van email
-		$conn = new PDO("mysql:host=localhost;dbname=project_php;", "root", "root", null);
-		
-
-		// check of rehash van password gelijk is aan hash uit db
-		$statement = $conn->prepare("SELECT * FROM users WHERE password='".$newpassword."'");
-		$result = $statement->execute();
-
-		$user = $statement -> fetch(PDO::FETCH_ASSOC);
-
-		if( password_verify($newpassword, $user['password'])){
-			$error = true;
-
-
-		}else{
-      session_start();
-			$_SESSION['password'] = $newpassword;
-			header('Location:profiel.php');
-
-		}}
-
-
-?>
-
-  <!------------------------PASSWORD--------------------------->
-
-  <br>
-  <br>
-  
-  <form method="POST" action="profiel.php" enctype="multipart/form-data">
-<table>
-<tr>
-<td>Old email:</td>
-<td><input type="text" name="oldemail"/></td>
-</tr>
-<tr>
-<td>New email</td>
-<td><input type="text" name="newemail"/></td>
-</tr>
-<tr>
-<td>Change email</td>
-<td><input type="submit" name="submit"/></td>
-</tr>
-</table>
-</form>
-
-<?php
-
-if ($_POST['submit'])
-{
-
-$oldpassword = $_POST['oldpassword'];
-$newpassword = $_POST['newpassword'];
-
-}
-
-?>
 
 
 

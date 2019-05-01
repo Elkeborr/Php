@@ -1,7 +1,7 @@
 <?php 
 
   //Connectie klasses
-require_once("bootstrap.php");
+include_once("bootstrap.php");
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
