@@ -37,7 +37,7 @@ if (isset ($_FILES["image"])){
             $description = $_POST["description"];
 
             //move uploaded file
-            $newfilename = "images/post_images/" . $_FILES["image"]["name"]; 
+            $newfilename = "images" . $_FILES["image"]["name"]; 
             //id
             $stm = $conn-> prepare ("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
             $stm->execute();
@@ -60,7 +60,29 @@ if (isset ($_FILES["image"])){
         {
         $msg = "Sorry, enkel afbeeldingen zijn toegestaan.";
         }
+
 }
+
+ // if no error occured, continue ....
+ if(!isset($msg))
+ {
+  $stm = $conn->prepare('UPDATE profile_images 
+             SET image=:uimage, image_text=:uimage_text, userPic=:upic WHERE id=:uid');
+  $stm->bindParam(':uimage',$image);
+  $stm->bindParam(':uimage_text',$image_text);
+  $stm->bindParam(':uid',$id);
+   
+  if($stm->execute()){
+   ?>
+               <script> alert('Successfully Updated ...');
+                        window.location.href='profiel.php';
+                </script>
+<?php
+  }
+  else{
+   $msg = "Sorry Data Could Not Updated !";
+  }
+ }    
  echo $msg . "<br />";
 }
  

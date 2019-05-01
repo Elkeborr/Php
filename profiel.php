@@ -41,7 +41,7 @@
   <h3>Profielfoto</h3>
 
 
-  <div class="profilePic">
+  <div class="profileImage">
 
   <form enctype="multipart/form-data" action="uploadProfilePic.php" method="POST"> 
     <input type="file" name="image" capture="camera" required/><br>
@@ -73,7 +73,6 @@ if(!empty($posts)){
     <?php foreach($image as $p): ?>
     <div class="collection__item">
         <img class="collection--image"src="<?php echo $p['image']; ?>" alt="ProfileImg"></a>
-        <img class="profile__image" scr="images/hero_login.jpg">
   </div>
     <?php endforeach; ?> 
 </div>
