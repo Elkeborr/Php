@@ -5,18 +5,17 @@ include_once("bootstrap.php");
 
 
 
-
 ?>
 
 <nav class="navbar">
    
     <a href="profiel.php"><img src="images/hero_login.jpg" alt="profileImage"></a>
-  
-    <a href="profiel.php"><?php echo $_SESSION['email']; ?></a>
     
+    <a href="profiel.php">Username</a>
+
     <a href="index.php" class="logo">Plantspiratie</a>
     
-    <form action="search.php" method="get">
+    <form action="search.php?go" method="get">
       <input type="text" name="search">
       <input type="submit" name="submit" value="search">
 
