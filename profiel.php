@@ -1,12 +1,6 @@
-<?php
-$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-  $statement = $conn->prepare("SELECT* FROM users");
-  $statement->execute();
-  $collection = $statement->fetchAll();
-
-  ?>
 
 <?php include_once("nav.inc.php"); ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,6 +16,24 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
 </head>
 <body>
 
+<?php
+   $conn = new PDO("mysql:host=localhost;dbname=project_php;", "root", "root", null);
+
+   $stmt=$conn->prepare('SELECT * FROM users');
+   $stmt->execute();
+   if($stmt->rowCount()>0){
+     while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
+       extract($row);
+  
+
+     }
+   }
+
+   
+
+   ?>
+
+
 
   <!------------------------PROFIELFOTO--------------------------->
 
@@ -29,21 +41,44 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
   <h3>Profielfoto</h3>
 
 
+  <div class="profilePic">
 
-<form method="post" enctype="multipart/form-data" action="uploadProfilePic.php">
-<table>
-
-<tr>
-<td>image</td>
-<td><input type="file" name="image" /></td>
-</tr>
-<tr>
-<td>&nbsp;</td>
-<td><input type="submit" name="submit" value="submit" /></td>
-</tr>
-</table>
+  <form enctype="multipart/form-data" action="uploadProfilePic.php" method="POST"> 
+    <input type="file" name="image" capture="camera" required/><br>
+    <input type="submit" value="upload" name="upload"/>  
+  </form>      
 </div>
 
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
+
+$statement = $conn->prepare("SELECT * FROM profile_images where id = $id");
+$statement->execute();
+$collection = $statement->fetchAll();
+
+$image = ProfileImg::getAll();
+ 
+if(!empty($posts)){
+  $show = true;
+}else{
+  $error = true;
+}
+
+?>
+
+<div class="collection">
+ 
+    <?php foreach($image as $p): ?>
+    <div class="collection__item">
+        <img class="collection--image"src="<?php echo $p['image']; ?>" alt="ProfileImg"></a>
+        <img class="profile__image" scr="images/hero_login.jpg">
+  </div>
+    <?php endforeach; ?> 
+</div>
+
+  
 
   <!------------------------PROFIELTEKST--------------------------->
 <h3>Biografie</h3>
@@ -82,54 +117,42 @@ function test_input($data) {
 
 <br>
 
-<form method="POST" action="profiel.php" enctype="multipart/form-data">
-<table>
-<tr>
-<td>Old password:</td>
-<td><input type="text" name="oldpassword"/></td>
-</tr>
-<tr>
-<td>New password</td>
-<td><input type="text" name="newpassword"/></td>
-</tr>
-<tr>
-<td>Change password</td>
-<td><input type="submit" name="submit"/></td>
-</tr>
-</table>
+<form method="POST" action="profiel.php">
+   Old password: <input type="password" name="oldpassword"><br/>
+   New password: <input type="password" name="newpassword"><br/>
+   <input type="submit" value="submit" name="submit">
 </form>
 
 
 
 <?php
+  
+  if(!empty($_POST)){
+		// email en password opvragen
+		$oldpassword = $_POST['oldpassword'];
+		$newpassword = $_POST['newpassword'];
 
-if ($_POST['submit'])
-{
+		//hash opvragen, op basis van email
+		$conn = new PDO("mysql:host=localhost;dbname=project_php;", "root", "root", null);
+		
 
-$oldpassword = $_POST['oldpassword'];
-$newpassword = $_POST['newpassword'];
+		// check of rehash van password gelijk is aan hash uit db
+		$statement = $conn->prepare("SELECT * FROM users WHERE password='".$newpassword."'");
+		$result = $statement->execute();
 
-echo"$newpassword/$oldpassword";
-}
+		$user = $statement -> fetch(PDO::FETCH_ASSOC);
 
-$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-  $statement = $conn->prepare("SELECT password FROM users") or die("didn't work");
-  $statement->execute();
-  $collection = $statement->fetchAll();
-
+		if( password_verify($newpassword, $user['password'])){
+			$error = true;
 
 
+		}else{
+      session_start();
+			$_SESSION['password'] = $newpassword;
+			header('Location:profiel.php');
 
+		}}
 
-/*echo"<form action ='profiel.php' method='POST'>
-Old password: <input type='text' name='oldpassword'><br>
-New password: <input type='password' name='newpassword'><br>
-Repeat new password: <input type='password' name='repeatnewpassword'><br>
-<input type='submit' name='submit' value='Change password'>
-
-</form>
-
-";*/
 
 ?>
 
