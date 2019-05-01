@@ -3,7 +3,17 @@
 //Connectie klasses
 include_once("bootstrap.php");
 
+$conn = Db::getInstance();
 
+// Username ophalen
+$stm = $conn-> prepare ("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+$stm->execute();
+$id=$stm->fetch(PDO::FETCH_COLUMN);
+
+$statement = $conn->prepare("SELECT userName FROM users WHERE users.id=:id");
+$statement->bindValue(":id", $id); 
+$statement->execute();
+$username=$statement->fetch(PDO::FETCH_COLUMN);
 
 ?>
 
@@ -11,7 +21,7 @@ include_once("bootstrap.php");
    
     <a href="profiel.php"><img src="images/hero_login.jpg" alt="profileImage"></a>
     
-    <a href="profiel.php">Username</a>
+    <a href="profiel.php"><?php echo $username; ?></a>
 
     <a href="index.php" class="logo">Plantspiratie</a>
     

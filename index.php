@@ -38,7 +38,7 @@ $collection = $statement->fetchAll();
 <!-------UPLOADEN VAN AFBEELDING------->
 
 <div class="upload">
-
+<h3>Upload hier een foto</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
     <input type="file" name="image" capture="camera" required/><br>
     <br><textarea name="description" cols="40" rows="4" placeholder="Description" required></textarea><br>
@@ -65,9 +65,10 @@ $collection = $statement->fetchAll();
   </div>
     <?php endforeach; ?> 
   <?php endif; ?>
-</div>
 
-<button id="load-more">Load More</button>
+</div>
+<button id="load--more">Load More</button>
+
             
 
 
