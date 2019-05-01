@@ -84,6 +84,22 @@ if(!empty($posts)){
 <h3>Biografie</h3>
 
 <?php
+$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
+
+$statement = $conn->prepare("SELECT * FROM profile_images where image_text");
+$statement->execute();
+$collection = $statement->fetchAll();
+
+?>
+
+<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
+<textarea name="Tekst" rows="5" cols="40"><?php echo $tekst;?></textarea>
+<br><br>
+  <input type="submit" name="submit" value="Submit">  
+</form>
+
+<?php
+
 
 $tekst="";
 
@@ -104,14 +120,15 @@ function test_input($data) {
 
   ?>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-<textarea name="Tekst" rows="5" cols="40"><?php echo $tekst;?></textarea>
-<br><br>
-  <input type="submit" name="submit" value="Submit">  
-</form>
+
 
   <!------------------------PASSWORD--------------------------->
   <h3> Gegevens wijzigen </h3>
+
+<ul>
+<li><a href="changePassword.php">Verander wachtwoord</a></li>
+<li><a href="changeEmail.php">Verander email</a></li>
+</ul>
 
 
 
