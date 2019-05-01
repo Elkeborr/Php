@@ -84,40 +84,26 @@ if(!empty($posts)){
 
 <?php
 $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-
 $statement = $conn->prepare("SELECT * FROM profile_images where image_text");
 $statement->execute();
 $collection = $statement->fetchAll();
 
 ?>
-
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">  
-<textarea name="Tekst" rows="5" cols="40"><?php echo $tekst;?></textarea>
+<?php
+$tekst=@$_POST['tekst'];
+?>
+<form method="post" action="">  
+<textarea name="tekst" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!"><?php echo $tekst;?></textarea>
 <br><br>
   <input type="submit" name="submit" value="Submit">  
+
 </form>
 
-<?php
 
 
-$tekst="";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-if (empty($_POST["tekst"])) {
-    $tekst = "";
-  } else {
-    $tekst = test_input($_POST["tekst"]);
-  }
-}
-function test_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
-  }
 
-  ?>
 
 
 
