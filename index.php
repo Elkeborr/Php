@@ -1,11 +1,10 @@
-<?php 
+<?php
 
   //Connectie klasses
-include_once("bootstrap.php");
+include_once 'bootstrap.php';
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
-
 
 /*$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
 $statement = $conn->prepare("SELECT* FROM images_with_fields");
@@ -13,11 +12,11 @@ $statement->execute();
 $collection = $statement->fetchAll();
 */
   $posts = Post::getAll();
- 
-  if(!empty($posts)){
-    $show = true;
-  }else{
-    $error = true;
+ var_dump($posts);
+  if (!empty($posts)) {
+      $show = true;
+  } else {
+      $error = true;
   }
 
 ?>
@@ -33,7 +32,7 @@ $collection = $statement->fetchAll();
 </head>
 <body>
 
-<?php include_once("nav.inc.php"); ?>
+<?php include_once 'nav.inc.php'; ?>
 
 <!-------UPLOADEN VAN AFBEELDING------->
 
@@ -58,7 +57,7 @@ $collection = $statement->fetchAll();
 
 <div class="collection">
  
-    <?php foreach($posts as $p): ?>
+    <?php foreach ($posts as $p): ?>
     <div class="collection__item">
         <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image"src="<?php echo $p['image']; ?>" alt="Post"></a>
         <!--<img class="profile__image" scr="images/hero_login.jpg">---> <p><?php echo $p['image_text']; ?></p>
