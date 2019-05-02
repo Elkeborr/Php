@@ -1,6 +1,10 @@
-.collection--image{
-    height: 50px;
-    width: 50px;
+.profiel{
+    justify-content: center;
     margin: auto;
-    padding-right: 100px;
+}
+.collection--image{
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    margin-bottom: 20px;
 }

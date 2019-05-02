@@ -3,7 +3,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="profiel">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -41,13 +41,6 @@
   <h3>Profielfoto</h3>
 
 
-  <div class="profileImage">
-
-  <form enctype="multipart/form-data" action="uploadProfilePic.php" method="POST"> 
-    <input type="file" name="image" capture="camera" required/><br>
-    <input type="submit" value="upload" name="upload"/>  
-  </form>      
-</div>
 
 <?php 
 error_reporting(E_ALL);
@@ -75,6 +68,15 @@ if(!empty($posts)){
         <img class="collection--image"src="<?php echo $p['image']; ?>" alt="ProfileImg"></a>
   </div>
     <?php endforeach; ?> 
+</div>
+
+
+<div class="profileImage">
+
+<form enctype="multipart/form-data" action="uploadProfilePic.php" method="POST"> 
+  <input type="file" name="image" capture="camera" required/><br>
+  <input type="submit" value="upload" name="upload"/>  
+</form>      
 </div>
 
   
