@@ -89,17 +89,42 @@ $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null)
 $statement = $conn->prepare("SELECT * FROM users where bio");
 $statement->execute();
 $collection = $statement->fetchAll();
+?>
 
-?>
-<?php
-$tekst=@$_POST['tekst'];
-?>
 <form method="post" action="">  
-<textarea name="tekst" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!"><?php echo $tekst;?></textarea>
+<textarea name="tekst" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!"></textarea>
 <br><br>
-  <input type="submit" name="submit" value="Submit">  
-
+<input type="submit" name="submit" value="Submit">  
 </form>
+
+<?php 
+
+$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
+$statement = $conn->prepare("SELECT * FROM users where bio");
+$statement->execute();
+$collection = $statement->fetchAll();
+
+if(isset($_POST['submit'])){
+
+  $tekst=$_POST['tekst'];
+
+  if(empty($tekst)){
+    echo "<font color='red'>Tekstveld is leeg!</font><br/>";
+
+  }
+  else{
+    $sql = "INSERT INTO users(bio) VALUES(:bio)";
+
+    $query = $conn->prepare($sql);
+
+    $query->bindparam(':bio', $tekst);
+    $query->execute();
+
+    echo $tekst;
+  }
+}
+
+?>
 
 
 
