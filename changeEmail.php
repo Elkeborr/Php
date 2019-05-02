@@ -9,7 +9,6 @@
 </form>
 
 
-
 <?php
  if(!empty($_POST)){
 		// email en password opvragen

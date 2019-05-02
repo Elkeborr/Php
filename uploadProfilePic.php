@@ -9,12 +9,12 @@ $conn = Db::getInstance();
 // in elke file waar we sessie willen gebruiken moeten we die dan ook starten
 session_start();
 
-if (isset ($_FILES["image"])){
+if (isset ($_FILES["profileImg"])){
 
-    if ($_FILES["image"]["error"] > 0)
+    if ($_FILES["profileImg"]["error"] > 0)
     {
  //for error messages: see http://php.net/manual/en/features.fileupload.errors.php
-        switch($_FILES["image"]["error"])
+        switch($_FILES["profileImg"]["error"])
         {
         case 1:
         $msg = "U mag maximaal 2MB opladen.";
@@ -28,7 +28,7 @@ if (isset ($_FILES["image"])){
     {
         //check MIME TYPE - http://php.net/manual/en/function.finfo-open.php
         $allowedtypes = array("image/jpg", "image/jpeg", "image/png", "image/gif");
-        $filename = $_FILES["image"]["tmp_name"];
+        $filename = $_FILES["profileImg"];
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $fileinfo = $finfo->file($filename);
 
@@ -36,17 +36,17 @@ if (isset ($_FILES["image"])){
         {
 
             //move uploaded file
-            $newfilename = "images" . $_FILES["image"]["name"]; 
+            $newfilename = "profileImg" . $_FILES["profileImg"]; 
             //id
             $stm = $conn-> prepare ("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
             $stm->execute();
             $id=$stm->fetch(PDO::FETCH_COLUMN);
  
-            if(move_uploaded_file($_FILES["image"]["tmp_name"], $newfilename))
+            if(move_uploaded_file($_FILES["profileImg"], $newfilename))
             {
 
                 $insert = $conn->query("INSERT into users (image) 
-                                        VALUES ('".$newfilename."', '".$id."')");
+                                        VALUES ('".$newfilename."')");
 
                 header('location:profiel.php');
             }

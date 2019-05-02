@@ -58,7 +58,7 @@ ini_set('display_errors', 1);
 <div class="profileImage">
 
 <form enctype="multipart/form-data" action="uploadProfilePic.php" method="POST"> 
-  <input type="file" name="image" capture="camera" required/><br>
+  <input type="file" name="profileImg" capture="camera" required/><br>
   <input type="submit" value="upload" name="upload"/>  
 </form>      
 </div>
