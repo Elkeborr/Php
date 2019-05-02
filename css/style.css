@@ -99,7 +99,7 @@ body
   justify-content: center;
   align-items: center;
   padding: 0.7em; 
-  background-color:black;
+  background-color: #273B09;
   height: 60px;
   position: fixed;
   top: 0;
@@ -109,14 +109,14 @@ body
 
 .navbar a{
   text-decoration: none;
-
+  color: white;
 }
 
 .navbar .logo
 {
   margin-left: auto;
   margin-right: auto;
-  color:#273B09;
+  color: white;
   
 
 }
@@ -142,6 +142,7 @@ a.navbar__logout
 {
   margin-left: 2em;
   margin-right: 0;
+  color: white;
 }
 
 .upload{
@@ -171,6 +172,7 @@ a.navbar__logout
 .search{
   color: black;
   padding: 20px;
+  margin-top: 50px;
 }
 
 /*-----load more-----*/
