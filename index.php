@@ -12,7 +12,6 @@ $statement->execute();
 $collection = $statement->fetchAll();
 */
   $posts = Post::getAll();
- var_dump($posts);
   if (!empty($posts)) {
       $show = true;
   } else {

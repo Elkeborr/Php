@@ -9,12 +9,12 @@ $conn = Db::getInstance();
 // in elke file waar we sessie willen gebruiken moeten we die dan ook starten
 session_start();
 
-if (isset ($_FILES["image"])){
+if (isset ($_FILES["profileImg"])){
 
-    if ($_FILES["image"]["error"] > 0)
+    if ($_FILES["profileImg"]["error"] > 0)
     {
  //for error messages: see http://php.net/manual/en/features.fileupload.errors.php
-        switch($_FILES["image"]["error"])
+        switch($_FILES["profileImg"]["error"])
         {
         case 1:
         $msg = "U mag maximaal 2MB opladen.";
@@ -28,26 +28,25 @@ if (isset ($_FILES["image"])){
     {
         //check MIME TYPE - http://php.net/manual/en/function.finfo-open.php
         $allowedtypes = array("image/jpg", "image/jpeg", "image/png", "image/gif");
-        $filename = $_FILES["image"]["tmp_name"];
+        $filename = $_FILES["profileImg"];
         $finfo = new finfo(FILEINFO_MIME_TYPE);
         $fileinfo = $finfo->file($filename);
 
         if(in_array($fileinfo, $allowedtypes))
         {
-            $description = $_POST["description"];
 
             //move uploaded file
-            $newfilename = "images" . $_FILES["image"]["name"]; 
+            $newfilename = "profileImg" . $_FILES["profileImg"]; 
             //id
             $stm = $conn-> prepare ("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
             $stm->execute();
             $id=$stm->fetch(PDO::FETCH_COLUMN);
  
-            if(move_uploaded_file($_FILES["image"]["tmp_name"], $newfilename))
+            if(move_uploaded_file($_FILES["profileImg"], $newfilename))
             {
 
-                $insert = $conn->query("INSERT into profile_images (image, user_id) 
-                                        VALUES ('".$newfilename."', '".$id."')");
+                $insert = $conn->query("INSERT into users (image) 
+                                        VALUES ('".$newfilename."')");
 
                 header('location:profiel.php');
             }
@@ -66,11 +65,8 @@ if (isset ($_FILES["image"])){
  // if no error occured, continue ....
  if(!isset($msg))
  {
-  $stm = $conn->prepare('UPDATE profile_images 
-             SET image=:uimage, image_text=:uimage_text, userPic=:upic WHERE id=:uid');
+  $stm = $conn->prepare("UPDATE users SET image=:uimage, WHERE email = '".$_SESSION['email']."'");
   $stm->bindParam(':uimage',$image);
-  $stm->bindParam(':uimage_text',$image_text);
-  $stm->bindParam(':uid',$id);
    
   if($stm->execute()){
    ?>
