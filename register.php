@@ -10,7 +10,7 @@ if (!empty($_POST['submit'])) {
         $error = true;
     } else {
         // Gegevens in de classe user steken
-        $user = new  \phpProject\User();
+        $user = new  User();
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
         $user->setFirstName($_POST['firstname']);

@@ -73,6 +73,7 @@ class Post
 
     public static function detailPagina()
     {
+        //probleem met get id
         $id = $_GET['id'];
         $conn = Db::getInstance();
 
@@ -81,5 +82,19 @@ class Post
         $collection = $statement->fetchAll();
 
         return $collection;
+    }
+
+    public static function profilePic()
+    {
+        //probleem met get id
+        $id = $_GET['id'];
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT users.profileImg FROM images_with_fields,users 
+       WHERE images_with_fields.user_id = users.id AND images_with_fields.id = $id");
+        $statement->execute();
+        $profilePic = $statement->fetch();
+
+        return $profilePic;
     }
 }

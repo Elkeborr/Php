@@ -9,6 +9,7 @@ class User
     private $lastName;
     private $userName;
     private $password;
+    private $bio;
     private $profileImg;
 
     //----------------------- GETTER & SETTER -----------------------//
@@ -114,6 +115,26 @@ class User
     }
 
     /**
+     * Get the value of bio.
+     */
+    public function getBio()
+    {
+        return $this->bio;
+    }
+
+    /**
+     * Set the value of bio.
+     *
+     * @return self
+     */
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    /**
      * Get the value of profileImg.
      */
     public function getProfileImg()
@@ -146,17 +167,6 @@ class User
         return $result->fetchAll(PDO::FETCH_CLASS, __CLASS__);
     }
 
-    /* controle van de login*/
-    public static function checkLogin()
-    {
-        if (!isset($_SESSION)) {
-            session_start();
-        }
-        if (!isset($_SESSION['email'])) {
-            header('Location: login.php');
-        }
-    }
-
     /* registreren*/
     public function register()
     {
@@ -171,7 +181,7 @@ class User
             // De databank aanspreken
             $conn = Db::getInstance();
             // Opslagen in de databank
-            $stm = $conn->prepare('INSERT into users (email,firstname,lastname,username,password) VALUES (:email,:firstname,:lastname,:username,:password)');
+            $stm = $conn->prepare('INSERT into users (email,firstname,lastname,username,password,bio,profileImg) VALUES (:email,:firstname,:lastname,:username,:password,"","")');
             // Waarden koppelen aan invul velden (bindParam= veiligere manier)
             $stm->bindParam(':email', $this->email);
             $stm->bindParam(':firstname', $this->firstName);
@@ -215,6 +225,17 @@ class User
                 // nee -> error
                 $error = true;
             }
+        }
+    }
+
+    /* controle van de login*/
+    public static function checkLogin()
+    {
+        if (!isset($_SESSION)) {
+            session_start();
+        }
+        if (!isset($_SESSION['email'])) {
+            header('Location: login.php');
         }
     }
 

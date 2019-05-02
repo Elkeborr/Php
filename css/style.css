@@ -26,14 +26,27 @@ body
   width: 400px;
 
 }
-.profile__image{
 
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+.item--container{
+  display: flex;
+  justify-content: space-between;
+
+ height: 100px;
 
 }
 
+.item--container button{
+  height: 20px;
+}
+
+.item{
+  width: 50%;
+  
+
+}
+.collection__item p {
+float: left;
+}
 
 /*DETAIL PAGINA*/
 .collection__detail{
@@ -50,7 +63,6 @@ body
   font-size: 2em;
   font-weight: bold;
 }
-
 
 
 .formComment{
@@ -121,7 +133,7 @@ body
 
 }
 
-.nav--profile{
+.profile--small{
   width: 40px;
   height: 40px;
   position: relative;
@@ -129,7 +141,7 @@ body
   border-radius: 50%;
 }
 
-.navbar img{
+.profile--imageSmall{
   display: inline;
   margin: 0 auto;
   height: 150%;

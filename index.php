@@ -1,4 +1,5 @@
 <?php
+session_start();
 
   //Connectie klasses
 include_once 'bootstrap.php';
@@ -12,6 +13,7 @@ User::checkLogin();
   } else {
       $error = true;
   }
+  $profileImg = Post::profilePic();
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +55,21 @@ User::checkLogin();
     <?php foreach ($posts as $p): ?>
     <div class="collection__item">
         <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image" src="<?php echo $p['image']; ?>" alt="Post"></a>
-        <!--<img class="profile__image" scr="images/hero_login.jpg">---> <p><?php echo $p['image_text']; ?></p>
+        <div class='item--container'>
+          
+        <div class="profile--small ">
+        <img class="profile--imageSmall" src="<?php echo $profileImg; ?>"> 
+        </div>
+
+        <p><?php echo $p['image_text']; ?></p>
+   
+   
+        <p>2u geleden</p>
+    
+        <button>Like</button>
+    
+     
+</div>
   </div>
     <?php endforeach; ?> 
   <?php endif; ?>

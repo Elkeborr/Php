@@ -11,8 +11,8 @@ $profileImg = User::profileImg();
 
 <nav class="navbar">
    
-<div class="nav--profile">
-    <a href="profiel.php"><img src="<?php echo $profileImg; ?>" alt="profileImage"></a>
+<div class="profile--small">
+    <a href="profiel.php"><img  class="profile--imageSmall" src="<?php echo $profileImg; ?>" alt="profileImage"></a>
 </div>
     <a href="profiel.php" class="userName"><?php echo $username; ?></a>
 
