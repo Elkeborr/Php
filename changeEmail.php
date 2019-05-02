@@ -2,7 +2,7 @@
 
 
 <form method="POST" action="changeEmail.php">
-   Old email: <input type="email" name="oldemail"><br/>
+   Old email: <input type="password" name="password"><br/>
    New email: <input type="email" name="newemail"><br/>
    Repeat new email: <input type="email" name="repeatNewemail"><br/>
    <input type="submit" value="wijzig" name="submit">

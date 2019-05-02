@@ -7,6 +7,7 @@ private $firstName;
 private $lastName;
 private $userName;
 private $password;
+private $profileImg;
 
 
 
@@ -112,6 +113,26 @@ $this->password = $password;
 return $this;
 }
 
+/**
+ * Get the value of profileImg
+ */ 
+public function getProfileImg()
+{
+return $this->profileImg;
+}
+
+/**
+ * Set the value of profileImg
+ *
+ * @return  self
+ */ 
+public function setProfileImg($profileImg)
+{
+$this->profileImg = $profileImg;
+
+return $this;
+}
+
 
 
 
@@ -211,6 +232,25 @@ public static function UsernameAvailable($username)
     }
   
 }
+
+public static function profileImg(){
+
+    $conn = Db::getInstance();
+    $statement = $conn->prepare('SELECT * FROM users WHERE profileImg = :profileImg');
+    $statement->bindParam(":profileImg",$profileImg);
+    $statement->execute();
+    $collection = $statement->fetch(PDO::FETCH_ASSOC);
+
+    $image = ProfileImg::getAll();
+ 
+if(!empty($posts)){
+  $show = true;
+}else{
+  $error = true;
+}
+}
+
+
 
 
 

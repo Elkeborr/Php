@@ -1,5 +1,9 @@
 
-<?php include_once("nav.inc.php"); ?>
+<?php include_once 'bootstrap.php';
+
+$profileImg = new User();
+
+?>
 
 
 <!DOCTYPE html>
@@ -15,55 +19,35 @@
 	<link rel="stylesheet" href="css/profiel.css">
 </head>
 <body>
-
-<?php
-   $conn = new PDO("mysql:host=localhost;dbname=project_php;", "root", "root", null);
-
-   $stmt=$conn->prepare('SELECT * FROM users');
-   $stmt->execute();
-   if($stmt->rowCount()>0){
-     while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
-       extract($row);
-  
-
-     }
-   }
-
-   
-
-   ?>
-
-
-
+<?php include_once("nav.inc.php"); ?>
   <!------------------------PROFIELFOTO--------------------------->
 
 <div class="container">
   <h3>Profielfoto</h3>
 
-
-
 <?php 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
 
-$statement = $conn->prepare("SELECT * FROM profile_images where id = $id");
-$statement->execute();
-$collection = $statement->fetchAll();
+//$profileImg = new profileImg();
 
-$image = ProfileImg::getAll();
+//$statement = $conn->prepare("SELECT * FROM profile_images where id = $id");
+//$statement->execute();
+//$collection = $statement->fetchAll();
+
+//$image = ProfileImg::getAll();
  
-if(!empty($posts)){
-  $show = true;
-}else{
-  $error = true;
-}
+//if(!empty($posts)){
+  //$show = true;
+//}else{
+ // $error = true;
+//}
 
 ?>
 
 <div class="collection">
  
-    <?php foreach($image as $p): ?>
+    <?php foreach($profileImg as $p): ?>
     <div class="collection__item">
         <img class="collection--image"src="<?php echo $p['image']; ?>" alt="ProfileImg"></a>
   </div>
@@ -83,13 +67,6 @@ if(!empty($posts)){
 
   <!------------------------PROFIELTEKST--------------------------->
 <h3>Biografie</h3>
-
-<?php
-$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-$statement = $conn->prepare("SELECT * FROM users where bio");
-$statement->execute();
-$collection = $statement->fetchAll();
-?>
 
 <form method="post" action="">  
 <textarea name="tekst" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!"></textarea>

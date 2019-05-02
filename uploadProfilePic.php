@@ -34,7 +34,6 @@ if (isset ($_FILES["image"])){
 
         if(in_array($fileinfo, $allowedtypes))
         {
-            $description = $_POST["description"];
 
             //move uploaded file
             $newfilename = "images" . $_FILES["image"]["name"]; 
@@ -46,7 +45,7 @@ if (isset ($_FILES["image"])){
             if(move_uploaded_file($_FILES["image"]["tmp_name"], $newfilename))
             {
 
-                $insert = $conn->query("INSERT into profile_images (image, user_id) 
+                $insert = $conn->query("INSERT into users (image) 
                                         VALUES ('".$newfilename."', '".$id."')");
 
                 header('location:profiel.php');
@@ -66,11 +65,8 @@ if (isset ($_FILES["image"])){
  // if no error occured, continue ....
  if(!isset($msg))
  {
-  $stm = $conn->prepare('UPDATE profile_images 
-             SET image=:uimage, image_text=:uimage_text, userPic=:upic WHERE id=:uid');
+  $stm = $conn->prepare("UPDATE users SET image=:uimage, WHERE email = '".$_SESSION['email']."'");
   $stm->bindParam(':uimage',$image);
-  $stm->bindParam(':uimage_text',$image_text);
-  $stm->bindParam(':uid',$id);
    
   if($stm->execute()){
    ?>
