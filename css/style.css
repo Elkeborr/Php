@@ -175,6 +175,10 @@ a.navbar__logout
   margin-top: 50px;
 }
 
+.search_submit{
+  visibility: hidden;
+}
+
 /*-----load more-----*/
 #load--more{
   display: flex;

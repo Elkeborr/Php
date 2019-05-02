@@ -27,7 +27,7 @@ $username=$statement->fetch(PDO::FETCH_COLUMN);
     
     <form action="search.php?go" method="get">
       <input type="text" name="search" class="search" placeholder="zoek">
-      <input type="submit" name="submit" value="search">
+      <input type="submit" name="submit" value="search" class="search_submit">
 
     </form>
     
