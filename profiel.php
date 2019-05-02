@@ -86,7 +86,7 @@ if(!empty($posts)){
 
 <?php
 $conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-$statement = $conn->prepare("SELECT * FROM profile_images where image_text");
+$statement = $conn->prepare("SELECT * FROM users where bio");
 $statement->execute();
 $collection = $statement->fetchAll();
 
