@@ -52,7 +52,8 @@ float: left;
 .collection__detail{
   background-size: contain;
   background-repeat: no-repeat;
-  height: 400px;
+ height: 400px;
+ width: 500px;
   margin-left: 30px;
   background-position: center center;
 }

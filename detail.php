@@ -70,13 +70,22 @@ $posts = Post::detailPagina();
 	</form>
 	
 </div>	
-	<script
+
+
+
+	
+
+
+</body>
+</html>
+
+<script
 		src="https://code.jquery.com/jquery-3.3.1.min.js"
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous">
 	</script>
-	
-	<script>
+
+<script>
 	$("#btnSubmit").on("click",function(e){
 
 		var text = $("#comment").val();
@@ -102,6 +111,3 @@ $posts = Post::detailPagina();
 
 	});
 </script>
-
-</body>
-</html>

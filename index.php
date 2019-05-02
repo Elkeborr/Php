@@ -14,6 +14,7 @@ User::checkLogin();
       $error = true;
   }
   $profileImg = Post::profilePic();
+
 ?>
 
 <!DOCTYPE html>
@@ -67,6 +68,7 @@ User::checkLogin();
         <p>2u geleden</p>
     
         <button>Like</button>
+
     
      
 </div>
