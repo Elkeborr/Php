@@ -7,9 +7,9 @@ class Comment
         $conn = Db::getInstance();
         $statement = $conn->prepare("insert into comments (post_id, user_id, text) values (:post_id, :user_id, :text)");
         //Hier moet de post_id de id zijn die in de url te zien is($id = $_GET['id'];). Op deze manier kan ik de comments selecteren
-        //die dezelfde id hebben als die in de url. En dus zo alleen de comments tonen die op de specifieke foto geplaatst zijn.
+        //die post_id=$id hebben als die in de url. En dus zo alleen de comments tonen die op de specifieke foto geplaatst zijn.
         //(lukt nog niet)
-        $statement->bindValue(":post_id", 1);
+        $statement->bindValue(":post_id", (int)$_GET['id']); //Dit geeft telkens "0" in db bij post_id...
         $statement->bindValue(":user_id", 1);
         $statement->bindValue(":text", $this->getText());
         return $statement->execute();        
@@ -18,7 +18,8 @@ class Comment
     private $text;
 	public static function getAll(){
         $conn = Db::getInstance();
-        $result = $conn->query("SELECT * from comments order by id desc");
+        $id = $_GET['id'];
+        $result = $conn->query("SELECT * from comments where post_id=$id order by id desc");
 
         // fetch all records from the database and return them as objects of this __CLASS__ (Post)
         return $result->fetchAll(PDO::FETCH_CLASS, __CLASS__);
