@@ -6,18 +6,12 @@ include_once 'bootstrap.php';
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
-/*$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-$statement = $conn->prepare("SELECT* FROM images_with_fields");
-$statement->execute();
-$collection = $statement->fetchAll();
-*/
   $posts = Post::getAll();
   if (!empty($posts)) {
       $show = true;
   } else {
       $error = true;
   }
-
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +21,7 @@ $collection = $statement->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
-    <title>Homepage</title>
+    <title>Plantspiratie</title>
 </head>
 <body>
 
@@ -58,7 +52,7 @@ $collection = $statement->fetchAll();
  
     <?php foreach ($posts as $p): ?>
     <div class="collection__item">
-        <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image"src="<?php echo $p['image']; ?>" alt="Post"></a>
+        <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image" src="<?php echo $p['image']; ?>" alt="Post"></a>
         <!--<img class="profile__image" scr="images/hero_login.jpg">---> <p><?php echo $p['image_text']; ?></p>
   </div>
     <?php endforeach; ?> 

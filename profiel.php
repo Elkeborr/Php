@@ -1,7 +1,10 @@
 
-<?php include_once 'bootstrap.php';
+<?php
 
-$profileImg = new User();
+include_once 'bootstrap.php';
+session_start();
+
+$profileImg = User::profileImg();
 
 ?>
 
@@ -19,39 +22,14 @@ $profileImg = new User();
 	<link rel="stylesheet" href="css/profiel.css">
 </head>
 <body>
-<?php include_once("nav.inc.php"); ?>
+<?php include_once 'nav.inc.php'; ?>
   <!------------------------PROFIELFOTO--------------------------->
 
 <div class="container">
   <h3>Profielfoto</h3>
 
-<?php 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-//$profileImg = new profileImg();
-
-//$statement = $conn->prepare("SELECT * FROM profile_images where id = $id");
-//$statement->execute();
-//$collection = $statement->fetchAll();
-
-//$image = ProfileImg::getAll();
- 
-//if(!empty($posts)){
-  //$show = true;
-//}else{
- // $error = true;
-//}
-
-?>
-
-<div class="collection">
- 
-    <?php foreach($profileImg as $p): ?>
-    <div class="collection__item">
-        <img class="collection--image"src="<?php echo $p['image']; ?>" alt="ProfileImg"></a>
-  </div>
-    <?php endforeach; ?> 
+<div class="profile">
+        <img class="profile--image" src="<?php echo $profileImg; ?>" alt="ProfileImg"></a>
 </div>
 
 
@@ -74,31 +52,28 @@ ini_set('display_errors', 1);
 <input type="submit" name="submit" value="Submit">  
 </form>
 
-<?php 
+<?php
 
-$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-$statement = $conn->prepare("SELECT * FROM users where bio");
+$conn = new PDO('mysql:host=localhost;dbname=project_php', 'root', 'root', null);
+$statement = $conn->prepare('SELECT * FROM users where bio');
 $statement->execute();
 $collection = $statement->fetchAll();
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
+    $tekst = $_POST['tekst'];
 
-  $tekst=$_POST['tekst'];
+    if (empty($tekst)) {
+        echo "<font color='red'>Tekstveld is leeg!</font><br/>";
+    } else {
+        $sql = 'INSERT INTO users(bio) VALUES(:bio)';
 
-  if(empty($tekst)){
-    echo "<font color='red'>Tekstveld is leeg!</font><br/>";
+        $query = $conn->prepare($sql);
 
-  }
-  else{
-    $sql = "INSERT INTO users(bio) VALUES(:bio)";
+        $query->bindparam(':bio', $tekst);
+        $query->execute();
 
-    $query = $conn->prepare($sql);
-
-    $query->bindparam(':bio', $tekst);
-    $query->execute();
-
-    echo $tekst;
-  }
+        echo $tekst;
+    }
 }
 
 ?>

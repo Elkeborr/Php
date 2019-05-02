@@ -1,27 +1,20 @@
 <?php
 
 //Connectie klasses
-include_once("bootstrap.php");
+include_once 'bootstrap.php';
 
-$conn = Db::getInstance();
+$username = User::username();
 
-// Username ophalen
-$stm = $conn-> prepare ("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
-$stm->execute();
-$id=$stm->fetch(PDO::FETCH_COLUMN);
-
-$statement = $conn->prepare("SELECT userName FROM users WHERE users.id=:id");
-$statement->bindValue(":id", $id); 
-$statement->execute();
-$username=$statement->fetch(PDO::FETCH_COLUMN);
+$profileImg = User::profileImg();
 
 ?>
 
 <nav class="navbar">
    
-    <a href="profiel.php"><img src="images/hero_login.jpg" alt="profileImage"></a>
-    
-    <a href="profiel.php"><?php echo $username; ?></a>
+<div class="nav--profile">
+    <a href="profiel.php"><img src="<?php echo $profileImg; ?>" alt="profileImage"></a>
+</div>
+    <a href="profiel.php" class="userName"><?php echo $username; ?></a>
 
     <a href="index.php" class="logo">Plantspiratie</a>
     

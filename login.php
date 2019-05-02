@@ -1,33 +1,7 @@
 <?php
+include_once 'bootstrap.php';
 
-	if(!empty($_POST)){
-		// email en password opvragen
-		$email = $_POST['email'];
-		$password = $_POST['password'];
-
-		//hash opvragen, op basis van email
-		$conn = new PDO("mysql:host=localhost;dbname=project_php;", "root", "root", null);
-		
-
-		// check of rehash van password gelijk is aan hash uit db
-		$statement = $conn->prepare("SELECT * from users where email = :email");
-		$statement->bindParam(":email", $email);
-		$result = $statement->execute();
-
-		$user = $statement -> fetch(PDO::FETCH_ASSOC);
-
-		if( password_verify($password, $user['password'])){
-		// ja -> login
-			session_start();
-			$_SESSION['email'] = $email;
-			header('Location:index.php');
-
-		}else{
-		// nee -> error
-			$error = true;
-		}
-
-	}
+User::login();
 
 ?>
 <!DOCTYPE html>
