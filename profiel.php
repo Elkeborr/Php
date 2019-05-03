@@ -5,6 +5,7 @@ include_once 'bootstrap.php';
 session_start();
 
 $profileImg = User::profileImg();
+$bio = User::bio();
 
 ?>
 
@@ -29,7 +30,7 @@ $profileImg = User::profileImg();
   <h3>Profielfoto</h3>
 
 <div class="profile">
-        <img class="profile--image" src="<?php echo $profileImg; ?>" alt="ProfileImg"></a>
+        <img class="profile--image" src="<?php echo $profileImg, $bio; ?>" alt="ProfileImg"></a>
 </div>
 
 
@@ -46,37 +47,42 @@ $profileImg = User::profileImg();
   <!------------------------PROFIELTEKST--------------------------->
 <h3>Biografie</h3>
 
-<form method="post" action="">  
-<textarea name="tekst" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!"></textarea>
-<br><br>
-<input type="submit" name="submit" value="Submit">  
-</form>
+
 
 <?php
 
-$conn = new PDO('mysql:host=localhost;dbname=project_php', 'root', 'root', null);
-$statement = $conn->prepare('SELECT * FROM users where bio');
-$statement->execute();
-$collection = $statement->fetchAll();
+$conn = Db::getInstance();
+
 
 if (isset($_POST['submit'])) {
-    $tekst = $_POST['tekst'];
+    $bio = $_POST['bio'];
 
-    if (empty($tekst)) {
+    if (empty($bio)) {
         echo "<font color='red'>Tekstveld is leeg!</font><br/>";
-    } else {
-        $sql = 'INSERT INTO users(bio) VALUES(:bio)';
+    } 
+    else{
+      $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+      $stm->execute();
+      $id = $stm->fetch(PDO::FETCH_COLUMN);
 
-        $query = $conn->prepare($sql);
+      $insert = $conn->prepare("UPDATE users SET bio = '".$bio."'WHERE users.id='".$id."';");
+      $insert->bindParam(':bio', $bio);
+      $insert->execute();
 
-        $query->bindparam(':bio', $tekst);
-        $query->execute();
-
-        echo $tekst;
     }
-}
+  }
+    ?>
+    
+    <form method="post" action="profiel.php">  
+<textarea name="bio" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!"><?php echo $bio; ?></textarea>
+<br><br>
+<input type="submit" name="submit" value="Submit">  
+</form>
+    
+    
 
-?>
+
+
 
 
 

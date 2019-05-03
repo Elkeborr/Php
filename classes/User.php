@@ -309,4 +309,21 @@ class User
 
         return $profileImg;
     }
+
+        /*Biografie zoeken*/
+        public static function bio()
+        {
+            $conn = Db::getInstance();
+    
+            $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+            $stm->execute();
+            $id = $stm->fetch(PDO::FETCH_COLUMN);
+    
+            $statement = $conn->prepare('SELECT bio FROM users WHERE users.id=:id');
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+            $profileImg = $statement->fetch(PDO::FETCH_COLUMN);
+    
+            return $bio;
+        }
 }

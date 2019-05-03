@@ -223,20 +223,3 @@ a.navbar__logout
   background-color:#273B09;
   transition: 0.3s;
 }
-/*-----profiel-----*/
-.container{
-  margin-top: 100px;
-}
-.profile{
-  width: 100px;
-  height: 100px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 50%;
-}
-.profile--image{
-  display: inline;
-  margin: 0 auto;
-  height: 150%;
-  width: auto;
-}
