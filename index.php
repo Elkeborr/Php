@@ -58,10 +58,10 @@ User::checkLogin();
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
         <div class="profile--small ">
-          <img class="profile--imageSmall" src="<?php echo $profileImg; ?>"> 
+          <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
         </div>
         <p><?php echo $p['image_text']; ?></p>
-        <p>2u geleden</p>
+        <p><?php echo  $p['images_date']; ?></p>
         <button>Like</button>   
       </div>
   </div>
@@ -90,7 +90,7 @@ $('#load--more').click(function(){
     var allcount = Number($('#all').val());
     var rowperpage = 3;
     row = row + rowperpage;
-console.log (row);
+    console.log (row);
     if(row <= allcount){
         $("#row").val(row);
 

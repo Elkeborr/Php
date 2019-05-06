@@ -16,10 +16,14 @@
     position: relative;
     overflow: hidden;
     border-radius: 50%;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    background-color: black;
   }
   .profile--image{
     display: inline;
     margin: 0 auto;
-    height: 150%;
-    width: auto;
+    max-height: 100%;
+  
   }

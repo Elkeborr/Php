@@ -59,5 +59,5 @@ if (isset($_FILES['image'])) {
             $msg = 'Sorry, enkel afbeeldingen zijn toegestaan.';
         }
     }
-    echo $msg.'<br />';
+    //echo $msg.'<br />';
 }

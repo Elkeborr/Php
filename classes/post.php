@@ -60,10 +60,15 @@ class Post
         $id = $stm->fetch(PDO::FETCH_COLUMN);
 
         // Alle post laden van de gevolgde personen
-        $statement = $conn->prepare('SELECT images_with_fields.id,images_with_fields.image,images_with_fields.image_text,images_with_fields.user_id
-                FROM images_with_fields,followers WHERE followers.user_id1=:id AND followers.user_id2=images_with_fields.user_id 
-                UNION SELECT images_with_fields.id,images_with_fields.image,images_with_fields.image_text,images_with_fields.user_id FROM images_with_fields,followers 
-                WHERE  images_with_fields.user_id =:id  LIMIT 3');
+        $statement = $conn->prepare('SELECT images_with_fields.id,images_with_fields.image,images_with_fields.image_text,images_with_fields.user_id,
+        images_with_fields.date AS images_date,users.profileImg 
+        FROM images_with_fields,followers,users 
+        WHERE followers.user_id1=:id
+        AND followers.user_id2=images_with_fields.user_id 
+        AND followers.user_id2 = users.id 
+        UNION SELECT images_with_fields.id,images_with_fields.image,images_with_fields.image_text,images_with_fields.user_id,images_with_fields.date,users.profileImg 
+        FROM images_with_fields,users 
+        WHERE images_with_fields.user_id =:id AND users.id=:id ORDER BY `images_date` DESC limit 20');
 
         $statement->bindValue(':id', $id);
         $statement->execute();
