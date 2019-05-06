@@ -49,7 +49,9 @@ if (isset($_FILES['image'])) {
                                         VALUES ('".$newfilename."', '".$description."', '".$id."')");
 
                 $colors = $ex->Get_Color('images/post_images/'.$_FILES['image']['tmp_name']);
-                header('location:index.php');
+
+                //header('location:index.php');
+                var_dump($colors);
             } else {
                 $msg = 'Sorry, de upload is mislukt.';
             }

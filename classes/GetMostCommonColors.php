@@ -1,24 +1,5 @@
 <?php
-/**
- * This class can be used to get the most common colors in an image.
- * It needs one parameter:
- * 	$image - the filename of the image you want to process.
- * Optional parameters:.
- *
- *	$count - how many colors should be returned. 0 mmeans all. default=20
- *	$reduce_brightness - reduce (not eliminate) brightness variants? default=true
- *	$reduce_gradients - reduce (not eliminate) gradient variants? default=true
- *	$delta - the amount of gap when quantizing color values.
- *		Lower values mean more accurate colors. default=16
- *
- * Author: 	Csongor Zalatnai
- *
- * Modified By: Kepler Gelotte - Added the gradient and brightness variation
- * 	reduction routines. Kudos to Csongor for an excellent class. The original
- * 	version can be found at:
- *
- *	http://www.phpclasses.org/browse/package/3370.html
- */
+
 class GetMostCommonColors
 {
     public $PREVIEW_WIDTH = 150;
