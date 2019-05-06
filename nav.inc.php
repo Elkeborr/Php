@@ -4,7 +4,6 @@
 include_once 'bootstrap.php';
 
 $username = User::username();
-
 $profileImg = User::profileImg();
 
 ?>
@@ -18,9 +17,9 @@ $profileImg = User::profileImg();
 
     <a href="index.php" class="logo">Plantspiratie</a>
     
-    <form action="search.php?go" method="get">
+    <form action="search.php" method="get">
       <input type="text" name="search" class="search" placeholder="zoek">
-      <input type="submit" name="submit" value="search" class="search_submit">
+      <input type="submit" name="submit_search" value="search" class="search_submit">
 
     </form>
     
