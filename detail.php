@@ -27,12 +27,14 @@ $posts = Post::detailPagina();
 	<?php foreach ($posts as $c): ?>
 	<img src="<?php echo $c['image']; ?>" alt="Post">
     <p><?php echo $c['image_text']; ?></p>
-	  
+	  <div class="clearfix">
 		<?php
           $img = $c['image'];
           $palette = Post::detectColors($img, 5, 1);
+
           foreach ($palette as $color) {
-              echo '<div>
+              echo '
+			  <div class="color">
 			  <div class="bol" style="background:#'.$color.';"></div>
 			  <p>#'.$color.'</p></div>';
           }
@@ -40,6 +42,7 @@ $posts = Post::detailPagina();
         ?>
 
 	<?php endforeach; ?>
+	  </div>
 </div>
 
 

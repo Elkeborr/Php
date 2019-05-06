@@ -11,6 +11,14 @@ body
 
 }
 
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+  font-size: 0;
+  visibility: hidden;
+  height: 0; }
+
 /*-----POST INDEX-----*/
 
 .collection {
@@ -66,10 +74,29 @@ font-size: 1em;
   width: 50%;
   
 }
-.collectionDetails__desc
-{
- 
+.color{
+  float: left;
 }
+
+.color p {
+  font-size: 0.7em;
+  text-align: center;
+}
+
+.bol{
+  list-style: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin: 0 10px;
+  cursor: pointer;
+  transition-duration: .2s;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+
+}
+
 
 
 .formComment{
@@ -110,11 +137,7 @@ font-size: 1em;
   background-color: goldenrod;
 }
 
-.bol{
-  width: 30px;
-  border-radius: 50%;
 
-}
 /*-------- NAVIGATIE --------*/
 
 .navbar{
