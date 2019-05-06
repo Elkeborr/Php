@@ -61,7 +61,7 @@ User::checkLogin();
           <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
         </div>
         <p><?php echo $p['image_text']; ?></p>
-        <p><?php echo  $p['images_date']; ?></p>
+        <p id="date"><?php echo  $p['images_date']; ?></p>
         <button>Like</button>   
       </div>
   </div>

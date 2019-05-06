@@ -24,14 +24,15 @@ body
 .collection--image {
   height: auto;
   width: 400px;
+  margin-bottom: 1em;
 
 }
 
 .item--container{
   display: flex;
-  justify-content: space-between;
-
- height: 100px;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  padding: 1em;
 
 }
 
@@ -44,8 +45,14 @@ body
   
 
 }
-.collection__item p {
-float: left;
+.item--container p {
+font-size: 1em;
+
+}
+
+#id{
+  color: #333333;
+  font-size: 0.6em;
 }
 
 /*DETAIL PAGINA*/
@@ -111,7 +118,7 @@ float: left;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.7em; 
+  padding: 1em; 
   background-color: #273B09;
   height: 60px;
   position: fixed;
