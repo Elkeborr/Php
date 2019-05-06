@@ -22,19 +22,20 @@ $posts = Post::detailPagina();
 
 <?php include_once 'nav.inc.php'; ?>
 
-<div class="collection">
-    <?php foreach ($posts as $c): ?>
-    	<img src="<?php echo $c['id']; ?>" class="collection__detail" style="background-image:url(<?php echo $c['image']; ?>)" alt="">
-		<p class="collectionDetails__desc"><?php echo $c['image_text']; ?></p>
+<div class="collection__detail">
+	
+	<?php foreach ($posts as $c): ?>
+	<img src="<?php echo $c['image']; ?>" alt="Post">
+    <p><?php echo $c['image_text']; ?></p>
+	  
 		<?php
           $img = $c['image'];
           $palette = Post::detectColors($img, 5, 1);
-
-          echo '<table>';
           foreach ($palette as $color) {
-              echo '<tr><td style="background:#'.$color.'; width:36px;"></td><td>#'.$color.'</td></tr>';
+              echo '<div>
+			  <div class="bol" style="background:#'.$color.';"></div>
+			  <p>#'.$color.'</p></div>';
           }
-          echo '</table>';
 
         ?>
 
