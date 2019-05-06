@@ -6,10 +6,6 @@ ini_set('display_errors', 1);
 // connectie met de databank
 require_once 'bootstrap.php';
 
-//kleuren
-
-$ex = new GetMostCommonColors();
-
 $conn = Db::getInstance();
 
 // in elke file waar we sessie willen gebruiken moeten we die dan ook starten
@@ -47,11 +43,7 @@ if (isset($_FILES['image'])) {
                 //kleuren dedecteren
                 $insert = $conn->query("INSERT into images_with_fields (image, image_text, user_id) 
                                         VALUES ('".$newfilename."', '".$description."', '".$id."')");
-
-                $colors = $ex->Get_Color('images/post_images/'.$_FILES['image']['tmp_name']);
-
-                //header('location:index.php');
-                var_dump($colors);
+                header('location:index.php');
             } else {
                 $msg = 'Sorry, de upload is mislukt.';
             }

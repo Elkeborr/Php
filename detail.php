@@ -25,9 +25,22 @@ $posts = Post::detailPagina();
 <div class="collection">
     <?php foreach ($posts as $c): ?>
     	<img src="<?php echo $c['id']; ?>" class="collection__detail" style="background-image:url(<?php echo $c['image']; ?>)" alt="">
-    	<p class="collectionDetails__desc"><?php echo $c['image_text']; ?></p>
+		<p class="collectionDetails__desc"><?php echo $c['image_text']; ?></p>
+		<?php
+          $img = $c['image'];
+          $palette = Post::detectColors($img, 5, 1);
+
+          echo '<table>';
+          foreach ($palette as $color) {
+              echo '<tr><td style="background:#'.$color.'; width:36px;"></td><td>#'.$color.'</td></tr>';
+          }
+          echo '</table>';
+
+        ?>
+
 	<?php endforeach; ?>
 </div>
+
 
 <?php
     //Eerst bouwen we onze applicatie uit zodat ze werkt, ook zonder JavaScript
