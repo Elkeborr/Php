@@ -2,13 +2,14 @@
 
 require_once '../bootstrap.php';
 session_start();
-$row = $_POST['row'];
 
+$row = $_POST['row'];
 $rowperpage = 3;
 
 $conn = Db::getInstance();
 
 // selecting posts
+
 $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
 $stm->execute();
 $id = $stm->fetch(PDO::FETCH_COLUMN);
@@ -21,7 +22,7 @@ AND followers.user_id2=images_with_fields.user_id
 AND followers.user_id2 = users.id 
 UNION SELECT images_with_fields.id,images_with_fields.image,images_with_fields.image_text,images_with_fields.user_id,images_with_fields.date,users.profileImg 
 FROM images_with_fields,users 
-WHERE images_with_fields.user_id =:id AND users.id=:id ORDER BY `images_date` DESC LIMIT $row,$rowperpage");
+WHERE images_with_fields.user_id =:id AND users.id=:id ORDER BY `images_date` DESC LIMIT '".$row.",'".$rowperpage."'");
 $posts->bindValue(':id', $id);
 $posts->execute();
 
@@ -33,7 +34,7 @@ foreach ($result as $r) {
     $image = $r['image'];
     $image_text = $r['image_text'];
     $profileImage = $r['profileImg'];
-    $date = $r['date'];
+    $date = $r['images_date'];
 
     // Creating HTML structure
     $html .= '<div class="collection__item">';
