@@ -28,7 +28,7 @@ $conn = Db::getInstance();
 <div class="collection__detail">
 	
 	<?php foreach ($posts as $c): ?>
-	<img src="<?php echo $c['image']; ?>" alt="Post">
+	<img src="<?php echo $c['image']; ?>" alt="Post" class="collection__detail">
     <p><?php echo $c['image_text']; ?></p>
 	  <div class="clearfix">
 		<?php

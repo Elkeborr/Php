@@ -70,16 +70,8 @@ font-size: 1em;
   
   
 }
-<<<<<<< HEAD
-.collectionDetails__desc
-{
-  color:black;
-  background-position: center center;
-  font-size: 2em;
-  font-weight: bold;
-=======
 .collection__detail img{
-  width: 50%;
+  width: 200px;
   
 }
 .color{
@@ -103,9 +95,8 @@ font-size: 1em;
   transition-duration: .2s;
   box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 
->>>>>>> ff4b119e697c57c9d97fb7cd82c3653528b2c621
 }
-
+s
 
 
 .formComment{
