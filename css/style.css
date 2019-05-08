@@ -11,6 +11,14 @@ body
 
 }
 
+.clearfix:after {
+  content: "";
+  display: block;
+  clear: both;
+  font-size: 0;
+  visibility: hidden;
+  height: 0; }
+
 /*-----POST INDEX-----*/
 
 .collection {
@@ -24,31 +32,78 @@ body
 .collection--image {
   height: auto;
   width: 400px;
-
-}
-.profile__image{
-
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  margin-bottom: 1em;
 
 }
 
+.item--container{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+
+
+}
+
+.item--container button{
+  height: 20px;
+}
+
+.item{
+  width: 50%;
+  
+
+}
+.item--container p {
+font-size: 1em;
+
+}
+
+#id{
+  color: #333333;
+  font-size: 0.6em;
+}
 
 /*DETAIL PAGINA*/
 .collection__detail{
-  background-size: contain;
-  background-repeat: no-repeat;
-  height: 400px;
-  margin-left: 30px;
-  background-position: center center;
+
+  margin: 6.25em 0 0 2em;
+  
+  
 }
+<<<<<<< HEAD
 .collectionDetails__desc
 {
   color:black;
   background-position: center center;
   font-size: 2em;
   font-weight: bold;
+=======
+.collection__detail img{
+  width: 50%;
+  
+}
+.color{
+  float: left;
+}
+
+.color p {
+  font-size: 0.7em;
+  text-align: center;
+}
+
+.bol{
+  list-style: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border-bottom: 5px solid rgba(0, 0, 0, 0.1);
+  display: inline-block;
+  margin: 0 10px;
+  cursor: pointer;
+  transition-duration: .2s;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
+
+>>>>>>> ff4b119e697c57c9d97fb7cd82c3653528b2c621
 }
 
 
@@ -91,6 +146,7 @@ body
   background-color: goldenrod;
 }
 
+
 /*-------- NAVIGATIE --------*/
 
 .navbar{
@@ -98,7 +154,7 @@ body
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.7em; 
+  padding: 2em; 
   background-color: #273B09;
   height: 60px;
   position: fixed;
@@ -121,11 +177,24 @@ body
 
 }
 
-.navbar img{
+.profile--small{
   width: 40px;
   height: 40px;
+  background-color: black;
+  position: relative;
+  overflow: hidden;
   border-radius: 50%;
-  margin-right: 20px;
+  text-align: center;
+  align-content: center;
+  align-items: center;
+}
+
+.profile--imageSmall{
+  display: inline;
+  margin: 0 auto;
+  height: 150%;
+  width: auto;
+  max-height: 100%;
 }
 
 .navbar input
@@ -179,6 +248,10 @@ a.navbar__logout
   visibility: hidden;
 }
 
+.userName{
+  padding-left:15px;
+}
+
 /*-----load more-----*/
 #load--more{
   display: flex;
@@ -197,8 +270,4 @@ a.navbar__logout
 #load--more:hover{
   background-color:#273B09;
   transition: 0.3s;
-}
-/*-----profiel-----*/
-.container{
-  margin-top: 100px;
 }

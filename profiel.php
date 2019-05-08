@@ -1,7 +1,11 @@
 
-<?php include_once 'bootstrap.php';
+<?php
 
-$profileImg = new User();
+include_once 'bootstrap.php';
+session_start();
+
+$profileImg = User::profileImg();
+$bio = User::bio();
 
 ?>
 
@@ -19,39 +23,14 @@ $profileImg = new User();
 	<link rel="stylesheet" href="css/profiel.css">
 </head>
 <body>
-<?php include_once("nav.inc.php"); ?>
+<?php include_once 'nav.inc.php'; ?>
   <!------------------------PROFIELFOTO--------------------------->
 
 <div class="container">
   <h3>Profielfoto</h3>
 
-<?php 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-//$profileImg = new profileImg();
-
-//$statement = $conn->prepare("SELECT * FROM profile_images where id = $id");
-//$statement->execute();
-//$collection = $statement->fetchAll();
-
-//$image = ProfileImg::getAll();
- 
-//if(!empty($posts)){
-  //$show = true;
-//}else{
- // $error = true;
-//}
-
-?>
-
-<div class="collection">
- 
-    <?php foreach($profileImg as $p): ?>
-    <div class="collection__item">
-        <img class="collection--image"src="<?php echo $p['image']; ?>" alt="ProfileImg"></a>
-  </div>
-    <?php endforeach; ?> 
+<div class="profile">
+        <img class="profile--image" src="<?php echo $profileImg, $bio; ?>" alt="ProfileImg"></a>
 </div>
 
 
@@ -68,40 +47,39 @@ ini_set('display_errors', 1);
   <!------------------------PROFIELTEKST--------------------------->
 <h3>Biografie</h3>
 
-<form method="post" action="">  
-<textarea name="tekst" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!"></textarea>
+
+
+<?php
+
+$conn = Db::getInstance();
+
+if (isset($_POST['submit'])) {
+    $bio = $_POST['bio'];
+
+    if (empty($bio)) {
+        echo "<font color='red'>Tekstveld is leeg!</font><br/>";
+    } else {
+        $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+        $stm->execute();
+        $id = $stm->fetch(PDO::FETCH_COLUMN);
+
+        $insert = $conn->prepare("UPDATE users SET bio = '".$bio."'WHERE users.id='".$id."';");
+        $insert->bindParam(':bio', $bio);
+        $insert->execute();
+    }
+}
+    ?>
+    
+    <form method="post" action="profiel.php">  
+<textarea name="bio" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!"><?php echo $bio; ?></textarea>
 <br><br>
 <input type="submit" name="submit" value="Submit">  
 </form>
+    
+    
 
-<?php 
 
-$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-$statement = $conn->prepare("SELECT * FROM users where bio");
-$statement->execute();
-$collection = $statement->fetchAll();
 
-if(isset($_POST['submit'])){
-
-  $tekst=$_POST['tekst'];
-
-  if(empty($tekst)){
-    echo "<font color='red'>Tekstveld is leeg!</font><br/>";
-
-  }
-  else{
-    $sql = "INSERT INTO users(bio) VALUES(:bio)";
-
-    $query = $conn->prepare($sql);
-
-    $query->bindparam(':bio', $tekst);
-    $query->execute();
-
-    echo $tekst;
-  }
-}
-
-?>
 
 
 

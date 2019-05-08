@@ -1,4 +1,5 @@
 <?php
+session_start();
 
   //Connectie klasses
 include_once 'bootstrap.php';
@@ -6,17 +7,15 @@ include_once 'bootstrap.php';
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
-/*$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-$statement = $conn->prepare("SELECT* FROM images_with_fields");
-$statement->execute();
-$collection = $statement->fetchAll();
-*/
   $posts = Post::getAll();
+  $post = count($posts);
+
   if (!empty($posts)) {
       $show = true;
   } else {
       $error = true;
   }
+  $profileImg = Post::profilePic();
 
 ?>
 
@@ -27,7 +26,7 @@ $collection = $statement->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
-    <title>Homepage</title>
+    <title>Plantspiratie</title>
 </head>
 <body>
 
@@ -52,23 +51,28 @@ $collection = $statement->fetchAll();
 		</div>
 	<?php endif; ?>
 
-  <?php if (isset($show)): ?>
-
+<?php if (isset($show)): ?>
 <div class="collection">
- 
-    <?php foreach ($posts as $p): ?>
-    <div class="collection__item">
-        <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image"src="<?php echo $p['image']; ?>" alt="Post"></a>
-        <!--<img class="profile__image" scr="images/hero_login.jpg">---> <p><?php echo $p['image_text']; ?></p>
+  <?php foreach ($posts as $p): ?>
+  <div class="collection__item">
+      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image" src="<?php echo $p['image']; ?>" alt="Post"></a>
+      <div class='item--container'>
+        <div class="profile--small ">
+          <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
+        </div>
+        <p><?php echo $p['image_text']; ?></p>
+        <p id="date"><?php echo  $p['images_date']; ?></p>
+        <button>Like</button>   
+      </div>
   </div>
-    <?php endforeach; ?> 
-  <?php endif; ?>
-
+<?php endforeach; ?> 
 </div>
+<?php endif; ?>
+
+
 <button id="load--more">Load More</button>
-
-            
-
+<input type="hidden" id="row" value="0">
+<input type="hidden" id="all" value="<?php echo $post; ?>">
 
 </body>
 </html>
@@ -78,21 +82,67 @@ $collection = $statement->fetchAll();
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
 
-$("#load--more").click(function (e){
-	
-	$.ajax({
-	    method: "GET",
-		  url: "ajax/loadmore.php",
-		  data: {text: text},
-		  dataType: 'json'
-		})
-  		.done((function (res)  {
-		if(res.status == "mistake"){
-        $("#email_error").html(res.message);
-        }
-    }));
-    e.preventDefault();
+$(document).ready(function(){
+
+// Load more data
+$('#load--more').click(function(){
+    var row = Number($('#row').val());
+    var allcount = Number($('#all').val());
+    var rowperpage = 3;
+    row = row + rowperpage;
+    console.log (row);
+    if(row <= allcount){
+        $("#row").val(row);
+
+        $.ajax({
+            url: 'ajax/loadMore.php',
+            type: 'post',
+            data: {row:row},
+            beforeSend:function(){
+                $("#load--more").text("Loading...");
+            },
+            success: function(response){
+
+                // Setting little delay while displaying new content
+                setTimeout(function() {
+                    // appending posts after last post with class="post"
+                    $(".collection__item:last").after(response).show().fadeIn("slow");
+
+                    var rowno = row + rowperpage;
+
+                    // checking row value is greater than allcount or not
+                    if(rowno > allcount){
+
+                        // Change the text and background
+                        $('#load--more').text("No more posts");
+                        $('#load--more').css("background","#273B09");
+                    }else{
+                        $("#load--more").text("Load more");
+                    }
+                }, 2000);
+
+            }
         });
+    }else{
+        $('#load--more').text("Loading...");
+
+        // Setting little delay while removing contents
+        setTimeout(function() {
+
+            // Reset the value of row
+            $("#row").val(0);
+
+            // Change the text and background
+            $('#load--more').text("Load more");
+           
+        }, 2000);
+
+
+    }
+
+});
+
+});
             
 
 

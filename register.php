@@ -1,34 +1,29 @@
-<?php 
+<?php
 
 //Connectie klasses
-include_once("bootstrap.php");
+include_once 'bootstrap.php';
 
-if (!empty($_POST['submit'])){
-	// checked of alle velden leeg zijn of niet,als er 1 leeg is kan men niet  registreren
-	if ( empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname']) 
-	|| empty($_POST['lastname'])|| empty($_POST['username'])){
-		$error = true;
-	}
-	else {
-		// Gegevens in de classe user steken
-		$user = new User ();
-		$user->setEmail($_POST['email']);
-		$user->setPassword($_POST['password']);
-		$user->setFirstName($_POST['firstname']);
-		$user->setLastName($_POST['lastname']);
-		$user->setUserName($_POST['username']);
-		
-		if ($user->register()){
-			session_start();
-			$_SESSION['email'] = $email;
-			header('Location:index.php');
-		}
-		
-		/*
-Een sassion start met User, dit moet dan ook in de index controleren of
-de sessie gestart is of niet (if rond de register zetten)*/ 
-	
-	}}
+if (!empty($_POST['submit'])) {
+    // checked of alle velden leeg zijn of niet,als er 1 leeg is kan men niet  registreren
+    if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname'])
+    || empty($_POST['lastname']) || empty($_POST['username'])) {
+        $error = true;
+    } else {
+        // Gegevens in de classe user steken
+        $user = new  User();
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+        $user->setFirstName($_POST['firstname']);
+        $user->setLastName($_POST['lastname']);
+        $user->setUserName($_POST['username']);
+
+        if ($user->register()) {
+            session_start();
+            $_SESSION['email'] = $email;
+            header('Location:index.php');
+        }
+    }
+}
 
 ?>
 

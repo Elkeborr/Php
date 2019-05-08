@@ -6,3 +6,24 @@
     margin-bottom: 20px;
     margin-right: 1400px;
 }
+
+.container{
+    margin-top: 100px;
+  }
+  .profile{
+    width: 100px;
+    height: 100px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    background-color: black;
+  }
+  .profile--image{
+    display: inline;
+    margin: 0 auto;
+    max-height: 100%;
+  
+  }
