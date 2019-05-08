@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-<?php 
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
-	$conn = new PDO("mysql:host=localhost;dbname=project_php", "root", "root", null);
-
-	$id = $_GET['id'];
-=======
 <?php
 include_once 'bootstrap.php';
 
@@ -15,8 +7,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $posts = Post::detailPagina();
->>>>>>> ff4b119e697c57c9d97fb7cd82c3653528b2c621
-
+$conn = Db::getInstance();
 	$statement = $conn->prepare("SELECT * FROM images_with_fields where id = $id");
 	$statement->execute();
 	$collection = $statement->fetchAll();
@@ -32,8 +23,6 @@ $posts = Post::detailPagina();
 </head>
 <body>
 
-<<<<<<< HEAD
-=======
 <?php include_once 'nav.inc.php'; ?>
 
 <div class="collection__detail">
@@ -54,7 +43,6 @@ $posts = Post::detailPagina();
           }
 
         ?>
->>>>>>> ff4b119e697c57c9d97fb7cd82c3653528b2c621
 
 	<?php endforeach; ?>
 	  </div>
@@ -116,26 +104,6 @@ $posts = Post::detailPagina();
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 		crossorigin="anonymous">
 	</script>
-<<<<<<< HEAD
-
-	<script>
-		$("#btnSubmit").on("click",function(e){
-
-			var text = $("#comment").val();
-
-			$.ajax({
-				method: "POST",
-				url: "ajax/postcomment.php",
-				data: { text: text, post_id:<?php $_GET['id']?>},
-				dataType: 'json'
-			})
-			.done(function( res ) {
-				if( res.status == 'success'){
-					var li = "<li>" + text + "</li>";
-					$("#listupdates").append(li);
-					$("#comment").val("").focus();
-					$("#listupdates li").last().slideDown();
-=======
 
 <script>
 	$("#btnSubmit").on("click",function(e){
@@ -154,7 +122,6 @@ $posts = Post::detailPagina();
 				$("#listupdates").append(li);
 				$("#comment").val("").focus();
 				$("#listupdates li").last().slideDown();
->>>>>>> ff4b119e697c57c9d97fb7cd82c3653528b2c621
 
 				}
 			});
@@ -162,13 +129,5 @@ $posts = Post::detailPagina();
 			e.preventDefault();
 
 
-<<<<<<< HEAD
-		});
-	</script>
-
-</body>
-</html>
-=======
 	});
 </script>
->>>>>>> ff4b119e697c57c9d97fb7cd82c3653528b2c621
