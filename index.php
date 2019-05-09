@@ -10,6 +10,8 @@ User::checkLogin();
   $posts = Post::getAll();
   $post = count($posts);
 
+  var_dump($post);
+
   if (!empty($posts)) {
       $show = true;
   } else {
@@ -89,15 +91,15 @@ $('#load--more').click(function(){
     var row = Number($('#row').val());
     var allcount = Number($('#all').val());
     var rowperpage = 3;
-    row = row + rowperpage;
-    console.log (row);
+    
+  row=row + rowperpage;
+
     if(row <= allcount){
         $("#row").val(row);
-
         $.ajax({
             url: 'ajax/loadMore.php',
-            type: 'post',
-            data: {row:row},
+            type: 'POST',
+            data: {row: row},
             beforeSend:function(){
                 $("#load--more").text("Loading...");
             },
@@ -107,7 +109,7 @@ $('#load--more').click(function(){
                 setTimeout(function() {
                     // appending posts after last post with class="post"
                     $(".collection__item:last").after(response).show().fadeIn("slow");
-
+                    
                     var rowno = row + rowperpage;
 
                     // checking row value is greater than allcount or not
@@ -115,7 +117,8 @@ $('#load--more').click(function(){
 
                         // Change the text and background
                         $('#load--more').text("No more posts");
-                        $('#load--more').css("background","#273B09");
+                        $('#load--more').css("background","#F2F2F2");
+                        $('#load--more').off('click');
                     }else{
                         $("#load--more").text("Load more");
                     }
