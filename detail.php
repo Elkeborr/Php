@@ -76,7 +76,6 @@ $conn = Db::getInstance();
 		<div class="statusupdates">
 		<textarea name="comment" id="comment" placeholder="Comment..." cols="30" rows="5"></textarea>
 		<input id="btnSubmit" type="submit" value="Add comment" class="formComment__btn" />
-		<input type="hidden" id="postId" value="<?php $_GET['id']?>">
 		
 		<ul id="listupdates">
 			<?php
@@ -110,7 +109,7 @@ $conn = Db::getInstance();
 	$("#btnSubmit").on("click",function(e){
 
 		var text = $("#comment").val();
-		$id = $_POST['postId'];
+		$id = $_GET['id'];
 
 		$.ajax({
   			method: "POST",
