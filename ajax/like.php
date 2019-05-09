@@ -4,7 +4,7 @@
         $postId = $_POST['postId'];
         $userId = 1;
 
-        include_once '../bootstrap.php';
+        require_once '../bootstrap.php';
         $l = new Like();
         $l->setPostId($postId);
         $l->setUserId($userId);

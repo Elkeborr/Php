@@ -139,4 +139,13 @@ class Post
 
         return array_slice(array_keys($palette), 0, $num);
     }
+
+/*    public function getLikes(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("SELECT count(*) as count from likes where post_id = :postid");
+        $statement->bindValue(":postid", $this->id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        return $result['count'];
+    }*/
 }

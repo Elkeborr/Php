@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 09, 2019 at 07:25 AM
+-- Generation Time: May 09, 2019 at 08:49 AM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -66,7 +66,10 @@ INSERT INTO `followers` (`id`, `user_id1`, `user_id2`) VALUES
 (3, 26, 28),
 (4, 28, 23),
 (5, 26, 23),
-(6, 30, 28);
+(6, 30, 28),
+(8, 32, 28),
+(9, 32, 23),
+(10, 32, 26);
 
 -- --------------------------------------------------------
 
@@ -79,23 +82,37 @@ CREATE TABLE `images_with_fields` (
   `image` varchar(255) COLLATE utf8_bin NOT NULL,
   `image_text` text COLLATE utf8_bin NOT NULL,
   `user_id` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `likes` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Dumping data for table `images_with_fields`
 --
 
-INSERT INTO `images_with_fields` (`id`, `image`, `image_text`, `user_id`, `date`) VALUES
-(55, 'https://images.pexels.com/photos/1470171/pexels-photo-1470171.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'Some nice plant from above', 26, '2019-05-06 16:03:18'),
-(56, 'https://images.pexels.com/photos/707194/pexels-photo-707194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'Did some work today', 28, '2019-05-06 16:03:18'),
-(57, 'https://images.pexels.com/photos/311458/pexels-photo-311458.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500', 'Lolzz', 28, '2019-05-06 16:03:18'),
-(58, 'https://images.pexels.com/photos/1477166/pexels-photo-1477166.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500', 'hihihi', 23, '2019-05-06 16:03:18'),
-(59, 'https://images.pexels.com/photos/38136/pexels-photo-38136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', '', 28, '2019-05-06 16:03:18'),
-(60, 'https://images.pexels.com/photos/796620/pexels-photo-796620.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500', '', 23, '2019-05-06 16:03:18'),
-(62, 'images/post_images/WmDev_636017832951914926.jpg', 'hello people', 26, '2019-05-06 16:03:18'),
-(63, 'images/post_images/DSC_0470.jpg', 'plitvice', 23, '2019-05-06 16:30:14'),
-(64, 'images/post_images/DSC_0477.jpg', 'rome', 23, '2019-05-07 14:06:00');
+INSERT INTO `images_with_fields` (`id`, `image`, `image_text`, `user_id`, `date`, `likes`) VALUES
+(55, 'https://images.pexels.com/photos/1470171/pexels-photo-1470171.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'Some nice plant from above', 26, '2019-05-06 16:03:18', 0),
+(56, 'https://images.pexels.com/photos/707194/pexels-photo-707194.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', 'Did some work today', 28, '2019-05-06 16:03:18', 0),
+(57, 'https://images.pexels.com/photos/311458/pexels-photo-311458.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500', 'Lolzz', 28, '2019-05-06 16:03:18', 0),
+(58, 'https://images.pexels.com/photos/1477166/pexels-photo-1477166.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500', 'hihihi', 23, '2019-05-06 16:03:18', 0),
+(59, 'https://images.pexels.com/photos/38136/pexels-photo-38136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', '', 28, '2019-05-06 16:03:18', 0),
+(60, 'https://images.pexels.com/photos/796620/pexels-photo-796620.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500', '', 23, '2019-05-06 16:03:18', 0),
+(62, 'images/post_images/WmDev_636017832951914926.jpg', 'hello people', 26, '2019-05-06 16:03:18', 0),
+(63, 'images/post_images/DSC_0470.jpg', 'plitvice', 23, '2019-05-06 16:30:14', 0),
+(64, 'images/post_images/DSC_0477.jpg', 'rome', 23, '2019-05-07 14:06:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `likes`
+--
+
+CREATE TABLE `likes` (
+  `id` int(11) NOT NULL,
+  `post_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `data_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -124,7 +141,8 @@ INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `userName`, `passwo
 (28, 'elliot.doms@gmail.com', 'Elliot', 'Doms', 'ElliotDoms', '$2y$12$nPhBtAoNQOToa6OyO47rseHZ8tJ7YnUE9qU6laXUQX7Nz12f9kpAm', '', 'images/profile_images/DSC_0524.jpg'),
 (29, 'lol@lol.com', 'lol', 'lol', 'lol', '$2y$12$83OnmXVJPDtJHTIlUxLCP.jvyA9SZLAGPyq9OYeunHnRuVo1IQdkK', '', ''),
 (30, 'r0718185@student.thomasmore.be', 'Koen', 'R', 'Koen', '$2y$12$J4TF8KAWGWD3t1f3Bhzd4OUO1f9LQ.ydC2gC2FLKSpxom1Qr0eiF6', '', ''),
-(31, 'serafima.y@hotmail.com', 'serafima', 'y', 'serafima', '$2y$12$AzLEViDaxN.06zRQOoRWDeBlt9D/wXyG5ZVka3gAOT6X.KGCKwdPW', '', 'images/profile_images/WmDev_636017832951914926.jpg');
+(31, 'serafima.y@hotmail.com', 'serafima', 'y', 'serafima', '$2y$12$AzLEViDaxN.06zRQOoRWDeBlt9D/wXyG5ZVka3gAOT6X.KGCKwdPW', '', 'images/profile_images/WmDev_636017832951914926.jpg'),
+(32, 'simon.h@gmail.com', 'Simon', 'Hostyn', 'Simonh', '$2y$12$77Pqxe1fX0sYt2QujC6VqOvp7z3QT493qZPm/u1NP0dVMoXq373q.', '', '');
 
 --
 -- Indexes for dumped tables
@@ -167,7 +185,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `followers`
 --
 ALTER TABLE `followers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `images_with_fields`
 --
@@ -177,7 +195,7 @@ ALTER TABLE `images_with_fields`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
