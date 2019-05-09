@@ -2,12 +2,16 @@
 
 function detectColors($image, $num, $level = 5)
 {
+    // aantal kleuren
     $level = (int) $level;
+    // het pallet in een arary
     $palette = array();
+    // de  grote van de afbeelding
     $size = getimagesize($image);
     if (!$size) {
         return false;
     }
+    // soort image uitlezen
     switch ($size['mime']) {
       case 'image/jpeg':
         $img = imagecreatefromjpeg($image);
