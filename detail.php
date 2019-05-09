@@ -7,7 +7,10 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $posts = Post::detailPagina();
-
+$conn = Db::getInstance();
+	$statement = $conn->prepare("SELECT * FROM images_with_fields where id = $id");
+	$statement->execute();
+	$collection = $statement->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +28,7 @@ $posts = Post::detailPagina();
 <div class="collection__detail">
 	
 	<?php foreach ($posts as $c): ?>
-	<img src="<?php echo $c['image']; ?>" alt="Post">
+	<img src="<?php echo $c['image']; ?>" alt="Post" class="collection__detail">
     <p><?php echo $c['image_text']; ?></p>
 	  <div class="clearfix">
 		<?php
@@ -120,10 +123,10 @@ $posts = Post::detailPagina();
 				$("#comment").val("").focus();
 				$("#listupdates li").last().slideDown();
 
-			}
-  		});
+				}
+			});
 
-		e.preventDefault();
+			e.preventDefault();
 
 
 	});
