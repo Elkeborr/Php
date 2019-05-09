@@ -2,8 +2,8 @@
 -- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Gegenereerd op: 06 mei 2019 om 17:20
+-- Host: localhost:3306
+-- Gegenereerd op: 09 mei 2019 om 06:56
 -- Serverversie: 5.7.23
 -- PHP-versie: 7.2.10
 
@@ -32,7 +32,8 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`id`, `text`, `user_id`, `post_id`) VALUES
-(1, 'Hallloooo', 1, 1);
+(1, 'Hallloooo', 1, 1),
+(2, 'hallo', 1, 58);
 
 -- --------------------------------------------------------
 
@@ -82,7 +83,8 @@ INSERT INTO `images_with_fields` (`id`, `image`, `image_text`, `user_id`, `date`
 (59, 'https://images.pexels.com/photos/38136/pexels-photo-38136.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940', '', 28, '2019-05-06 16:03:18'),
 (60, 'https://images.pexels.com/photos/796620/pexels-photo-796620.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500', '', 23, '2019-05-06 16:03:18'),
 (62, 'images/post_images/WmDev_636017832951914926.jpg', 'hello people', 26, '2019-05-06 16:03:18'),
-(63, 'images/post_images/DSC_0470.jpg', 'plitvice', 23, '2019-05-06 16:30:14');
+(63, 'images/post_images/DSC_0470.jpg', 'plitvice', 23, '2019-05-06 16:30:14'),
+(64, 'images/post_images/DSC_0477.jpg', 'rome', 23, '2019-05-07 14:06:00');
 
 -- --------------------------------------------------------
 
@@ -108,7 +110,8 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `userName`, `password`, `bio`, `profileImg`) VALUES
 (23, 'elke.borreij@gmail.com', 'Elke', 'Borreij', 'elkebo', '$2y$12$mHKkhyBR9OH.ONYzQqicju1pXJbtsxWoSz5qO.fy2OxW6rVXginva', '', 'images/profile_images/19403525_1148521161920775_1166382737_o kopie.jpg'),
 (26, 'test@test.be', 'test', 'test', 'test', '$2y$12$143VKfRWHLVAOnSSMcOdguWiIvlgnpYr56RqeZM8mupIK6u8aZuLe', '', 'images/profile_images/download.jpeg'),
-(28, 'elliot.doms@gmail.com', 'Elliot', 'Doms', 'ElliotDoms', '$2y$12$nPhBtAoNQOToa6OyO47rseHZ8tJ7YnUE9qU6laXUQX7Nz12f9kpAm', '', 'images/profile_images/DSC_0524.jpg');
+(28, 'elliot.doms@gmail.com', 'Elliot', 'Doms', 'ElliotDoms', '$2y$12$nPhBtAoNQOToa6OyO47rseHZ8tJ7YnUE9qU6laXUQX7Nz12f9kpAm', '', 'images/profile_images/DSC_0524.jpg'),
+(29, 'lol@lol.com', 'lol', 'lol', 'lol', '$2y$12$83OnmXVJPDtJHTIlUxLCP.jvyA9SZLAGPyq9OYeunHnRuVo1IQdkK', '', '');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -146,7 +149,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT voor een tabel `followers`
@@ -158,10 +161,10 @@ ALTER TABLE `followers`
 -- AUTO_INCREMENT voor een tabel `images_with_fields`
 --
 ALTER TABLE `images_with_fields`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
