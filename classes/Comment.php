@@ -4,6 +4,7 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 class Comment
 {
     public function Save()
@@ -13,7 +14,7 @@ class Comment
         //Hier moet de post_id de id zijn die in de url te zien is($id = $_GET['id'];). Op deze manier kan ik de comments selecteren
         //die post_id=$id hebben als die in de url. En dus zo alleen de comments tonen die op de specifieke foto geplaatst zijn.
         //(lukt nog niet)
-        $statement->bindValue(':post_id', (int) $_GET['id']); //Dit geeft telkens "0" in db bij post_id...
+        $statement->bindValue(':post_id', $_GET['id']); //Dit geeft telkens "0" in db bij post_id...
         $statement->bindValue(':user_id', 1);
         $statement->bindValue(':text', $this->getText());
 
