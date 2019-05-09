@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 09, 2019 at 07:17 AM
+-- Generation Time: May 09, 2019 at 07:25 AM
 -- Server version: 5.6.34-log
 -- PHP Version: 7.1.5
 
@@ -123,7 +123,8 @@ INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `userName`, `passwo
 (26, 'test@test.be', 'test', 'test', 'test', '$2y$12$143VKfRWHLVAOnSSMcOdguWiIvlgnpYr56RqeZM8mupIK6u8aZuLe', '', 'images/profile_images/download.jpeg'),
 (28, 'elliot.doms@gmail.com', 'Elliot', 'Doms', 'ElliotDoms', '$2y$12$nPhBtAoNQOToa6OyO47rseHZ8tJ7YnUE9qU6laXUQX7Nz12f9kpAm', '', 'images/profile_images/DSC_0524.jpg'),
 (29, 'lol@lol.com', 'lol', 'lol', 'lol', '$2y$12$83OnmXVJPDtJHTIlUxLCP.jvyA9SZLAGPyq9OYeunHnRuVo1IQdkK', '', ''),
-(30, 'r0718185@student.thomasmore.be', 'Koen', 'R', 'Koen', '$2y$12$J4TF8KAWGWD3t1f3Bhzd4OUO1f9LQ.ydC2gC2FLKSpxom1Qr0eiF6', '', '');
+(30, 'r0718185@student.thomasmore.be', 'Koen', 'R', 'Koen', '$2y$12$J4TF8KAWGWD3t1f3Bhzd4OUO1f9LQ.ydC2gC2FLKSpxom1Qr0eiF6', '', ''),
+(31, 'serafima.y@hotmail.com', 'serafima', 'y', 'serafima', '$2y$12$AzLEViDaxN.06zRQOoRWDeBlt9D/wXyG5ZVka3gAOT6X.KGCKwdPW', '', 'images/profile_images/WmDev_636017832951914926.jpg');
 
 --
 -- Indexes for dumped tables
@@ -176,7 +177,7 @@ ALTER TABLE `images_with_fields`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
