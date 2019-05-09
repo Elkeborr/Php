@@ -61,18 +61,18 @@ class Post
 
         // Alle post laden van de gevolgde personen
         $statement = $conn->prepare("SELECT posts.id,posts.image,posts.image_text,posts.user_id,
-        posts.date AS images_date,users.profileImg 
-        FROM posts,followers,users 
+        posts.date AS images_date,users.profileImg,filters.name
+        FROM posts,followers,users, filters
         WHERE followers.user_id1=:id
         AND followers.user_id2=posts.user_id 
         AND followers.user_id2 = users.id 
-        UNION SELECT posts.id,posts.image,posts.image_text,posts.user_id,posts.date,users.profileImg 
-        FROM posts,users 
-        WHERE posts.user_id =:id AND users.id=:id ORDER BY `images_date` DESC limit $limit offset $offset");
+        AND posts.filter_id = filters.id
+        UNION SELECT posts.id,posts.image,posts.image_text,posts.user_id,posts.date,users.profileImg,filters.name
+        FROM posts,users,filters
+        WHERE posts.user_id =:id AND users.id=:id AND posts.filter_id = filters.id ORDER BY `images_date` DESC limit $limit offset $offset");
 
         $statement->bindValue(':id', $id);
         $statement->execute();
-        $count = $statement->rowCount();
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }

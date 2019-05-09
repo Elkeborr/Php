@@ -9,7 +9,6 @@ User::checkLogin();
   $post = count($posts);
 
   $filters = Post::getFilters();
-  var_dump($post);
 
   if (!empty($posts)) {
       $show = true;
@@ -68,7 +67,8 @@ if (isset($_POST['unliked'])) {
 <h3>Upload hier een foto</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
     <input type="file" name="image" capture="camera" required/><br>
-    <select>
+    <p>Choose your filter</p>
+    <select name="filter" >
         <?php  foreach ($filters as $f): ?>
         <option  value="<?php echo $f['id']; ?>"><?php echo $f['name']; ?></option>
 <?php endforeach; ?>
@@ -90,7 +90,7 @@ if (isset($_POST['unliked'])) {
 <div class="collection">
   <?php foreach ($posts as $p): ?>
   <div class="collection__item">
-      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image" src="<?php echo $p['image']; ?>" alt="Post"></a>
+      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
         <div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 

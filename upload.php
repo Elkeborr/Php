@@ -31,6 +31,7 @@ if (isset($_FILES['image'])) {
 
         if (in_array($fileinfo, $allowedtypes)) {
             $description = $_POST['description'];
+            $filter = $_POST['filter'];
 
             //move uploaded file
             $newfilename = 'images/post_images/'.$_FILES['image']['name'];
@@ -41,17 +42,15 @@ if (isset($_FILES['image'])) {
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $newfilename)) {
                 //kleuren dedecteren
-                $insert = $conn->query("INSERT into posts (image, image_text, user_id, likes,filter) 
-                                        VALUES ('".$newfilename."', '".$description."', '".$id."',0,)");
+                $insert = $conn->query("INSERT into posts (image, image_text, user_id,filter_id) 
+                                        VALUES ('".$newfilename."', '".$description."', '".$id."','".$filter."')");
 
                 $postId = $conn->prepare("SELECT id FROM posts WHERE image ='".$newfilename."'");
                 $postId->execute();
                 $post_id = $postId->fetch(PDO::FETCH_COLUMN);
 
-                var_dump($post_id);
                 $img = $newfilename;
                 $palette = Post::detectColors($img, 5, 1);
-                var_dump($palette);
 
                 foreach ($palette as $color) {
                     $update = $conn->query("INSERT into colors (post_id, color)
