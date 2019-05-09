@@ -9,7 +9,7 @@ require_once 'bootstrap.php';
 $conn = Db::getInstance();
 
 // in elke file waar we sessie willen gebruiken moeten we die dan ook starten
-session_start();
+//session_start();
 
 if (isset($_FILES['image'])) {
     if ($_FILES['image']['error'] > 0) {

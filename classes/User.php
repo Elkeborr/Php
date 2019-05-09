@@ -212,13 +212,13 @@ class User
             // check of rehash van password gelijk is aan hash uit db
             $statement = $conn->prepare('SELECT * from users where email = :email');
             $statement->bindParam(':email', $email);
-            $result = $statement->execute();
+            $statement->execute();
 
             $user = $statement->fetch(PDO::FETCH_ASSOC);
 
             if (password_verify($password, $user['password'])) {
                 // ja -> login
-                session_start();
+                //session_start();
                 $_SESSION['email'] = $email;
                 header('Location:index.php');
             } else {
@@ -232,7 +232,7 @@ class User
     public static function checkLogin()
     {
         if (!isset($_SESSION)) {
-            session_start();
+            // session_start();
         }
         if (!isset($_SESSION['email'])) {
             header('Location: login.php');
@@ -310,20 +310,20 @@ class User
         return $profileImg;
     }
 
-        /*Biografie zoeken*/
-        public static function bio()
-        {
-            $conn = Db::getInstance();
-    
-            $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
-            $stm->execute();
-            $id = $stm->fetch(PDO::FETCH_COLUMN);
-    
-            $statement = $conn->prepare('SELECT bio FROM users WHERE users.id=:id');
-            $statement->bindParam(':id', $id);
-            $statement->execute();
-            $profileImg = $statement->fetch(PDO::FETCH_COLUMN);
-    
-            return $bio;
-        }
+    /*Biografie zoeken*/
+    public static function bio()
+    {
+        $conn = Db::getInstance();
+
+        $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+        $stm->execute();
+        $id = $stm->fetch(PDO::FETCH_COLUMN);
+
+        $statement = $conn->prepare('SELECT bio FROM users WHERE users.id=:id');
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $profileImg = $statement->fetch(PDO::FETCH_COLUMN);
+
+        return $bio;
+    }
 }

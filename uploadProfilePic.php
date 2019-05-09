@@ -2,13 +2,11 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-session_start();
+//session_start();
 
 // connectie met de databank
 require_once 'bootstrap.php';
 $conn = Db::getInstance();
-
-// in elke file waar we sessie willen gebruiken moeten we die dan ook starten
 
 if (isset($_FILES['profileImg'])) {
     if ($_FILES['profileImg']['error'] > 0) {

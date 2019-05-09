@@ -18,7 +18,7 @@ if (!empty($_POST['submit'])) {
         $user->setUserName($_POST['username']);
 
         if ($user->register()) {
-            session_start();
+            //session_start();
             $_SESSION['email'] = $email;
             header('Location:index.php');
         }

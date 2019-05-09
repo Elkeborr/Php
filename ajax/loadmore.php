@@ -1,7 +1,7 @@
 <?php
 
 require_once '../bootstrap.php';
-session_start();
+//session_start();
 
 $row = $_POST['row'];
 $rowperpage = 3;

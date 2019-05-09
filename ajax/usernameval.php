@@ -1,37 +1,29 @@
 <?php
 
-require_once("../bootstrap.php");
-  
-if(!empty($_POST)) {
+require_once '../bootstrap.php';
 
-    $name= $_POST['name']; 
+if (!empty($_POST)) {
+    $name = $_POST['name'];
 
-    try{
-        $e  = User::UsernameAvailable($name);
-        if ($e == false){
-            $result=[
-                "status" => "auwtch",
-                "message" => "Already taken"
+    try {
+        $e = User::UsernameAvailable($name);
+        if ($e == false) {
+            $result = [
+                'status' => 'auwtch',
+                'message' => 'Already taken',
                     ];
-        }else {
-            $result=[
-                "status" => "success",
-                "message" => "Not taken yet" 
+        } else {
+            $result = [
+                'status' => 'success',
+                'message' => 'Not taken yet',
                     ];
         }
-    }
-    catch(Throwable $t){
-        $result=[
-            "status" => "error",
-            "message" => "er is iet fout gelopen"
+    } catch (Throwable $t) {
+        $result = [
+            'status' => 'error',
+            'message' => 'er is iet fout gelopen',
             ];
     }
 
-    
     echo json_encode($result);
-           
-    
-        }
-    
-
-
+}

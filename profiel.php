@@ -2,7 +2,7 @@
 <?php
 
 include_once 'bootstrap.php';
-session_start();
+//session_start();
 
 $profileImg = User::profileImg();
 $bio = User::bio();
