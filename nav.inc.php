@@ -1,7 +1,7 @@
 <?php
 
 //Connectie klasses
-include_once 'bootstrap.php';
+require_once 'bootstrap.php';
 
 $username = User::username();
 $profileImg = User::profileImg();

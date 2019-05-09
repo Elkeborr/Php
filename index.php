@@ -1,15 +1,14 @@
 <?php
-//session_start();
-
   //Connectie klasses
-include_once 'bootstrap.php';
+ require_once 'bootstrap.php';
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
-  $posts = Post::getAll();
+  $posts = Post::get();
   $post = count($posts);
 
+  $filters = Post::getFilters();
   var_dump($post);
 
   if (!empty($posts)) {
@@ -18,21 +17,19 @@ User::checkLogin();
       $error = true;
   }
   $profileImg = Post::profilePic();
-
-
-
+/*
   if (isset($_POST['liked'])) {
-    $postid = $_POST['postid'];
-    $result = mysqli_query($con, "SELECT * FROM images_with_fields WHERE id=$postid");
-    $row = mysqli_fetch_array($result);
-    $n = $row['likes'];
+      $postid = $_POST['postid'];
+      $result = mysqli_query($con, "SELECT * FROM images_with_fields WHERE id=$postid");
+      $row = mysqli_fetch_array($result);
+      $n = $row['likes'];
 
-    mysqli_query($con, "INSERT INTO likes (userid, postid) VALUES (1, $postid)");
-    mysqli_query($con, "UPDATE images_with_fields SET likes=$n+1 WHERE id=$postid");
+      mysqli_query($con, "INSERT INTO likes (userid, postid) VALUES (1, $postid)");
+      mysqli_query($con, "UPDATE images_with_fields SET likes=$n+1 WHERE id=$postid");
 
-    echo $n+1;
-    exit();
-}
+      echo $n + 1;
+      exit();
+  }
 if (isset($_POST['unliked'])) {
     $postid = $_POST['postid'];
     $result = mysqli_query($con, "SELECT * FROM images_with_fields WHERE id=$postid");
@@ -41,16 +38,14 @@ if (isset($_POST['unliked'])) {
 
     mysqli_query($con, "DELETE FROM likes WHERE postid=$postid AND userid=1");
     mysqli_query($con, "UPDATE images_with_fields SET likes=$n-1 WHERE id=$postid");
-    
-    echo $n-1;
+
+    echo $n - 1;
     exit();
 }
 
 // Retrieve posts from the database
-$posts = mysqli_query($con, "SELECT * FROM images_with_fields");
-
-
-
+//$posts = mysqli_query($con, "SELECT * FROM images_with_fields");
+*/
 ?>
 
 <!DOCTYPE html>
@@ -60,6 +55,7 @@ $posts = mysqli_query($con, "SELECT * FROM images_with_fields");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/filters.css">
     <title>Plantspiratie</title>
 </head>
 <body>
@@ -72,6 +68,11 @@ $posts = mysqli_query($con, "SELECT * FROM images_with_fields");
 <h3>Upload hier een foto</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
     <input type="file" name="image" capture="camera" required/><br>
+    <select>
+        <?php  foreach ($filters as $f): ?>
+        <option  value="<?php echo $f['id']; ?>"><?php echo $f['name']; ?></option>
+<?php endforeach; ?>
+    </select>
     <br><textarea name="description" cols="40" rows="4" placeholder="Description" required></textarea><br>
     <input type="submit" value="upload" name="upload" class="input"/>  
   </form>      
@@ -96,21 +97,22 @@ $posts = mysqli_query($con, "SELECT * FROM images_with_fields");
         </div>
         <p><?php echo $p['image_text']; ?></p>
         <p id="date"><?php echo  $p['images_date']; ?></p>
-        <!--<button>Like</button><div><a href="#" data-id="<?//php echo $post->id ?>" class="like">Like</a> <span class='likes'><?//php echo $post->getLikes(); ?>*/</span></div>-->
+        <!--<button>Like</button><div><a href="#" data-id="<?//php echo $post->id?>" class="like">Like</a> <span class='likes'><?//php echo $post->getLikes();?>*/</span></div>-->
       
 
 
-<?php while ($row = mysqli_fetch_array($posts)) { ?>
+<?php //while ($row = mysqli_fetch_array($posts)) {
+    ?>
 
 <div class="post">
     <?php echo $row['image_text']; ?>
 
     <div style="padding: 2px; margin-top: 5px;">
-    <?php 
+    <?php
         // determine if user has already liked this post
-        $results = mysqli_query($con, "SELECT * FROM likes WHERE userid=1 AND postid=".$row['id']."");
+        $results = mysqli_query($con, 'SELECT * FROM likes WHERE userid=1 AND postid='.$row['id'].'');
 
-        if (mysqli_num_rows($results) == 1 ): ?>
+    if (mysqli_num_rows($results) == 1): ?>
             <!-- user already likes post -->
             <span class="unlike fa fa-thumbs-up" data-id="<?php echo $row['id']; ?>"></span> 
             <span class="like hide fa fa-thumbs-o-up" data-id="<?php echo $row['id']; ?>"></span> 
@@ -118,13 +120,14 @@ $posts = mysqli_query($con, "SELECT * FROM images_with_fields");
             <!-- user has not yet liked post -->
             <span class="like fa fa-thumbs-o-up" data-id="<?php echo $row['id']; ?>"></span> 
             <span class="unlike hide fa fa-thumbs-up" data-id="<?php echo $row['id']; ?>"></span> 
-        <?php endif ?>
+        <?php endif; ?>
 
         <span class="likes_count"><?php echo $row['likes']; ?> likes</span>
     </div>
 </div>
 
-<?php } ?>
+<?php
+//}?>
       
       </div>
   </div>

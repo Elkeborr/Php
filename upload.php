@@ -41,8 +41,23 @@ if (isset($_FILES['image'])) {
 
             if (move_uploaded_file($_FILES['image']['tmp_name'], $newfilename)) {
                 //kleuren dedecteren
-                $insert = $conn->query("INSERT into images_with_fields (image, image_text, user_id) 
-                                        VALUES ('".$newfilename."', '".$description."', '".$id."')");
+                $insert = $conn->query("INSERT into posts (image, image_text, user_id, likes,filter) 
+                                        VALUES ('".$newfilename."', '".$description."', '".$id."',0,)");
+
+                $postId = $conn->prepare("SELECT id FROM posts WHERE image ='".$newfilename."'");
+                $postId->execute();
+                $post_id = $postId->fetch(PDO::FETCH_COLUMN);
+
+                var_dump($post_id);
+                $img = $newfilename;
+                $palette = Post::detectColors($img, 5, 1);
+                var_dump($palette);
+
+                foreach ($palette as $color) {
+                    $update = $conn->query("INSERT into colors (post_id, color)
+                 VALUES ('".$post_id."', '".$color."')");
+                }
+
                 header('location:index.php');
             } else {
                 $msg = 'Sorry, de upload is mislukt.';
