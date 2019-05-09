@@ -15,7 +15,7 @@ User::checkLogin();
   } else {
       $error = true;
   }
-  $profileImg = Post::profilePic();
+
 /*
   if (isset($_POST['liked'])) {
       $postid = $_POST['postid'];

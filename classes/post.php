@@ -77,23 +77,24 @@ class Post
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function detailPagina()
+    public static function detailPagina($id)
     {
         //probleem met get id
-        $id = $_GET['id'];
+        //$id = $_GET['id'];
         $conn = Db::getInstance();
 
-        $statement = $conn->prepare("SELECT * FROM posts where id = $id");
+        $statement = $conn->prepare("SELECT posts.id,posts.image,posts.image_text,posts.user_id,posts.date,posts.filter_id, filters.name
+        FROM posts,filters where posts.id = $id AND filters.id=posts.filter_id");
         $statement->execute();
         $collection = $statement->fetchAll();
 
         return $collection;
     }
 
-    public static function profilePic()
+    public static function profilePic($id)
     {
         //probleem met get id
-        $id = $_GET['id'];
+        //$id = $_GET['id'];
         $conn = Db::getInstance();
 
         $statement = $conn->prepare("SELECT users.profileImg FROM posts,users 
