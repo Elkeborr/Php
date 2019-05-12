@@ -17,7 +17,7 @@ $profileImg = User::profileImg();
 
     <a href="index.php" class="logo">Plantspiratie</a>
     
-    <form action="search.php" method="get">
+    <form action="search.php" method="post">
       <input type="text" name="search" class="search" placeholder="zoek">
       <input type="submit" name="submit_search" value="search" class="search_submit">
 

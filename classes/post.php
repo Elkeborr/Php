@@ -7,6 +7,7 @@ class Post
     private $image;
     private $image_text;
 
+
     /**
      * Get the value of image.
      */
@@ -46,6 +47,7 @@ class Post
 
         return $this;
     }
+
 
     /*
         Alle posts van de databank halen
@@ -138,5 +140,22 @@ class Post
         arsort($palette);
 
         return array_slice(array_keys($palette), 0, $num);
+    }
+
+
+
+
+   public static function search(){
+
+     $conn = Db::getInstance();
+     $stmt = $conn->prepare("SELECT image_text FROM images_with_fields WHERE search LIKE '%search%'");
+     $stmt->bindParam(':search', $search, PDO::PARAM_STR);
+
+     $stmt->execute();
+     $search = $stmt->fetch();
+
+     return $search;
+
+
     }
 }

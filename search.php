@@ -1,11 +1,14 @@
-
 <?php
+//session_start();
 
-//include_once 'bootstrap.php';
-include_once 'nav.inc.php';
+  //Connectie klasses
+include_once 'bootstrap.php';
 
-//$dbconn = Db::getInstance();
+// Controleren of we al ingelogd zijn, functie van gemaakt
+User::checkLogin();
 
+  $profileImg = Post::profilePic();
+  $searchResult = post::search($_GET['search']);
 ?>
 
 <!DOCTYPE html>
@@ -20,27 +23,27 @@ include_once 'nav.inc.php';
     <title>SEARCH</title>
 </head>
 <body>
+
+<?php include_once 'nav.inc.php'; ?>
+
+
+<!-------AFBEELDINGEN SHOWEN------->
+
+<?php $dbconn = Db::getInstance();
+
+if($searchResult>0){
+  foreach($searchResult as $value){
+    echo $value['id'];
+    echo $value['image'];
+    echo $value['image_text'];
+  }
+}
+else{
+  echo 'No data found';
+}
+
+
+?>
     
 </body>
 </html>
-
-
-
-<?php
-if(isset($_POST['submit_search'])){
-    $search= $_POST['search'];
-    echo $search;
-    $stmt = $dbconn->prepare("SELECT * FROM images_with_fields WHERE image_text LIKE '%search%'");
-    $stmt->execute();
-
-    if(!$stmt->rowCount() == 0){
-        while ($row = $stmt->fetch()){
-            echo $row['image'];
-            echo $row['image_text'];
-        }
-    }
-}
-
-   
-
-?>
