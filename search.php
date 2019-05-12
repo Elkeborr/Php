@@ -7,8 +7,8 @@ include_once 'bootstrap.php';
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
-  $profileImg = Post::profilePic();
-  $searchResult = post::search($_GET['search']);
+ // $profileImg = Post::profilePic();
+  $searchResult = Post::search($_GET['search']);
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ User::checkLogin();
 if($searchResult>0){
   foreach($searchResult as $value){
     echo $value['id'];
-    echo $value['image'];
+    echo "<img src='" . $value['image'] . "'>";
     echo $value['image_text'];
   }
 }

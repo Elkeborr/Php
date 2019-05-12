@@ -8,7 +8,7 @@ include_once 'bootstrap.php';
 User::checkLogin();
 
   $posts = Post::getAll();
-  $post = count($posts);
+  //$post = count($posts);
 
   if (!empty($posts)) {
       $show = true;
