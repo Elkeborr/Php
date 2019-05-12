@@ -24,26 +24,33 @@ User::checkLogin();
 </head>
 <body>
 
-<?php include_once 'nav.inc.php'; ?>
+
+<?php include_once 'nav.inc.php'; 
+//echo "<img src='" . $value['image'] . "'>";
+?>
 
 
 <!-------AFBEELDINGEN SHOWEN------->
 
-<?php $dbconn = Db::getInstance();
+<?php $dbconn = Db::getInstance();?>
 
-if($searchResult>0){
-  foreach($searchResult as $value){
-    echo $value['id'];
-    echo "<img src='" . $value['image'] . "'>";
-    echo $value['image_text'];
-  }
-}
-else{
-  echo 'No data found';
-}
+<div class="collection">
+<?php if($searchResult>0): foreach($searchResult as $value):?>
+
+    <div class="collection__item">
+    <a href="detail.php?id=<?php echo $value['id']; ?>" > <img class="collection--image" src="<?php echo $value['image']; ?>" alt="Post"></a>
+    <div class='item--container'>
+        <p><?php echo $value['image_text']; ?></p>
+      </div>
+  </div>
+<?php endforeach; ?> 
+</div>
+<?php endif; ?>
 
 
-?>
-    
+</div>
+</div>
+
 </body>
 </html>
+

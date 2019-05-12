@@ -192,6 +192,6 @@ class Post
         $filters = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         return  $filters;
-    }*/
+    
     }
 }
