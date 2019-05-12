@@ -2,13 +2,13 @@
 //session_start();
 
   //Connectie klasses
-include_once 'bootstrap.php';
+require_once 'bootstrap.php';
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
   $posts = Post::getAll();
-  //$post = count($posts);
+  $post = count($posts);
 
   if (!empty($posts)) {
       $show = true;

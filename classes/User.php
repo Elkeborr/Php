@@ -322,7 +322,7 @@ class User
         $statement = $conn->prepare('SELECT bio FROM users WHERE users.id=:id');
         $statement->bindParam(':id', $id);
         $statement->execute();
-        $profileImg = $statement->fetch(PDO::FETCH_COLUMN);
+        $bio = $statement->fetch(PDO::FETCH_COLUMN);
 
         return $bio;
     }

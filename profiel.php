@@ -1,8 +1,7 @@
 
 <?php
 
-include_once 'bootstrap.php';
-//session_start();
+require_once 'bootstrap.php';
 
 $profileImg = User::profileImg();
 $bio = User::bio();

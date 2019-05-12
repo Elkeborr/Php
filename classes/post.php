@@ -167,6 +167,7 @@ class Post
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result['count'];
         }
+        }*/
 
     public static function getColors()
     {
@@ -192,4 +193,5 @@ class Post
 
         return  $filters;
     }*/
+    }
 }

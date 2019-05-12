@@ -1,5 +1,5 @@
 <?php
-include_once 'bootstrap.php';
+require_once 'bootstrap.php';
 
 User::login();
 
