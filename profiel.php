@@ -18,7 +18,8 @@ User::updateBio();
     <title>Profiel</title>
 
   <link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/filters.css">
 	<link rel="stylesheet" href="css/profiel.css">
 </head>
 <body>
@@ -69,13 +70,13 @@ User::updateBio();
 
   <?php foreach ($posts as $p): ?>
   <div class="collection__item">
-      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
+      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
         <div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
         </div>
         <p><?php echo $p['image_text']; ?></p>
-        <p id="date"><?php echo  $p['images_date']; ?></p>
+        <p id="date"><?php echo  $p['date']; ?></p>
         <button>Verwijderen</button>
       
       </div>

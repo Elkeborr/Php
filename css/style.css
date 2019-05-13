@@ -281,3 +281,8 @@ a.navbar__logout
   justify-content: space-evenly;
 
 }
+
+.container--search{
+margin-top:100px;
+text-align: center;
+}
