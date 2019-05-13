@@ -1,21 +1,20 @@
 <?php
-//session_start();
-
   //Connectie klasses
 require_once 'bootstrap.php';
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
-  $posts = Post::getAll();
+  $posts = Post::get();
   $post = count($posts);
+
+  $filters = Post::getFilters();
 
   if (!empty($posts)) {
       $show = true;
   } else {
       $error = true;
   }
-  $profileImg = Post::profilePic();
 
 ?>
 
@@ -25,6 +24,7 @@ User::checkLogin();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/filters.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Plantspiratie</title>
 </head>
@@ -37,6 +37,13 @@ User::checkLogin();
 <div class="upload">
 <h3>Upload hier een foto</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
+  <p>Choose your filter</p>
+    <select name="filter" >
+        <?php  foreach ($filters as $f): ?>
+        <option  value="<?php echo $f['id']; ?>"><?php echo $f['name']; ?></option>
+        <?php endforeach; ?>
+    </select>
+    <br> 
     <input type="file" name="image" capture="camera" required/><br>
     <br><textarea name="description" cols="40" rows="4" placeholder="Description" required></textarea><br>
     <input type="submit" value="upload" name="upload" class="input"/>  
@@ -55,7 +62,7 @@ User::checkLogin();
 <div class="collection">
   <?php foreach ($posts as $p): ?>
   <div class="collection__item">
-      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image" src="<?php echo $p['image']; ?>" alt="Post"></a>
+      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
         <div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 

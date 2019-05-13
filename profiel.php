@@ -2,10 +2,10 @@
 <?php
 
 require_once 'bootstrap.php';
-
-$profileImg = User::profileImg();
+//$profileImg = User::profileImg($_GET['id']);
 $bio = User::bio();
-
+$posts = Post::getPosts();
+User::updateBio();
 ?>
 
 
@@ -23,81 +23,66 @@ $bio = User::bio();
 </head>
 <body>
 <?php include_once 'nav.inc.php'; ?>
+
   <!------------------------PROFIELFOTO--------------------------->
+<div class="profile--container">
 
-<div class="container">
-  <h3>Profielfoto</h3>
-
-<div class="profile">
-        <img class="profile--image" src="<?php echo $profileImg, $bio; ?>" alt="ProfileImg"></a>
+<div class="info">
+  <div class="profile">
+        <img class="profile--image" src="<?php echo $profileImg; ?>" alt="ProfileImg"></a>
+  </div>
+  <div class="profileImage">
+    <form enctype="multipart/form-data" action="uploadProfilePic.php" method="POST"> 
+      <input type="file" name="profileImg" capture="camera" required/><br>
+      <input type="submit" value="upload" name="upload"/>  
+    </form>      
+  </div>  
 </div>
-
-
-<div class="profileImage">
-
-<form enctype="multipart/form-data" action="uploadProfilePic.php" method="POST"> 
-  <input type="file" name="profileImg" capture="camera" required/><br>
-  <input type="submit" value="upload" name="upload"/>  
-</form>      
-</div>
-
-  
-
   <!------------------------PROFIELTEKST--------------------------->
+  <div class="biografie">
 <h3>Biografie</h3>
 
-
-
-<?php
-
-$conn = Db::getInstance();
-
-if (isset($_POST['submit'])) {
-    $bio = $_POST['bio'];
-
-    if (empty($bio)) {
-        echo "<font color='red'>Tekstveld is leeg!</font><br/>";
-    } else {
-        $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
-        $stm->execute();
-        $id = $stm->fetch(PDO::FETCH_COLUMN);
-
-        $insert = $conn->prepare("UPDATE users SET bio = '".$bio."'WHERE users.id='".$id."';");
-        $insert->bindParam(':bio', $bio);
-        $insert->execute();
-    }
-}
-    ?>
+<p><?php echo $bio; ?> </p>
     
-    <form method="post" action="profiel.php">  
-<textarea name="bio" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!"><?php echo $bio; ?></textarea>
-<br><br>
-<input type="submit" name="submit" value="Submit">  
-</form>
-    
-    
-
-
-
-
-
-
-
-
-
-
-
+    <form method="post" action="">  
+      <textarea name="bio" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!" required><?php echo $bio; ?></textarea>
+      <br><br>
+        <input type="submit" name="submit" value="Submit">  
+    </form>
+  </div>  
+  
 
   <!------------------------PASSWOORD EN EMAIL WIJZIGEN--------------------------->
+
+  <div class="wijzigen">
   <h3> Gegevens wijzigen </h3>
 
-<ul>
-<li><a href="changePassword.php">Verander wachtwoord</a></li>
-<li><a href="changeEmail.php">Verander email</a></li>
-</ul>
 
+<a href="changePassword.php">Verander wachtwoord</a>
+<br>
+<a href="changeEmail.php">Verander email</a>
 
+  </div>
 
+</div>
+<div class="post--container">
+
+  <?php foreach ($posts as $p): ?>
+  <div class="collection__item">
+      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
+      <div class='item--container'>
+        <div class="profile--small ">
+          <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
+        </div>
+        <p><?php echo $p['image_text']; ?></p>
+        <p id="date"><?php echo  $p['images_date']; ?></p>
+        <button>Verwijderen</button>
+      
+      </div>
+  </div>
+<?php endforeach; ?> 
+
+</div>
 
     
 </body>

@@ -6,8 +6,8 @@ include_once 'bootstrap.php';
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
-
  // $profileImg = Post::profilePic();
+
   $searchResult = Post::search($_GET['search']);
 ?>
 
@@ -20,32 +20,38 @@ User::checkLogin();
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/reset.css">
 
-    <title>SEARCH</title>
+    <title>Search</title>
 </head>
 <body>
 
 
-<?php include_once 'nav.inc.php'; 
-//echo "<img src='" . $value['image'] . "'>";
-?>
+<?php include_once 'nav.inc.php'; ?>
 
 
 <!-------AFBEELDINGEN SHOWEN------->
 
-<?php $dbconn = Db::getInstance();?>
+<?php $dbconn = Db::getInstance(); ?>
 
-<div class="collection">
-<?php if($searchResult>0): foreach($searchResult as $value):?>
+<div class="collection--search">
+<?php if ($searchResult > 0): foreach ($searchResult as $value):?>
 
-    <div class="collection__item">
-    <a href="detail.php?id=<?php echo $value['id']; ?>" > <img class="collection--image" src="<?php echo $value['image']; ?>" alt="Post"></a>
-    <div class='item--container'>
+  <div class="collection__item">
+      <a href="detail.php?id=<?php echo $value['id']; ?>" > <img class="collection--image  <?php echo $value['name']; ?>" src="<?php echo $value['image']; ?>" alt="Post"></a>
+      <div class='item--container'>
+        <div class="profile--small ">
+          <img class="profile--imageSmall" src="<?php echo  $value['profileImg']; ?>"> 
+        </div>
         <p><?php echo $value['image_text']; ?></p>
+        <p id="date"><?php echo $value['date']; ?></p>
+        <button>Like</button>   
       </div>
   </div>
 <?php endforeach; ?> 
 </div>
 <?php endif; ?>
+
+
+
 
 
 </div>

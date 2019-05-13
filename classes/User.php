@@ -326,4 +326,27 @@ class User
 
         return $bio;
     }
+
+    public static function updateBio()
+    {
+        $conn = Db::getInstance();
+
+        if (isset($_POST['submit'])) {
+            $bio = $_POST['bio'];
+
+            if (empty($bio)) {
+                echo "<font color='red'>Tekstveld is leeg!</font><br/>";
+            } else {
+                $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+                $stm->execute();
+                $id = $stm->fetch(PDO::FETCH_COLUMN);
+
+                $insert = $conn->prepare("UPDATE users SET bio = '".$bio."'WHERE users.id='".$id."';");
+                $insert->bindParam(':bio', $bio);
+                $insert->execute();
+            }
+
+            return $insert;
+        }
+    }
 }

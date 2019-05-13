@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Gegenereerd op: 09 mei 2019 om 16:32
+-- Gegenereerd op: 13 mei 2019 om 11:24
 -- Serverversie: 5.7.23
 -- PHP-versie: 7.2.10
 
@@ -31,24 +31,16 @@ CREATE TABLE `colors` (
 --
 
 INSERT INTO `colors` (`id`, `post_id`, `color`) VALUES
-(7, 73, '666666'),
-(8, 73, 'CCCCCC'),
-(9, 73, '000000'),
-(10, 73, '666600'),
-(11, 73, '6666CC'),
-(12, 74, '132132132'),
-(13, 74, '000000'),
-(14, 74, 'CCCCCC'),
-(15, 74, '666666'),
-(16, 74, '132132132'),
-(17, 74, '000000'),
-(18, 74, 'CCCCCC'),
-(19, 74, '666666'),
-(20, 76, '6666CC'),
-(21, 76, '666666'),
-(22, 76, '666600'),
-(23, 76, '66CCCC'),
-(24, 76, 'CCCCCC');
+(25, 77, '000000'),
+(26, 77, '666600'),
+(27, 77, '666666'),
+(28, 77, '006600'),
+(29, 77, 'CCCCCC'),
+(30, 78, '000000'),
+(31, 78, '006666'),
+(32, 78, 'CCCCCC'),
+(33, 78, '000066'),
+(34, 78, '666666');
 
 -- --------------------------------------------------------
 
@@ -184,9 +176,8 @@ INSERT INTO `posts` (`id`, `image`, `image_text`, `user_id`, `date`, `filter_id`
 (60, 'https://images.pexels.com/photos/796620/pexels-photo-796620.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500', '', 23, '2019-05-09 16:08:53', '55'),
 (62, 'images/post_images/WmDev_636017832951914926.jpg', 'hello people', 26, '2019-05-09 16:08:55', '55'),
 (63, 'images/post_images/DSC_0470.jpg', 'plitvice', 23, '2019-05-09 16:08:57', '55'),
-(73, 'images/post_images/600_5845_1024px.jpg', 'bauhaus', 23, '2019-05-09 16:08:59', '55'),
-(74, 'images/post_images/Bauhaus_Chair_Breuer.png', 'Stoel', 23, '2019-05-09 15:46:58', '1'),
-(76, 'images/post_images/1920px-Bauhaus_Dessau_2018.jpg', 'Schule', 23, '2019-05-09 16:11:50', '9');
+(77, 'images/post_images/brug.jpeg', 'Prachtige brug :) ', 23, '2019-05-13 09:19:48', '55'),
+(78, 'images/post_images/flowers.jpeg', 'Flowers for mothersday! ❤️', 23, '2019-05-13 11:23:57', '1');
 
 -- --------------------------------------------------------
 
@@ -210,7 +201,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `firstName`, `lastName`, `userName`, `password`, `bio`, `profileImg`) VALUES
-(23, 'elke.borreij@gmail.com', 'Elke', 'Borreij', 'elkebo', '$2y$12$mHKkhyBR9OH.ONYzQqicju1pXJbtsxWoSz5qO.fy2OxW6rVXginva', '', 'images/profile_images/19403525_1148521161920775_1166382737_o kopie.jpg'),
+(23, 'elke.borreij@gmail.com', 'Elke', 'Borreij', 'elkebo', '$2y$12$mHKkhyBR9OH.ONYzQqicju1pXJbtsxWoSz5qO.fy2OxW6rVXginva', 'Hallo ik ben Elke, studente IMD :)', 'images/profile_images/19403525_1148521161920775_1166382737_o kopie.jpg'),
 (26, 'test@test.be', 'test', 'test', 'test', '$2y$12$143VKfRWHLVAOnSSMcOdguWiIvlgnpYr56RqeZM8mupIK6u8aZuLe', '', 'images/profile_images/download.jpeg'),
 (28, 'elliot.doms@gmail.com', 'Elliot', 'Doms', 'ElliotDoms', '$2y$12$nPhBtAoNQOToa6OyO47rseHZ8tJ7YnUE9qU6laXUQX7Nz12f9kpAm', '', 'images/profile_images/DSC_0524.jpg'),
 (29, 'lol@lol.com', 'lol', 'lol', 'lol', '$2y$12$83OnmXVJPDtJHTIlUxLCP.jvyA9SZLAGPyq9OYeunHnRuVo1IQdkK', '', ''),
@@ -266,7 +257,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT voor een tabel `colors`
 --
 ALTER TABLE `colors`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT voor een tabel `comments`
@@ -278,7 +269,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT voor een tabel `filters`
 --
 ALTER TABLE `filters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT voor een tabel `followers`
@@ -290,7 +281,7 @@ ALTER TABLE `followers`
 -- AUTO_INCREMENT voor een tabel `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
 
 --
 -- AUTO_INCREMENT voor een tabel `users`
