@@ -231,10 +231,9 @@ class User
     /* controle van de login*/
     public static function checkLogin()
     {
-        if (!isset($_SESSION)) {
+        if (isset($_SESSION['email'])) {
             // session_start();
-        }
-        if (!isset($_SESSION['email'])) {
+        } else {
             header('Location: login.php');
         }
     }

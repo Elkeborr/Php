@@ -28,6 +28,7 @@ body
   padding:5px;
   justify-content: space-evenly;
 
+
 }
 .collection--image {
   height: auto;
@@ -40,8 +41,6 @@ body
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-
-
 }
 
 .item--container button{
