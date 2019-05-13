@@ -10,7 +10,7 @@ $conn = Db::getInstance();
 
 // selecting posts
 
-$result = Post::getAll($limit, $offset);
+$result = Post::get($limit, $offset);
 $html = '';
 
 foreach ($result as $r) {

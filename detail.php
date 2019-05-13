@@ -1,16 +1,12 @@
 <?php
-include_once 'bootstrap.php';
-
-session_start();
+require_once 'bootstrap.php';
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-$posts = Post::detailPagina();
-$conn = Db::getInstance();
-	$statement = $conn->prepare("SELECT * FROM images_with_fields where id = $id");
-	$statement->execute();
-	$collection = $statement->fetchAll();
+$posts = Post::detailPagina($_GET['id']);
+$colors = Post::getColors($_GET['id']);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,7 +14,8 @@ $conn = Db::getInstance();
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/filters.css">
     <title>Plantspiratie</title>
 </head>
 <body>
@@ -28,23 +25,28 @@ $conn = Db::getInstance();
 <div class="collection__detail">
 	
 	<?php foreach ($posts as $c): ?>
-	<img src="<?php echo $c['image']; ?>" alt="Post" class="collection__detail">
-    <p><?php echo $c['image_text']; ?></p>
+	<img src="<?php echo $c['image']; ?>" alt="Post" class="collection--image   <?php echo $c['name']; ?>">
+	<p><?php echo $c['image_text']; ?></p>
+	<div class="profile--small ">
+          <img class="profile--imageSmall" src="<?php echo  $c['profileImg']; ?>"> 
+        </div>
+        <p id="date"><?php echo  $c['date']; ?></p>
+	<button>Like</button>
+	
 	  <div class="clearfix">
-		<?php
-          $img = $c['image'];
-          $palette = Post::detectColors($img, 5, 1);
+		<?php foreach ($colors as $color) {
+    echo '
+			  <div class="color"> 
+			  
+			  <a href="search.php?search='.$color.'"><div class="bol" style="background:#'.$color.';"></div>
+			  <p>#'.$color.'</p></a></div>';
+} ?>
 
-          foreach ($palette as $color) {
-              echo '
-			  <div class="color">
-			  <div class="bol" style="background:#'.$color.';"></div>
-			  <p>#'.$color.'</p></div>';
-          }
-
-        ?>
 
 	<?php endforeach; ?>
+
+
+
 	  </div>
 </div>
 

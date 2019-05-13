@@ -231,10 +231,9 @@ class User
     /* controle van de login*/
     public static function checkLogin()
     {
-        if (!isset($_SESSION)) {
+        if (isset($_SESSION['email'])) {
             // session_start();
-        }
-        if (!isset($_SESSION['email'])) {
+        } else {
             header('Location: login.php');
         }
     }
@@ -322,8 +321,31 @@ class User
         $statement = $conn->prepare('SELECT bio FROM users WHERE users.id=:id');
         $statement->bindParam(':id', $id);
         $statement->execute();
-        $profileImg = $statement->fetch(PDO::FETCH_COLUMN);
+        $bio = $statement->fetch(PDO::FETCH_COLUMN);
 
         return $bio;
+    }
+
+    public static function updateBio()
+    {
+        $conn = Db::getInstance();
+
+        if (isset($_POST['submit'])) {
+            $bio = $_POST['bio'];
+
+            if (empty($bio)) {
+                echo "<font color='red'>Tekstveld is leeg!</font><br/>";
+            } else {
+                $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+                $stm->execute();
+                $id = $stm->fetch(PDO::FETCH_COLUMN);
+
+                $insert = $conn->prepare("UPDATE users SET bio = '".$bio."'WHERE users.id='".$id."';");
+                $insert->bindParam(':bio', $bio);
+                $insert->execute();
+            }
+
+            return $insert;
+        }
     }
 }

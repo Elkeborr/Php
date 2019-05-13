@@ -1,16 +1,14 @@
 <?php
-//session_start();
-
   //Connectie klasses
-include_once 'bootstrap.php';
+require_once 'bootstrap.php';
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
-  $posts = Post::getAll();
+  $posts = Post::get();
   $post = count($posts);
 
-  var_dump($post);
+  $filters = Post::getFilters();
 
   if (!empty($posts)) {
       $show = true;
@@ -32,6 +30,7 @@ User::checkLogin();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/filters.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Plantspiratie</title>
 </head>
@@ -44,6 +43,13 @@ User::checkLogin();
 <div class="upload">
 <h3>Upload hier een foto</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
+  <p>Choose your filter</p>
+    <select name="filter" >
+        <?php  foreach ($filters as $f): ?>
+        <option  value="<?php echo $f['id']; ?>"><?php echo $f['name']; ?></option>
+        <?php endforeach; ?>
+    </select>
+    <br> 
     <input type="file" name="image" capture="camera" required/><br>
     <br><textarea name="description" cols="40" rows="4" placeholder="Description" required></textarea><br>
     <input type="submit" value="upload" name="upload" class="input"/>  
@@ -62,7 +68,7 @@ User::checkLogin();
 <div class="collection">
   <?php foreach ($posts as $p): ?>
   <div class="collection__item">
-      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image" src="<?php echo $p['image']; ?>" alt="Post"></a>
+      <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
         <div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
@@ -74,30 +80,7 @@ User::checkLogin();
       </div>
 
 
-<?php while ($row = $post->fetch()) { ?>
 
-<div class="post">
-    <?php echo $row['image_text']; ?>
-
-    <div style="padding: 2px; margin-top: 5px;">
-    <?php 
-        // determine if user has already liked this post
-        $results = $con->prepare("SELECT * FROM likes WHERE userid=1 AND postid=".$row['id']."");
-
-        if ($results->rowCount() == 1 ): ?>            <!-- user already likes post -->
-            <span class="unlike fa fa-thumbs-up" data-id="<?php echo $row['id']; ?>"></span> 
-            <span class="like hide fa fa-thumbs-o-up" data-id="<?php echo $row['id']; ?>"></span> 
-        <?php else: ?>
-            <!-- user has not yet liked post -->
-            <span class="like fa fa-thumbs-o-up" data-id="<?php echo $row['id']; ?>"></span> 
-            <span class="unlike hide fa fa-thumbs-up" data-id="<?php echo $row['id']; ?>"></span> 
-        <?php endif ?>
-
-        <span class="likes_count"><?php echo $row['likes']; ?> likes</span>
-    </div>
-</div>
-
-<?php } ?>
   </div>
 <?php endforeach; ?> 
 </div>
@@ -123,15 +106,15 @@ $('#load--more').click(function(){
     var row = Number($('#row').val());
     var allcount = Number($('#all').val());
     var rowperpage = 3;
-    
-  row=row + rowperpage;
-
+    row = row + rowperpage;
+    console.log (row);
     if(row <= allcount){
         $("#row").val(row);
+
         $.ajax({
             url: 'ajax/loadMore.php',
-            type: 'POST',
-            data: {row: row},
+            type: 'post',
+            data: {row:row},
             beforeSend:function(){
                 $("#load--more").text("Loading...");
             },
@@ -141,7 +124,7 @@ $('#load--more').click(function(){
                 setTimeout(function() {
                     // appending posts after last post with class="post"
                     $(".collection__item:last").after(response).show().fadeIn("slow");
-                    
+
                     var rowno = row + rowperpage;
 
                     // checking row value is greater than allcount or not
@@ -149,8 +132,7 @@ $('#load--more').click(function(){
 
                         // Change the text and background
                         $('#load--more').text("No more posts");
-                        $('#load--more').css("background","#F2F2F2");
-                        $('#load--more').off('click');
+                        $('#load--more').css("background","#273B09");
                     }else{
                         $("#load--more").text("Load more");
                     }
@@ -179,67 +161,6 @@ $('#load--more').click(function(){
 
 });
             
- /* index.php script
- $("a.like").on("click", function(e){
-            // op welke post?
-            var postId = $(this).data('id');
-            var elLikes = $(this).parent().find(".likes");
-            var likes = elLikes.html();
- 
-            $.ajax({
-                method: "POST",
-                url: "ajax/like.php",
-                data: { postId: postId },
-                dataType: "json"
-            })
-            .done(function( res ) {
-                if(res.status == "success") {
-                    likes++;
-                    elLikes.html(likes);
-                }
-            });
- 
-            e.preventDefault();
-        });*/
-        $(document).ready(function(){
-		// when the user clicks on like
-		$('.like').on('click', function(){
-			var postid = $(this).data('id');
-			    $post = $(this);
 
-			$.ajax({
-				url: 'index.php',
-				type: 'post',
-				data: {
-					'liked': 1,
-					'postid': postid
-				},
-				success: function(response){
-					$post.parent().find('span.likes_count').text(response + " likes");
-					$post.addClass('hide');
-					$post.siblings().removeClass('hide');
-				}
-			});
-		});
 
-		// when the user clicks on unlike
-		$('.unlike').on('click', function(){
-			var postid = $(this).data('id');
-		    $post = $(this);
-
-			$.ajax({
-				url: 'index.php',
-				type: 'post',
-				data: {
-					'unliked': 1,
-					'postid': postid
-				},
-				success: function(response){
-					$post.parent().find('span.likes_count').text(response + " likes");
-					$post.addClass('hide');
-					$post.siblings().removeClass('hide');
-				}
-			});
-		});
-	});
 </script>

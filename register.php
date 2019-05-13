@@ -8,6 +8,10 @@ if (!empty($_POST['submit'])) {
     if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname'])
     || empty($_POST['lastname']) || empty($_POST['username'])) {
         $error = true;
+        if (!empty($_SESSION['error']['message'])) {
+            $error = $_SESSION['error']['message'];
+            unset($_SESSION['error']);
+        }
     } else {
         // Gegevens in de classe user steken
         $user = new  User();
@@ -62,15 +66,21 @@ if (!empty($_POST['submit'])) {
 
 				<div class="form__field">
 					<label for="email">Email</label>
-					<input type="text" id="email" name="email">
+					<input type="text" id="email" name="email" value="<?php if (isset($_POST['email'])) {
+    echo $_POST['email'];
+}?>">
                 </div>
                 <div class="form__field">
 					<label for="firstname">Firstname</label>
-					<input type="text" id="firstname" name="firstname">
+					<input type="text" id="firstname" name="firstname" value="<?php if (isset($_POST['firstname'])) {
+    echo $_POST['firstname'];
+}?>">
                 </div>
                 <div class="form__field">
 					<label for="lastname">Lastname</label>
-					<input type="text" id="lastname" name="lastname">
+					<input type="text" id="lastname" name="lastname"value="<?php if (isset($_POST['lastname'])) {
+    echo $_POST['lastname'];
+}?>">
                 </div>
 
                 <div class="username__error">
@@ -79,7 +89,9 @@ if (!empty($_POST['submit'])) {
                 
                 <div class="form__field">
 					<label for="username">Username</label>
-					<input type="text" id="username" name="username">
+					<input type="text" id="username" name="username" value="<?php if (isset($_POST['username'])) {
+    echo $_POST['username'];
+}?>">
 				</div>
 				<div class="form__field">
 					<label for="password">Password</label>
@@ -120,9 +132,6 @@ $("#email").on("keyup", function (e){
     e.preventDefault();
         });
              
-        
-    
-
 //Username- validation
 $("#username").on("keyup", function (e) {
 	var name = $("#username").val();

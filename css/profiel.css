@@ -1,15 +1,15 @@
 
-.collection--image{
-    height: 100px;
-    width: 100px;
-    margin: auto;
-    margin-bottom: 20px;
-    margin-right: 1400px;
-}
-
-.container{
-    margin-top: 100px;
+.profile--container{
+  padding: 100px 0 0 30px;
+  width: 30%;
+  background-color: #F8F8F8;
+  height: 100vh;
+  text-align: center;
+  z-index: 900;
+  position: fixed;
+  margin-top: -100px;
   }
+
   .profile{
     width: 100px;
     height: 100px;
@@ -20,10 +20,82 @@
     align-content: center;
     align-items: center;
     background-color: black;
+    margin: 0 auto;
   }
   .profile--image{
     display: inline;
-    margin: 0 auto;
+ 
     max-height: 100%;
-  
   }
+  .profileImage{
+    margin-top:20px;
+}
+  .info input:last-child{
+    color:white;
+    background-color: #273B09;
+    border:none;
+    padding:10px;
+    width: 30%;
+    margin-top:10px;
+  }
+
+.biografie{
+      padding-top: 20px;
+    }
+.biografie h3{
+  color: #273B09;
+  font-size: 1.3em;
+}
+
+.biografie input:last-child{
+  color:white;
+  background-color: #273B09;
+  border:none;
+  padding:10px;
+  width: 30%;
+  margin-top:10px;
+}
+
+.biografie p{
+  padding-bottom: 20px;
+}
+
+.biografie textarea{
+  color:#CBCBCB;
+ 
+}
+
+.wijzigen h3{
+  color: #273B09;
+  font-size: 1.3em;
+}
+
+.wijzigen a{
+ text-decoration: none;
+}
+
+.post--container{
+  margin-top: 100px;
+  display:flex;
+  flex-flow: row wrap;
+  padding:5px;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+/* MediaQueries */
+
+@media screen and (min-width: 600px){
+
+}
+
+@media screen and (min-width: 768px){
+  .post--container{
+    margin-left: 30%;
+    width: 69%;
+}
+
+}
+@media screen and (min-width: 1200px){
+
+}

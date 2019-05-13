@@ -28,6 +28,7 @@ body
   padding:5px;
   justify-content: space-evenly;
 
+
 }
 .collection--image {
   height: auto;
@@ -40,8 +41,6 @@ body
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
-
-
 }
 
 .item--container button{
@@ -70,10 +69,7 @@ font-size: 1em;
   
   
 }
-.collection__detail img{
-  width: 200px;
-  
-}
+
 .color{
   float: left;
 }
@@ -130,11 +126,6 @@ font-size: 1em;
       margin-left: 24px;
       margin-bottom: 10px;
       border-bottom: solid #709255 1px;
-}
-
-
-.input{
-  background-color: goldenrod;
 }
 
 
@@ -278,4 +269,20 @@ a.navbar__logout
 .fa-thumbs-up, .fa-thumbs-o-up {
 	transform: rotateY(-180deg);
 	font-size: 1.3em;
+}
+
+
+
+.collection--search {
+  margin-top:100px;
+  display:flex;
+  flex-flow: row wrap;
+  padding:5px;
+  justify-content: space-evenly;
+
+}
+
+.container--search{
+margin-top:100px;
+text-align: center;
 }

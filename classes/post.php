@@ -50,7 +50,7 @@ class Post
     /*
         Alle posts van de databank halen
     */
-    public static function getAll($limit = 3, $offset = 0)
+    public static function get($limit = 20, $offset = 0)
     {
         $conn = Db::getInstance();
 
@@ -60,44 +60,41 @@ class Post
         $id = $stm->fetch(PDO::FETCH_COLUMN);
 
         // Alle post laden van de gevolgde personen
-        $statement = $conn->prepare("SELECT images_with_fields.id,images_with_fields.image,images_with_fields.image_text,images_with_fields.user_id,
-        images_with_fields.date AS images_date,users.profileImg 
-        FROM images_with_fields,followers,users 
+        $statement = $conn->prepare("SELECT posts.id,posts.image,posts.image_text,posts.user_id,
+        posts.date AS images_date,users.profileImg,filters.name
+        FROM posts,followers,users,filters
         WHERE followers.user_id1=:id
-        AND followers.user_id2=images_with_fields.user_id 
+        AND followers.user_id2=posts.user_id 
         AND followers.user_id2 = users.id 
-        UNION SELECT images_with_fields.id,images_with_fields.image,images_with_fields.image_text,images_with_fields.user_id,images_with_fields.date,users.profileImg 
-        FROM images_with_fields,users 
-        WHERE images_with_fields.user_id =:id AND users.id=:id ORDER BY `images_date` DESC limit $limit offset $offset");
+        AND posts.filter_id = filters.id
+        UNION SELECT posts.id,posts.image,posts.image_text,posts.user_id,posts.date,users.profileImg,filters.name
+        FROM posts,users,filters
+        WHERE posts.user_id =:id AND users.id=:id AND posts.filter_id = filters.id ORDER BY `images_date` DESC limit $limit offset $offset");
 
         $statement->bindValue(':id', $id);
         $statement->execute();
-        $count = $statement->rowCount();
 
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public static function detailPagina()
+    public static function detailPagina($id)
     {
-        //probleem met get id
-        $id = $_GET['id'];
         $conn = Db::getInstance();
 
-        $statement = $conn->prepare("SELECT * FROM images_with_fields where id = $id");
+        $statement = $conn->prepare("SELECT posts.id,posts.image,posts.image_text,posts.user_id,posts.date,posts.filter_id, filters.name, users.profileImg, posts.date
+        FROM posts,filters,users where posts.id = $id AND filters.id=posts.filter_id AND users.id= posts.user_id");
         $statement->execute();
         $collection = $statement->fetchAll();
 
         return $collection;
     }
 
-    public static function profilePic()
+    public static function profilePic($id)
     {
-        //probleem met get id
-        $id = $_GET['id'];
         $conn = Db::getInstance();
 
-        $statement = $conn->prepare("SELECT users.profileImg FROM images_with_fields,users 
-       WHERE images_with_fields.user_id = users.id AND images_with_fields.id = $id");
+        $statement = $conn->prepare("SELECT users.profileImg FROM posts,users 
+        WHERE posts.user_id = users.id AND posts.id = $id");
         $statement->execute();
         $profilePic = $statement->fetch();
 
@@ -141,12 +138,65 @@ class Post
         return array_slice(array_keys($palette), 0, $num);
     }
 
-/*    public function getLikes(){
+    public static function search($search)
+    {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT count(*) as count from likes where post_id = :postid");
-        $statement->bindValue(":postid", $this->id);
+        $stmt = $conn->prepare("SELECT posts.id,posts.image,posts.image_text,posts.date,filters.name,users.profileImg FROM users,colors,posts,filters 
+        WHERE posts.image_text like '%$search%' AND filters.id =posts.filter_id AND users.id=posts.user_id UNION SELECT posts.id,posts.image,posts.image_text,posts.date,filters.name,users.profileImg FROM users,colors,posts,filters WHERE colors.color like '%$search%' AND filters.id =posts.filter_id AND users.id=posts.user_id AND posts.id=colors.post_id");
+        $stmt->execute();
+        $search = $stmt->fetchAll();
+
+        return $search;
+    }
+
+    /*    public function getLikes(){
+            $conn = Db::getInstance();
+            $statement = $conn->prepare("SELECT count(*) as count from likes where post_id = :postid");
+            $statement->bindValue(":postid", $this->id);
+            $statement->execute();
+            $result = $statement->fetch(PDO::FETCH_ASSOC);
+            return $result['count'];
+        }
+        }*/
+
+    public static function getColors($id)
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT color FROM colors where post_id = $id");
         $statement->execute();
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
-        return $result['count'];
-    }*/
+        $colors = $statement->fetchAll(PDO::FETCH_COLUMN);
+
+        return $colors;
+    }
+
+    public static function getFilters()
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare('SELECT * FROM filters');
+        $statement->execute();
+        $filters = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        return  $filters;
+    }
+
+    public static function getPosts()
+    {
+        $conn = Db::getInstance();
+
+        // ID uit de database halen
+        $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+        $stm->execute();
+        $id = $stm->fetch(PDO::FETCH_COLUMN);
+
+        $statement = $conn->prepare('SELECT posts.id,posts.image,posts.image_text,posts.user_id, posts.date,users.profileImg,filters.name 
+        FROM posts,users,filters WHERE posts.filter_id = filters.id 
+        AND users.id = posts.user_id AND users.id=:id ORDER BY posts.date DESC');
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $posts = $statement->fetchAll();
+
+        return  $posts;
+    }
 }

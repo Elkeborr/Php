@@ -1,7 +1,7 @@
 <?php
 
 //Connectie klasses
-include_once 'bootstrap.php';
+require_once 'bootstrap.php';
 
 $username = User::username();
 $profileImg = User::profileImg();
@@ -20,7 +20,6 @@ $profileImg = User::profileImg();
     <form action="search.php" method="get">
       <input type="text" name="search" class="search" placeholder="zoek">
       <input type="submit" name="submit_search" value="search" class="search_submit">
-
     </form>
     
     <a href="logout.php" class="navbar__logout">logout</a>
