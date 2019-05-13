@@ -21,34 +21,7 @@ User::checkLogin();
 
 
 
-  if (isset($_POST['liked'])) {
-    $postid = $_POST['postid'];
-    $result = mysqli_query($con, "SELECT * FROM images_with_fields WHERE id=$postid");
-    $row = mysqli_fetch_array($result);
-    $n = $row['likes'];
-
-    mysqli_query($con, "INSERT INTO likes (userid, postid) VALUES (1, $postid)");
-    mysqli_query($con, "UPDATE images_with_fields SET likes=$n+1 WHERE id=$postid");
-
-    echo $n+1;
-    exit();
-}
-if (isset($_POST['unliked'])) {
-    $postid = $_POST['postid'];
-    $result = mysqli_query($con, "SELECT * FROM images_with_fields WHERE id=$postid");
-    $row = mysqli_fetch_array($result);
-    $n = $row['likes'];
-
-    mysqli_query($con, "DELETE FROM likes WHERE postid=$postid AND userid=1");
-    mysqli_query($con, "UPDATE images_with_fields SET likes=$n-1 WHERE id=$postid");
-    
-    echo $n-1;
-    exit();
-}
-
-// Retrieve posts from the database
-$posts = mysqli_query($con, "SELECT * FROM images_with_fields");
-
+  
 
 
 ?>
@@ -97,10 +70,11 @@ $posts = mysqli_query($con, "SELECT * FROM images_with_fields");
         <p><?php echo $p['image_text']; ?></p>
         <p id="date"><?php echo  $p['images_date']; ?></p>
         <!--<button>Like</button><div><a href="#" data-id="<?//php echo $post->id ?>" class="like">Like</a> <span class='likes'><?//php echo $post->getLikes(); ?>*/</span></div>-->
-      
+         
+      </div>
 
 
-<?php while ($row = mysqli_fetch_array($posts)) { ?>
+<?php while ($row = $post->fetch()) { ?>
 
 <div class="post">
     <?php echo $row['image_text']; ?>
@@ -108,10 +82,9 @@ $posts = mysqli_query($con, "SELECT * FROM images_with_fields");
     <div style="padding: 2px; margin-top: 5px;">
     <?php 
         // determine if user has already liked this post
-        $results = mysqli_query($con, "SELECT * FROM likes WHERE userid=1 AND postid=".$row['id']."");
+        $results = $con->prepare("SELECT * FROM likes WHERE userid=1 AND postid=".$row['id']."");
 
-        if (mysqli_num_rows($results) == 1 ): ?>
-            <!-- user already likes post -->
+        if ($results->rowCount() == 1 ): ?>            <!-- user already likes post -->
             <span class="unlike fa fa-thumbs-up" data-id="<?php echo $row['id']; ?>"></span> 
             <span class="like hide fa fa-thumbs-o-up" data-id="<?php echo $row['id']; ?>"></span> 
         <?php else: ?>
@@ -125,8 +98,6 @@ $posts = mysqli_query($con, "SELECT * FROM images_with_fields");
 </div>
 
 <?php } ?>
-      
-      </div>
   </div>
 <?php endforeach; ?> 
 </div>
