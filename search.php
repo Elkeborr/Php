@@ -8,7 +8,7 @@ include_once 'bootstrap.php';
 User::checkLogin();
  // $profileImg = Post::profilePic();
 
-  $searchResult = Post::search($_GET['search']);
+  $searchResult = Post::search(strtolower(($_GET['search'])));
 ?>
 
 <!DOCTYPE html>
@@ -37,6 +37,7 @@ User::checkLogin();
 
   <div class="collection__item">
       <a href="detail.php?id=<?php echo $value['id']; ?>" > <img class="collection--image  <?php echo $value['name']; ?>" src="<?php echo $value['image']; ?>" alt="Post"></a>
+
       <div class='item--container'>
         <div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $value['profileImg']; ?>"> 
