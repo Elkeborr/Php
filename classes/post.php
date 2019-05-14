@@ -181,7 +181,7 @@ class Post
         return  $filters;
     }
 
-    public static function getPosts()
+    public static function getOwnPosts()
     {
         $conn = Db::getInstance();
 
@@ -189,6 +189,20 @@ class Post
         $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
         $stm->execute();
         $id = $stm->fetch(PDO::FETCH_COLUMN);
+
+        $statement = $conn->prepare('SELECT posts.id,posts.image,posts.image_text,posts.user_id, posts.date,users.profileImg,filters.name
+         FROM posts,users,filters WHERE posts.filter_id = filters.id
+         AND users.id = posts.user_id AND users.id=:id ORDER BY posts.date DESC');
+        $statement->bindValue(':id', $id);
+        $statement->execute();
+        $posts = $statement->fetchAll();
+
+        return  $posts;
+    }
+
+    public static function getPosts($id)
+    {
+        $conn = Db::getInstance();
 
         $statement = $conn->prepare('SELECT posts.id,posts.image,posts.image_text,posts.user_id, posts.date,users.profileImg,filters.name 
         FROM posts,users,filters WHERE posts.filter_id = filters.id 
@@ -231,6 +245,17 @@ class Post
                 return ' About ' . $r . ' ' . $str . ( $r > 1 ? 's' : ' ' ) .' ago ';
             }
         }
+    public static function getAll()
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare('SELECT posts.id,posts.image,posts.image_text,posts.user_id, posts.date,users.profileImg,filters.name 
+        FROM posts,users,filters WHERE posts.filter_id = filters.id 
+        AND users.id = posts.user_id  ORDER BY posts.date DESC');
+        $statement->execute();
+        $posts = $statement->fetchAll();
+
+        return  $posts;
     }
 }
 

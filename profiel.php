@@ -4,7 +4,7 @@
 require_once 'bootstrap.php';
 //$profileImg = User::profileImg($_GET['id']);
 $bio = User::bio();
-$posts = Post::getPosts();
+$posts = Post::getOwnPosts();
 User::updateBio();
 ?>
 
@@ -23,7 +23,7 @@ User::updateBio();
 	<link rel="stylesheet" href="css/profiel.css">
 </head>
 <body>
-<?php include_once 'nav.inc.php'; ?>
+<?php include_once 'includes/nav.inc.php'; ?>
 
   <!------------------------PROFIELFOTO--------------------------->
 <div class="profile--container">
@@ -51,8 +51,6 @@ User::updateBio();
         <input type="submit" name="submit" value="Submit">  
     </form>
   </div>  
-  
-
   <!------------------------PASSWOORD EN EMAIL WIJZIGEN--------------------------->
 
   <div class="wijzigen">
