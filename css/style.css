@@ -57,6 +57,11 @@ font-size: 1em;
 
 }
 
+#date{
+  color: gray;
+  font-size: 12px;
+}
+
 #id{
   color: #333333;
   font-size: 0.6em;

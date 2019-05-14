@@ -199,4 +199,38 @@ class Post
 
         return  $posts;
     }
+
+    public static function getTimeAgo($time) {
+
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare("SELECT posts.date FROM posts WHERE posts.date = $time");
+        $statement->execute();
+        $timeCalc = $statement->fetchAll();
+
+        $estimate_time = time() - $time;
+
+        if($estimate_time < 1){
+            return 'less than 1 second ago';
+        }
+
+        $condition = array(
+            12*30*24*60*60 => 'year',
+            30*24*60*60 => 'month',
+            24*60*60 => 'day',
+            60*60 => 'hour',
+            60 => 'minute',
+            1 => 'second'
+        );
+
+        foreach($condition as $sec => $str){
+            $d = $estimate_time / $sec;
+
+            if($d >= 1){
+                $r = round($d);
+                return ' About ' . $r . ' ' . $str . ( $r > 1 ? 's' : ' ' ) .' ago ';
+            }
+        }
+    }
 }
+

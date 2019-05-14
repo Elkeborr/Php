@@ -6,7 +6,7 @@ ini_set('display_errors', 1);
 
 $posts = Post::detailPagina($_GET['id']);
 $colors = Post::getColors($_GET['id']);
-
+$timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,19 +21,23 @@ $colors = Post::getColors($_GET['id']);
 <body>
 
 <?php include_once 'nav.inc.php'; ?>
+<?php $dbconn = Db::getInstance(); ?>
+
 
 <div class="collection__detail">
-	
 	<?php foreach ($posts as $c): ?>
+	<p id="date"> <?php echo $timeago; ?> </p>
+
 	<img src="<?php echo $c['image']; ?>" alt="Post" class="collection--image   <?php echo $c['name']; ?>">
 	<p><?php echo $c['image_text']; ?></p>
 	<div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $c['profileImg']; ?>"> 
         </div>
-        <p id="date"><?php echo  $c['date']; ?></p>
-	<button>Like</button>
-	
+		<button>Like</button>
+
+
 	  <div class="clearfix">
+	  
 		<?php foreach ($colors as $color) {
     echo '
 			  <div class="color"> 
