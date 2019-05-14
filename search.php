@@ -8,7 +8,7 @@ include_once 'bootstrap.php';
 User::checkLogin();
  // $profileImg = Post::profilePic();
 
-  $searchResult = Post::search(strtolower(($_GET['search'])));
+  $searchResult = Post::search(strtolower($_GET['search']));
 ?>
 
 <!DOCTYPE html>
