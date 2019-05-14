@@ -21,16 +21,12 @@ User::checkLogin();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/filters.css">
-    <link rel="stylesheet" href="css/style.css">
+    <?php include_once 'includes/head.inc.php'; ?>
     <title>Plantspiratie</title>
 </head>
 <body>
 
-<?php include_once 'nav.inc.php'; ?>
+<?php include_once 'includes/nav.inc.php'; ?>
 
 <!-------UPLOADEN VAN AFBEELDING------->
 
@@ -65,7 +61,7 @@ User::checkLogin();
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
         <div class="profile--small ">
-          <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
+         <a href="user.profiel.php?id=<?php echo $p['user_id']; ?>" > <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> </a>
         </div>
         <p><?php echo $p['image_text']; ?></p>
         <p id="date"><?php echo  $p['images_date']; ?></p>

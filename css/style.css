@@ -22,7 +22,6 @@ body
 /*-----POST INDEX-----*/
 
 .collection {
-  margin-top: 2em;
   display:flex;
   flex-flow: row wrap;
   padding:5px;
@@ -139,7 +138,7 @@ font-size: 1em;
   padding: 2em; 
   background-color: #273B09;
   height: 60px;
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   z-index:999;
@@ -155,8 +154,12 @@ font-size: 1em;
   margin-left: auto;
   margin-right: auto;
   color: white;
-  
 
+}
+
+.navbar form 
+{
+  height: 124px;
 }
 
 .profile--small{
@@ -183,13 +186,12 @@ font-size: 1em;
 {
   width: 100%;
   max-width: 200px;
-
   color: black;
   padding: 0.5em;
-  border: 1px solid #273B09;
+  border: none;
 }
 
-a.navbar__logout
+a.navbar__link
 {
   margin-left: 2em;
   margin-right: 0;
@@ -197,7 +199,7 @@ a.navbar__logout
 }
 
 .upload{
-  margin-top:100px;
+
   text-align: center;
   width: 400px;
   margin-left: auto;

@@ -348,4 +348,40 @@ class User
             return $insert;
         }
     }
+
+    public static function detailPagina($id)
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare('SELECT * FROM users WHERE users.id=:id');
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $detailUser = $statement->fetchAll();
+
+        return $detailUser;
+    }
+
+    public static function detailPaginaFollowers($id)
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare('SELECT * FROM followers WHERE followers.user_id1=:id');
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $detailFollowers = $statement->fetchAll();
+
+        return $detailFollowers;
+    }
+
+    public static function detailPaginaFollow($id)
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare('SELECT * FROM followers WHERE followers.user_id2=:id');
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $detailFollow = $statement->fetchAll();
+
+        return $detailFollow;
+    }
 }
