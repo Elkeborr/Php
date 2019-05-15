@@ -2,7 +2,7 @@
     // ajax/like.php
     if (!empty($_POST)) {
         $postId = $_POST['postId'];
-        $userId = 1;
+        $userId =1;
 
         require_once '../bootstrap.php';
         $l = new Like();

@@ -24,11 +24,36 @@ $allPosts = Post::getAll();
         </div>
         <p><?php echo $p['image_text']; ?></p>
         <p id="date"><?php echo  $p['date']; ?></p>
-        <button>Like</button>   
+        <a href="#" data-id="<?php echo $post->id ?>" class="like">Like</a> <span class='likes'><?php echo $post->getLikes(); ?></span>
+
       </div>
   </div>
 <?php endforeach; ?> 
 </div>
+<script>
+        // index.php script
+        $("a.like").on("click", function(e){
+            // op welke post?
+            var postId = $(this).data('id');
+            var elLikes = $(this).parent().find(".likes");
+            var likes = elLikes.html();
+ 
+            $.ajax({
+                method: "POST",
+                url: "ajax/like.php",
+                data: { postId: postId },
+                dataType: "json"
+            })
+            .done(function( res ) {
+                if(res.status == "success") {
+                    likes++;
+                    elLikes.html(likes);
+                }
+            });
+ 
+            e.preventDefault();
+        });
+    </script>
 
     
 </body>

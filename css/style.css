@@ -261,35 +261,10 @@ a.navbar__link
   transition: 0.3s;
 }
 /*-----------------------------------------------------*/
-.post {
-	width: 30%;
-	margin: 10px auto;
-	border: 1px solid #cbcbcb;
-	padding: 5px 10px 0px 10px;
-}
-.like, .unlike, .likes_count {
-	color: blue;
-}
-.hide {
-	display: none;
-}
-.fa-thumbs-up, .fa-thumbs-o-up {
-	transform: rotateY(-180deg);
-	font-size: 1.3em;
+.like{
+
+  display: block;
+  
+ 
 }
 
-
-
-.collection--search {
-  margin-top:100px;
-  display:flex;
-  flex-flow: row wrap;
-  padding:5px;
-  justify-content: space-evenly;
-
-}
-
-.container--search{
-margin-top:100px;
-text-align: center;
-}

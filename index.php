@@ -73,8 +73,9 @@ User::checkLogin();
          <a href="user.profiel.php?id=<?php echo $p['user_id']; ?>" > <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> </a>
         </div>
         <p><?php echo $p['image_text']; ?></p>
+        <div><a href="#" data-id="<?php echo $post->id ?>" class="like">Like</a> <span class='likes'><?php echo $post->getLikes(); ?></span></div>
+
         <p id="date"><?php echo  $p['images_date']; ?></p>
-        <!--<button>Like</button><div><a href="#" data-id="<?//php echo $post->id ?>" class="like">Like</a> <span class='likes'><?//php echo $post->getLikes(); ?>*/</span></div>-->
          
       </div>
 
@@ -161,5 +162,28 @@ $('#load--more').click(function(){
 });
             
 
+        // index.php script
+        $("a.like").on("click", function(e){
+            // op welke post?
+            var postId = $(this).data('id');
+            var elLikes = $(this).parent().find(".likes");
+            var likes = elLikes.html();
+ 
+            $.ajax({
+                method: "POST",
+                url: "ajax/like.php",
+                data: { postId: postId },
+                dataType: "json"
+            })
+            .done(function( res ) {
+                if(res.status == "success") {
+                    likes++;
+                    elLikes.html(likes);
+                }
+            });
+ 
+            e.preventDefault();
+        });
+  
 
 </script>

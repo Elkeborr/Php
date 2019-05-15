@@ -149,15 +149,15 @@ class Post
         return $search;
     }
 
-    /*    public function getLikes(){
+    public function getLikes(){
             $conn = Db::getInstance();
             $statement = $conn->prepare("SELECT count(*) as count from likes where post_id = :postid");
             $statement->bindValue(":postid", $this->id);
             $statement->execute();
             $result = $statement->fetch(PDO::FETCH_ASSOC);
             return $result['count'];
-        }
-        }*/
+        
+    }
 
     public static function getColors($id)
     {
