@@ -4,14 +4,25 @@ require_once 'bootstrap.php';
 $user = User::detailPagina($_GET['id']);
 $posts = Post::getPosts($_GET['id']);
 
-$followers = User::detailPaginaFollowers($_GET['id']);
+//Wie hem volgt
+$followers = Follow::detailPaginaFollowers($_GET['id']);
 $allFollowers = count($followers);
 
-$follow = User::detailPaginaFollow($_GET['id']);
+//Wie hij volgt
+$follow = Follow::detailPaginaFollow($_GET['id']);
 $allFollows = count($follow);
+
+// Unfollow or follow
+/*$check = Follow::checkFollow($_GET['id']);
+var_dump($check);
+
+if ($check == true) {
+    $button = 'unfollow';
+} else {
+    $button = 'follow';
+}*/
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" class="profiel">
 <head>
@@ -30,9 +41,9 @@ $allFollows = count($follow);
         <img class="profile--image" src="<?php echo $u['profileImg']; ?>" alt="ProfileImg"></a>
 </div>  
 <p><?php echo $u['firstName'],' ' ,$u['lastName']; ?></p>
-<p class="followers"><?php echo $allFollows; ?></p>
-<p> volgend</p>
-<button id="follow" data-id="<?php echo $u['id']; ?>">Volg</button>
+<p><span class="followers"><?php echo $allFollowers; ?></span> Volgers</p>
+<p> <span><?php echo $allFollows; ?></span>  Volgend</p>
+<button id="follow" data-id="<?php echo $u['id']; ?>"></button>
 </div>
   <!------------------------PROFIELTEKST--------------------------->
   <div class="biografie">
@@ -64,29 +75,35 @@ $allFollows = count($follow);
 
 <script>
 
-$("button#follow").on("click",function(e){
-// op welke post?
-let user_id2= $(this).data('id');
-console.log(user_id2);
-let allFollowers =  $(this).parent().find(".followers");
-console.log(allFollowers);
-let followers = allFollowers.html();
-console.log(followers);
+$("#follow").on("click",function(e){
 
+let user_id2= $(this).data('id');
+//console.log(user_id2);
+let allFollowers =  $(this).parent().find(".followers");
+let followers = allFollowers.html();
+//console.log(followers);
 
 $.ajax({
   method: "POST",
   url: "ajax/follow.php",
-  // vakje postId: en daar de id van
   data: { user_id2: user_id2 },
-  // data type defineren; server gaat json terg geven
   dataType:"json"
 })
   .done(function( res ) {
-   if(res.status == "success"){
+    let button = $('#follow').html();
+    console.log(button)
+   if(res.status == "successfollow"){
 		followers ++;
     allFollowers.html(followers);
-    $("button#follow").html("unfollow");
+    $("#follow").html("unfollow");
+
+   }else if (res.status == "successunfollow"){
+    followers --;
+    allFollowers.html(followers);
+    $("#follow").html("follow");
+
+   }else {
+     console.log("error");
    }
   });
 

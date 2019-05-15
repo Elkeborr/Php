@@ -47,8 +47,6 @@ class Follow
 
     public function save()
     {
-        // @todo: hook in a new function that checks if a user has already liked a post
-
         $conn = Db::getInstance();
 
         $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
@@ -61,5 +59,65 @@ class Follow
         $statement->bindValue(':user_id2', $this->getUser_id2());
 
         return $statement->execute();
+    }
+
+    public static function delete($id)
+    {
+        $conn = Db::getInstance();
+
+        $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+        $stm->execute();
+        $user_id1 = $stm->fetch(PDO::FETCH_COLUMN);
+
+        $statement = $conn->prepare('DELETE FROM followers WHERE user_id1= :user_id1 AND user_id2=:user_id2');
+        $statement->bindValue(':user_id1', $user_id1);
+        $statement->bindValue(':user_id2', $id);
+
+        return $statement->execute();
+    }
+
+    public static function detailPaginaFollowers($id)
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare('SELECT * FROM followers WHERE followers.user_id2=:id');
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $detailFollowers = $statement->fetchAll();
+
+        return $detailFollowers;
+    }
+
+    public static function detailPaginaFollow($id)
+    {
+        $conn = Db::getInstance();
+
+        $statement = $conn->prepare('SELECT * FROM followers WHERE followers.user_id1=:id');
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $detailFollow = $statement->fetchAll();
+
+        return $detailFollow;
+    }
+
+    public static function checkFollow($id)
+    {
+        $conn = Db::getInstance();
+
+        $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+        $stm->execute();
+        $user_id1 = $stm->fetch(PDO::FETCH_COLUMN);
+
+        $statement = $conn->prepare('SELECT * FROM followers WHERE followers.user_id1=:id1 AND followers.user_id2=:id2');
+        $statement->bindParam(':id1', $user_id1);
+        $statement->bindParam(':id2', $id);
+        $statement->execute();
+        $check = $statement->fetch();
+
+        if ($check) {
+            return  true;
+        } else {
+            return  false;
+        }
     }
 }

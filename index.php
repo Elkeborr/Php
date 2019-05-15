@@ -16,12 +16,6 @@ User::checkLogin();
   } else {
       $error = true;
   }
-  $profileImg = Post::profilePic();
-
-
-
-  
-
 
 ?>
 
@@ -70,10 +64,10 @@ User::checkLogin();
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
         <div class="profile--small ">
-         <a href="user.profiel.php?id=<?php echo $p['user_id']; ?>" > <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> </a>
+         <a href="userProfile.php?id=<?php echo $p['user_id']; ?>" > <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> </a>
         </div>
         <p><?php echo $p['image_text']; ?></p>
-        <div><a href="#" data-id="<?php echo $post->id ?>" class="like">Like</a> <span class='likes'><?php echo $post->getLikes(); ?></span></div>
+        <!--<div><a href="#" data-id="<?php; // echo $post->id;?>" class="like">Like</a> <span class='likes'><?php //echo $post->getLikes();?></span></div>-->
 
         <p id="date"><?php echo  $p['images_date']; ?></p>
          
