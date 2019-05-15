@@ -5,8 +5,7 @@ require_once 'bootstrap.php';
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
-  //$timeago = Post::getTimeAgo(strtotime(date($_GET['posts.date'])));
-  var_dump(date('Y-m-d h:i:sa'));
+
   $posts = Post::get();
   $post = count($posts);
 
@@ -24,7 +23,7 @@ User::checkLogin();
 <html lang="en">
 <head>
     <?php include_once 'includes/head.inc.php'; ?>
-    <title>Plantspiratie</title>
+    <title>Plantspiration</title>
 </head>
 <body>
 
@@ -33,7 +32,7 @@ User::checkLogin();
 <!-------UPLOADEN VAN AFBEELDING------->
 
 <div class="upload">
-<h3>Upload hier een foto</h3>
+<h3>Upload here your picture...</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
   <p>Choose your filter</p>
     <select name="filter" >
@@ -70,7 +69,6 @@ User::checkLogin();
         <p><?php echo $p['image_text']; ?></p>
         <!--<div><a href="#" data-id="<?php; // echo $post->id;?>" class="like">Like</a> <span class='likes'><?php //echo $post->getLikes();?></span></div>-->
 
-        <!--<p id="date"><?php //echo  $p['images_date'];?></p>--->
           <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['images_date']))); ?></p>
       </div>
 

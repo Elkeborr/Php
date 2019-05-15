@@ -25,7 +25,7 @@ if ($check == true) {
 <html lang="en" class="profiel">
 <head>
     <?php include_once 'includes/head.inc.php'; ?>
-    <title>Gebruikers Profiel</title>
+    <title>Userprofile</title>
 </head>
 <body>
 <?php include_once 'includes/nav.inc.php'; ?>
@@ -39,13 +39,13 @@ if ($check == true) {
         <img class="profile--image" src="<?php echo $u['profileImg']; ?>" alt="ProfileImg"></a>
 </div>  
 <p><?php echo $u['firstName'],' ' ,$u['lastName']; ?></p>
-<p><span class="followers"><?php echo $allFollowers; ?></span> Volgers</p>
-<p> <span><?php echo $allFollows; ?></span>  Volgend</p>
+<p><span class="followers"><?php echo $allFollowers; ?></span> Followers</p>
+<p> <span><?php echo $allFollows; ?></span>  Follow</p>
 <button id="follow" data-id="<?php echo $u['id']; ?>"><?php echo $button; ?></button>
 </div>
   <!------------------------PROFIELTEKST--------------------------->
   <div class="biografie">
-<h3>Biografie</h3>
+<h3>Biography</h3>
 <p><?php echo $u['bio']; ?> </p></div>  
 <?php endforeach; ?>
   </div>
@@ -54,12 +54,12 @@ if ($check == true) {
 <?php foreach ($posts as $p): ?>
   <div class="collection__item">
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
+      <p><?php echo $p['image_text']; ?></p>
+      <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['date']))); ?></p>
       <div class='item--container'>
         <div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
         </div>
-        <p><?php echo $p['image_text']; ?></p>
-        <p id="date"><?php echo  $p['date']; ?></p>
      
       
       </div>

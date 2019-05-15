@@ -268,3 +268,19 @@ a.navbar__link
  
 }
 
+/***********SEARCH**************/
+
+.collection--search {
+  margin-top:100px;
+  display:flex;
+  flex-flow: row wrap;
+  padding:5px;
+  justify-content: space-evenly;
+
+}
+
+.container--search{
+  margin-top:100px;
+  text-align: center;
+  }
+

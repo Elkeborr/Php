@@ -13,7 +13,7 @@ if (isset($_FILES['profileImg'])) {
         //for error messages: see http://php.net/manual/en/features.fileupload.errors.php
         switch ($_FILES['profileImg']['error']) {
         case 1:
-        $msg = 'U mag maximaal 2MB opladen.';
+        $msg = 'You can only upload 2MB';
         break;
         default:
         $msg = 'Sorry, uw upload kon niet worden verwerkt.';
