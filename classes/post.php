@@ -149,14 +149,15 @@ class Post
         return $search;
     }
 
-    public function getLikes(){
-            $conn = Db::getInstance();
-            $statement = $conn->prepare("SELECT count(*) as count from likes where post_id = :postid");
-            $statement->bindValue(":postid", $this->id);
-            $statement->execute();
-            $result = $statement->fetch(PDO::FETCH_ASSOC);
-            return $result['count'];
-        
+    public function getLikes()
+    {
+        $conn = Db::getInstance();
+        $statement = $conn->prepare('SELECT count(*) as count from likes where post_id = :postid');
+        $statement->bindValue(':postid', $this->id);
+        $statement->execute();
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+
+        return $result['count'];
     }
 
     public static function getColors($id)
@@ -214,107 +215,106 @@ class Post
         return  $posts;
     }
 
-    public static function getTimeAgo($time) {
-
+    public static function getTimeAgo($time)
+    {
         $conn = Db::getInstance();
 
         $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
         $stm->execute();
         $id = $stm->fetch(PDO::FETCH_COLUMN);
 
-        $statement = $conn->prepare("SELECT posts.id,posts.date FROM posts WHERE posts.date = :time");
+        $statement = $conn->prepare('SELECT posts.id,posts.date FROM posts WHERE posts.date = :time');
         $statement->bindValue(':time', $time);
         $statement->execute();
         //$timeCalc = $statement->fetchAll(PDO::FETCH_COLUMN);
 
-        $cur_time 	= $time;
-$time_elapsed 	= $cur_time - $time;
-$seconds 	= $time_elapsed ;
-$minutes 	= round($time_elapsed / 60 );
-$hours 		= round($time_elapsed / 3600);
-$days 		= round($time_elapsed / 86400 );
-$weeks 		= round($time_elapsed / 604800);
-$months 	= round($time_elapsed / 2600640 );
-$years 		= round($time_elapsed / 31207680 );
+        /* $cur_time = $time;
+         $time_elapsed = $cur_time - $time;
+         $seconds = $time_elapsed;
+         $minutes = round($time_elapsed / 60);
+         $hours = round($time_elapsed / 3600);
+         $days = round($time_elapsed / 86400);
+         $weeks = round($time_elapsed / 604800);
+         $months = round($time_elapsed / 2600640);
+         $years = round($time_elapsed / 31207680);
 
-// Seconds
-if($seconds <= 60){
-	return $seconds . ' seconds ago ';
-}
-//Minutes
-else if($minutes <=60){
-	if($minutes==1){
-		return 'one minute ago';
-	}
-	else{
-		return $minutes . ' minutes ago';
-	}
-}
-//Hours
-else if($hours <=24){
-	if($hours==1){
-		return 'an hour ago';
-	}else{
-		return $hours. ' hours ago';
-	}
-}
-//Days
-else if($days <= 7){
-	if($days==1){
-		return 'yesterday';
-	}else{
-		return $days. ' days ago';
-	}
-}
-//Weeks
-else if($weeks <= 4.3){
-	if($weeks==1){
-		return 'a week ago';
-	}else{
-		return $weeks. ' weeks ago';
-	}
-}
-//Months
-else if($months <=12){
-	if($months==1){
-		return 'a month ago';
-	}else{
-		return $months. ' months ago';
-	}
-}
-//Years
-else{
-	if($years==1){
-		return 'one year ago';
-	}else{
-		return $years. ' years ago';
-	}
-}
+         // Seconds
+         if ($seconds <= 60) {
+             return $seconds.' seconds ago ';
+         }
+         //Minutes
+         elseif ($minutes <= 60) {
+             if ($minutes == 1) {
+                 return 'one minute ago';
+             } else {
+                 return $minutes.' minutes ago';
+             }
+         }
+         //Hours
+         elseif ($hours <= 24) {
+             if ($hours == 1) {
+                 return 'an hour ago';
+             } else {
+                 return $hours.' hours ago';
+             }
+         }
+         //Days
+         elseif ($days <= 7) {
+             if ($days == 1) {
+                 return 'yesterday';
+             } else {
+                 return $days.' days ago';
+             }
+         }
+         //Weeks
+         elseif ($weeks <= 4.3) {
+             if ($weeks == 1) {
+                 return 'a week ago';
+             } else {
+                 return $weeks.' weeks ago';
+             }
+         }
+         //Months
+         elseif ($months <= 12) {
+             if ($months == 1) {
+                 return 'a month ago';
+             } else {
+                 return $months.' months ago';
+             }
+         }
+         //Years
+         else {
+             if ($years == 1) {
+                 return 'one year ago';
+             } else {
+                 return $years.' years ago';
+             }
+         }*/
 
+        $estimate_time = time() - $time;
 
-        /*$estimate_time = time() - $time;
-
-        if($estimate_time < 1){
+        if ($estimate_time < 1) {
             return 'less than 1 second ago';
         }
 
         $condition = array(
-            12*30*24*60*60 => 'year',
-            30*24*60*60 => 'month',
-            24*60*60 => 'day',
-            60*60 => 'hour',
+            12 * 30 * 24 * 60 * 60 => 'year',
+            30 * 24 * 60 * 60 => 'month',
+            24 * 60 * 60 => 'day',
+            60 * 60 => 'hour',
             60 => 'minute',
-            1 => 'second'
+            1 => 'second',
         );
 
-        foreach($condition as $sec => $str){
+        foreach ($condition as $sec => $str) {
             $d = $estimate_time / $sec;
 
-            if($d >= 1){
+            if ($d >= 1) {
                 $r = round($d);
-                return ' About ' . $r . ' ' . $str . ( $r > 1 ? 's' : ' ' ) .' ago ';
+
+                return ' About '.$r.' '.$str.($r > 1 ? 's' : ' ').' ago ';
             }
-        }*/
+        }
     }
 
     public static function getAll()
@@ -330,4 +330,3 @@ else{
         return  $posts;
     }
 }
-

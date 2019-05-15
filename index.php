@@ -5,7 +5,8 @@ require_once 'bootstrap.php';
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
-  $timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
+  //$timeago = Post::getTimeAgo(strtotime(date($_GET['posts.date'])));
+  var_dump(date('Y-m-d h:i:sa'));
   $posts = Post::get();
   $post = count($posts);
 
@@ -59,7 +60,7 @@ User::checkLogin();
 <div class="collection">
   <?php foreach ($posts as $p): ?>
   <div class="collection__item">
-  <p id="date"><?php echo $timeago; ?></p>
+ 
 
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
@@ -69,8 +70,8 @@ User::checkLogin();
         <p><?php echo $p['image_text']; ?></p>
         <!--<div><a href="#" data-id="<?php; // echo $post->id;?>" class="like">Like</a> <span class='likes'><?php //echo $post->getLikes();?></span></div>-->
 
-        <p id="date"><?php echo  $p['images_date']; ?></p>
-         
+        <!--<p id="date"><?php //echo  $p['images_date'];?></p>--->
+          <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['images_date']))); ?></p>
       </div>
 
 

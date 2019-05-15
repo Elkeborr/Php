@@ -12,7 +12,7 @@ if (!empty($_POST)) {
             $f->save();
 
             $result = [
-                'status' => 'successfollow',
+                'status' => 'success',
                 'message' => 'Follow had been saved👌🏼',
             ];
         } catch (Throwable $t) {
@@ -28,7 +28,7 @@ if (!empty($_POST)) {
             Follow::delete($user_id2);
             var_dump(Follow::delete($user_id2));
             $result = [
-                'status' => 'successunfollow',
+                'status' => 'successun',
                 'message' => 'Unfollowd',
             ];
         } catch (Throwable $t) {

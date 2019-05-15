@@ -13,14 +13,12 @@ $follow = Follow::detailPaginaFollow($_GET['id']);
 $allFollows = count($follow);
 
 // Unfollow or follow
-/*$check = Follow::checkFollow($_GET['id']);
-var_dump($check);
-
+$check = Follow::checkFollow($_GET['id']);
 if ($check == true) {
     $button = 'unfollow';
 } else {
     $button = 'follow';
-}*/
+}
 
 ?>
 <!DOCTYPE html>
@@ -43,7 +41,7 @@ if ($check == true) {
 <p><?php echo $u['firstName'],' ' ,$u['lastName']; ?></p>
 <p><span class="followers"><?php echo $allFollowers; ?></span> Volgers</p>
 <p> <span><?php echo $allFollows; ?></span>  Volgend</p>
-<button id="follow" data-id="<?php echo $u['id']; ?>"></button>
+<button id="follow" data-id="<?php echo $u['id']; ?>"><?php echo $button; ?></button>
 </div>
   <!------------------------PROFIELTEKST--------------------------->
   <div class="biografie">
@@ -93,20 +91,20 @@ $.ajax({
   .done(function( res ) {
     let button = $('#follow').html();
     console.log(button)
-   if(res.status == "successfollow"){
-		followers ++;
-    allFollowers.html(followers);
+   if(res.status == "success"){
+     if(button == "follow"){
+      followers ++;
+      allFollowers.html(followers);
     $("#follow").html("unfollow");
-
-   }else if (res.status == "successunfollow"){
-    followers --;
-    allFollowers.html(followers);
-    $("#follow").html("follow");
-
-   }else {
+     }else {
+      followers --;
+      allFollowers.html(followers);
+      $("#follow").html("follow");
+   }
+  }else {
      console.log("error");
    }
-  });
+   } );
 
 
 
