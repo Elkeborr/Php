@@ -17,7 +17,8 @@ $timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
 </head>
 <body>
 
-<?php include_once 'nav.inc.php'; ?>
+
+<?php include_once 'includes/nav.inc.php'; ?>
 <?php $dbconn = Db::getInstance(); ?>
 
 

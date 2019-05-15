@@ -5,7 +5,7 @@ require_once 'bootstrap.php';
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
-  $timeago = Post::getTimeAgo(strtotime($_GET['images_date']));
+  $timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
   $posts = Post::get();
   $post = count($posts);
 
