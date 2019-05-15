@@ -83,6 +83,7 @@ let allFollowers =  $(this).parent().find(".followers");
 let followers = allFollowers.html();
 //console.log(followers);
 
+
 $.ajax({
   method: "POST",
   url: "ajax/follow.php",
