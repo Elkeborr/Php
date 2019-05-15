@@ -6,34 +6,36 @@ ini_set('display_errors', 1);
 
 $posts = Post::detailPagina($_GET['id']);
 $colors = Post::getColors($_GET['id']);
-
+$timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/filters.css">
-    <title>Plantspiratie</title>
+    <?php include_once 'includes/head.inc.php'; ?>
+    <title>Detail</title>
 </head>
 <body>
 
-<?php include_once 'nav.inc.php'; ?>
+
+<?php include_once 'includes/nav.inc.php'; ?>
+<?php $dbconn = Db::getInstance(); ?>
+
 
 <div class="collection__detail">
-	
 	<?php foreach ($posts as $c): ?>
+	<p id="date"> <?php echo $timeago; ?> </p>
+
 	<img src="<?php echo $c['image']; ?>" alt="Post" class="collection--image   <?php echo $c['name']; ?>">
 	<p><?php echo $c['image_text']; ?></p>
 	<div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $c['profileImg']; ?>"> 
         </div>
-        <p id="date"><?php echo  $c['date']; ?></p>
-	<button>Like</button>
-	
+		<button>Like</button>
+
+
 	  <div class="clearfix">
+	  
 		<?php foreach ($colors as $color) {
     echo '
 			  <div class="color"> 

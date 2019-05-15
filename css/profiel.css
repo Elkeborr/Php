@@ -75,7 +75,6 @@
 }
 
 .post--container{
-  margin-top: 100px;
   display:flex;
   flex-flow: row wrap;
   padding:5px;

@@ -5,6 +5,7 @@ require_once 'bootstrap.php';
 // Controleren of we al ingelogd zijn, functie van gemaakt
 User::checkLogin();
 
+  $timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
   $posts = Post::get();
   $post = count($posts);
 
@@ -27,16 +28,12 @@ User::checkLogin();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/filters.css">
-    <link rel="stylesheet" href="css/style.css">
+    <?php include_once 'includes/head.inc.php'; ?>
     <title>Plantspiratie</title>
 </head>
 <body>
 
-<?php include_once 'nav.inc.php'; ?>
+<?php include_once 'includes/nav.inc.php'; ?>
 
 <!-------UPLOADEN VAN AFBEELDING------->
 
@@ -68,10 +65,12 @@ User::checkLogin();
 <div class="collection">
   <?php foreach ($posts as $p): ?>
   <div class="collection__item">
+  <p id="date"><?php echo $timeago; ?></p>
+
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
         <div class="profile--small ">
-          <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
+         <a href="user.profiel.php?id=<?php echo $p['user_id']; ?>" > <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> </a>
         </div>
         <p><?php echo $p['image_text']; ?></p>
         <p id="date"><?php echo  $p['images_date']; ?></p>
