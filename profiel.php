@@ -15,7 +15,7 @@ User::updateBio();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Profiel</title>
+    <title>Profile</title>
 
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
@@ -41,7 +41,7 @@ User::updateBio();
 </div>
   <!------------------------PROFIELTEKST--------------------------->
   <div class="biografie">
-<h3>Biografie</h3>
+<h3>About me</h3>
 
 <p><?php echo $bio; ?> </p>
     
@@ -54,12 +54,12 @@ User::updateBio();
   <!------------------------PASSWOORD EN EMAIL WIJZIGEN--------------------------->
 
   <div class="wijzigen">
-  <h3> Gegevens wijzigen </h3>
+  <h3> Settinfs </h3>
 
 
-<a href="changePassword.php">Verander wachtwoord</a>
+<a href="changePassword.php">Change password</a>
 <br>
-<a href="changeEmail.php">Verander email</a>
+<a href="changeEmail.php">Change email</a>
 
   </div>
 
@@ -75,7 +75,7 @@ User::updateBio();
         </div>
         <p><?php echo $p['image_text']; ?></p>
         <p id="date"><?php echo  $p['date']; ?></p>
-        <button>Verwijderen</button>
+        <button>Delete</button>
       
       </div>
   </div>

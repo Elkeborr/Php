@@ -254,6 +254,7 @@ a.navbar__link
   background-color: #709255;
   color: #fff;
   font-size: 18px;
+  border:none;
 }
 
 #load--more:hover{

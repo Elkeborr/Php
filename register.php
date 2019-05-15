@@ -15,11 +15,11 @@ if (!empty($_POST['submit'])) {
     } else {
         // Gegevens in de classe user steken
         $user = new  User();
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->setFirstName($_POST['firstname']);
-        $user->setLastName($_POST['lastname']);
-        $user->setUserName($_POST['username']);
+        $user->setEmail(htmlspecialchars($_POST['email']));
+        $user->setPassword(htmlspecialchars($_POST['password']));
+        $user->setFirstName(htmlspecialchars($_POST['firstname']));
+        $user->setLastName(htmlspecialchars($_POST['lastname']));
+        $user->setUserName(htmlspecialchars($_POST['username']));
 
         if ($user->register()) {
             //session_start();
