@@ -30,7 +30,7 @@ require_once 'bootstrap.php';
 <!-------UPLOADEN VAN AFBEELDING------->
 
 <div class="upload">
-<h3>Upload hier een foto</h3>
+<h3>Upload your foto</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
   <p>Choose your filter</p>
     <select name="filter" >

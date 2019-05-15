@@ -26,7 +26,7 @@ $timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
 	<?php foreach ($posts as $c): ?>
 	<p id="date"> <?php echo $timeago; ?> </p>
 
-	<a href="detail.php?id=<?php echo $c['id']; ?>" ><img src="<?php echo $c['image']; ?>" alt="Post" class="collection--image   <?php echo $c['name']; ?>"></a>
+	<a href="detail.php?id=<?php echo $c['id']; ?>" ><img src="<?php echo $c['image']; ?>" alt="Post" class="collection--image  <?php echo $c['name']; ?>"></a>
 	<p><?php echo $c['image_text']; ?></p>
 	<div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $c['profileImg']; ?>"> 

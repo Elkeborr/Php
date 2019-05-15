@@ -269,3 +269,12 @@ a.navbar__link
  
 }
 
+.form__error{
+  text-align: center;
+  width: 50%;
+  margin-bottom: 20px;
+  margin: auto;
+  padding: 10px;
+  color:tomato;
+}
+

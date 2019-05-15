@@ -46,7 +46,7 @@ User::updateBio();
 <p><?php echo $bio; ?> </p>
     
     <form method="post" action="">  
-      <textarea name="bio" rows="5" cols="40" placeholder="Schrijf hier iets over jezelf!" required><?php echo $bio; ?></textarea>
+      <textarea name="bio" rows="5" cols="40" placeholder="Write something nice! (or not)" required><?php echo $bio; ?></textarea>
       <br><br>
         <input type="submit" name="submit" value="Submit">  
     </form>
