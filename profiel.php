@@ -75,14 +75,28 @@ User::updateBio();
         </div>
         <p><?php echo $p['image_text']; ?></p>
         <p id="date"><?php echo  $p['date']; ?></p>
-        <button>Delete</button>
-      
       </div>
+      <button>Delete</button>
+      <button>Edit</button>
   </div>
 <?php endforeach; ?> 
 
 </div>
-
+<?php
+if(isset($_SESSION['username']))
+{
+$id=$_GET['id'];
+$username=$_GET['username'];
+$stmt = $pdo->prepare("DELETE FROM `post` WHERE `id`='$id' and `userid`='" . $_SESSION["userid"] . "';");
+$stmt->execute(['id' => $id]);
+if($query1 || $query2)
+{
+header('location:search.php');
+}
+else { echo "You did not make this post";
+}
+}
+?>
     
 </body>
 </html>
