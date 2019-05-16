@@ -30,8 +30,8 @@ if (isset($_FILES['image'])) {
         $fileinfo = $finfo->file($filename);
 
         if (in_array($fileinfo, $allowedtypes)) {
-            $description = $_POST['description'];
-            $filter = $_POST['filter'];
+            $description = htmlspecialchars($_POST['description']);
+            $filter = htmlspecialchars($_POST['filter']);
 
             //move uploaded file
             $newfilename = 'images/post_images/'.$_FILES['image']['name'];

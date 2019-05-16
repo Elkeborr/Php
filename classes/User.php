@@ -181,7 +181,7 @@ class User
             // De databank aanspreken
             $conn = Db::getInstance();
             // Opslagen in de databank
-            $stm = $conn->prepare('INSERT into users (email,firstname,lastname,username,password,bio,profileImg) VALUES (:email,:firstname,:lastname,:username,:password,"","")');
+            $stm = $conn->prepare('INSERT into users (email,firstName,lastName,userName,password,bio,profileImg) VALUES (:email,:firstname,:lastname,:username,:password,"","")');
             // Waarden koppelen aan invul velden (bindParam= veiligere manier)
             $stm->bindParam(':email', $this->email);
             $stm->bindParam(':firstname', $this->firstName);
@@ -205,8 +205,8 @@ class User
     {
         if (!empty($_POST)) {
             // email en password opvragen
-            $email = $_POST['email'];
-            $password = $_POST['password'];
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
 
             $conn = Db::getInstance();
             // check of rehash van password gelijk is aan hash uit db
@@ -231,9 +231,10 @@ class User
     /* controle van de login*/
     public static function checkLogin()
     {
-        if (isset($_SESSION['email'])) {
+        if (isset($_SESSION)) {
             // session_start();
-        } else {
+        }
+        if (!isset($_SESSION['email'])) {
             header('Location: login.php');
         }
     }
@@ -334,7 +335,7 @@ class User
             $bio = $_POST['bio'];
 
             if (empty($bio)) {
-                echo "<font color='red'>Tekstveld is leeg!</font><br/>";
+                echo '<p Write something nice! (or not)</p><br/>';
             } else {
                 $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
                 $stm->execute();

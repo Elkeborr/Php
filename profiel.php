@@ -50,12 +50,12 @@ if (!empty($posts)) {
 </div>
   <!------------------------PROFIELTEKST--------------------------->
   <div class="biografie">
-<h3>Biography</h3>
+<h3>About me</h3>
 
 <p><?php echo $bio; ?> </p>
     
     <form method="post" action="">  
-      <textarea name="bio" rows="5" cols="40" placeholder="Write something about yourself..." required><?php echo $bio; ?></textarea>
+      <textarea name="bio" rows="5" cols="40" placeholder="Write something nice! (or not)" required><?php echo $bio; ?></textarea>
       <br><br>
         <input type="submit" name="submit" value="Submit">  
     </form>
@@ -63,7 +63,7 @@ if (!empty($posts)) {
   <!------------------------PASSWOORD EN EMAIL WIJZIGEN--------------------------->
 
   <div class="wijzigen">
-  <h3> Change info </h3>
+  <h3> Settings </h3>
 
 
 <a href="changePassword.php">Change password</a>
@@ -89,11 +89,27 @@ if (!empty($posts)) {
         <button>Delete</button>
       
       </div>
+      <button>Delete</button>
+      <button>Edit</button>
   </div>
 <?php endforeach; ?> 
 
 </div>
-
+<?php
+if(isset($_SESSION['username']))
+{
+$id=$_GET['id'];
+$username=$_GET['username'];
+$stmt = $pdo->prepare("DELETE FROM `post` WHERE `id`='$id' and `userid`='" . $_SESSION["userid"] . "';");
+$stmt->execute(['id' => $id]);
+if($query1 || $query2)
+{
+header('location:search.php');
+}
+else { echo "You did not make this post";
+}
+}
+?>
     
 </body>
 </html>

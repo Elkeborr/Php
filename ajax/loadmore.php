@@ -4,7 +4,7 @@ require_once '../bootstrap.php';
 //session_start();
 
 $offset = $_POST['row'];
-$limit = 3;
+$limit = 20;
 
 $conn = Db::getInstance();
 

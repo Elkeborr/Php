@@ -2,8 +2,11 @@
   //Connectie klasses
 require_once 'bootstrap.php';
 
-// Controleren of we al ingelogd zijn, functie van gemaakt
-User::checkLogin();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+    //Controleren of we al ingelogd zijn, functie van gemaakt
+ User::checkLogin();
 
 
   $posts = Post::get();
@@ -94,13 +97,22 @@ User::checkLogin();
 
 $(document).ready(function(){
 
+    var allcount = Number($('#all').val());
+    console.log (allcount);
+    if (allcount <= 20){
+        $('#load--more').text("No more posts").attr("disabled", true);
+        $('#load--more').css("background","#F4F4F4");
+    }else {
+        $("#load--more").text("Load more");
+    }
 // Load more data
 $('#load--more').click(function(){
     var row = Number($('#row').val());
     var allcount = Number($('#all').val());
     var rowperpage = 3;
     row = row + rowperpage;
-    console.log (row);
+    console.log (allcount);
+   
     if(row <= allcount){
         $("#row").val(row);
 
@@ -125,6 +137,7 @@ $('#load--more').click(function(){
 
                         // Change the text and background
                         $('#load--more').text("No more posts");
+                        $('#load--more').off('click');
                         $('#load--more').css("background","#273B09");
                     }else{
                         $("#load--more").text("Load more");

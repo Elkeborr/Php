@@ -32,7 +32,7 @@ if (!empty($posts)) {
 <div class="collection__detail">
 	<?php foreach ($posts as $c): ?>
 
-	<a href="detail.php?id=<?php echo $c['id']; ?>" ><img src="<?php echo $c['image']; ?>" alt="Post" class="collection--image   <?php echo $c['name']; ?>"></a>
+	<a href="detail.php?id=<?php echo $c['id']; ?>" ><img src="<?php echo $c['image']; ?>" alt="Post" class="collection--image  <?php echo $c['name']; ?>"></a>
 	<p><?php echo $c['image_text']; ?></p>
 	<p id="date"><?php echo Post::getTimeAgo(strtotime(date($c['date']))); ?></p>
 
