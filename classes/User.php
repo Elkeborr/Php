@@ -205,8 +205,8 @@ class User
     {
         if (!empty($_POST)) {
             // email en password opvragen
-            $email = $_POST['email'];
-            $password = $_POST['password'];
+            $email = htmlspecialchars($_POST['email']);
+            $password = htmlspecialchars($_POST['password']);
 
             $conn = Db::getInstance();
             // check of rehash van password gelijk is aan hash uit db
@@ -229,14 +229,14 @@ class User
     }
 
     /* controle van de login*/
-    public static function checkLogin()
-    {
-        if (isset($_SESSION['email'])) {
-            // session_start();
-        } else {
-            header('Location: login.php');
-        }
-    }
+    /* public static function checkLogin()
+     {
+         if (isset($_SESSION['email'])) {
+             // session_start();
+         } else {
+             header('Location: login.php');
+         }
+     }*/
 
     /*emailcheck*/
     public static function EmailAvailable($email)
@@ -359,29 +359,5 @@ class User
         $detailUser = $statement->fetchAll();
 
         return $detailUser;
-    }
-
-    public static function detailPaginaFollowers($id)
-    {
-        $conn = Db::getInstance();
-
-        $statement = $conn->prepare('SELECT * FROM followers WHERE followers.user_id1=:id');
-        $statement->bindParam(':id', $id);
-        $statement->execute();
-        $detailFollowers = $statement->fetchAll();
-
-        return $detailFollowers;
-    }
-
-    public static function detailPaginaFollow($id)
-    {
-        $conn = Db::getInstance();
-
-        $statement = $conn->prepare('SELECT * FROM followers WHERE followers.user_id2=:id');
-        $statement->bindParam(':id', $id);
-        $statement->execute();
-        $detailFollow = $statement->fetchAll();
-
-        return $detailFollow;
     }
 }

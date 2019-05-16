@@ -4,19 +4,28 @@ require_once 'bootstrap.php';
 $user = User::detailPagina($_GET['id']);
 $posts = Post::getPosts($_GET['id']);
 
-$followers = User::detailPaginaFollowers($_GET['id']);
+//Wie hem volgt
+$followers = Follow::detailPaginaFollowers($_GET['id']);
 $allFollowers = count($followers);
 
-$follow = User::detailPaginaFollow($_GET['id']);
+//Wie hij volgt
+$follow = Follow::detailPaginaFollow($_GET['id']);
 $allFollows = count($follow);
+
+// Unfollow or follow
+$check = Follow::checkFollow($_GET['id']);
+if ($check == true) {
+    $button = 'unfollow';
+} else {
+    $button = 'follow';
+}
+
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en" class="profiel">
 <head>
     <?php include_once 'includes/head.inc.php'; ?>
-    <title>Gebruikers Profiel</title>
+    <title>Users</title>
 </head>
 <body>
 <?php include_once 'includes/nav.inc.php'; ?>
@@ -30,13 +39,13 @@ $allFollows = count($follow);
         <img class="profile--image" src="<?php echo $u['profileImg']; ?>" alt="ProfileImg"></a>
 </div>  
 <p><?php echo $u['firstName'],' ' ,$u['lastName']; ?></p>
-<p class="followers"><?php echo $allFollows; ?></p>
-<p> volgend</p>
-<button id="follow" data-id="<?php echo $u['id']; ?>">Volg</button>
+<p><span class="followers"><?php echo $allFollowers; ?></span> Followers</p>
+<p> <span><?php echo $allFollows; ?></span>  Following</p>
+<button id="follow" data-id="<?php echo $u['id']; ?>"><?php echo $button; ?></button>
 </div>
   <!------------------------PROFIELTEKST--------------------------->
   <div class="biografie">
-<h3>Biografie</h3>
+<h3>About me</h3>
 <p><?php echo $u['bio']; ?> </p></div>  
 <?php endforeach; ?>
   </div>
@@ -64,31 +73,38 @@ $allFollows = count($follow);
 
 <script>
 
-$("button#follow").on("click",function(e){
-// op welke post?
+$("#follow").on("click",function(e){
+
 let user_id2= $(this).data('id');
-console.log(user_id2);
+//console.log(user_id2);
 let allFollowers =  $(this).parent().find(".followers");
-console.log(allFollowers);
 let followers = allFollowers.html();
-console.log(followers);
+//console.log(followers);
 
 
 $.ajax({
   method: "POST",
   url: "ajax/follow.php",
-  // vakje postId: en daar de id van
   data: { user_id2: user_id2 },
-  // data type defineren; server gaat json terg geven
   dataType:"json"
 })
   .done(function( res ) {
+    let button = $('#follow').html();
+    console.log(button)
    if(res.status == "success"){
-		followers ++;
-    allFollowers.html(followers);
-    $("button#follow").html("unfollow");
+     if(button == "follow"){
+      followers ++;
+      allFollowers.html(followers);
+    $("#follow").html("unfollow");
+     }else {
+      followers --;
+      allFollowers.html(followers);
+      $("#follow").html("follow");
    }
-  });
+  }else {
+     console.log("error");
+   }
+   } );
 
 
 

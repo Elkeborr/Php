@@ -3,9 +3,7 @@
 require_once 'bootstrap.php';
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
-User::checkLogin();
 
-  $timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
   $posts = Post::get();
   $post = count($posts);
 
@@ -16,12 +14,6 @@ User::checkLogin();
   } else {
       $error = true;
   }
-  $profileImg = Post::profilePic();
-
-
-
-  
-
 
 ?>
 
@@ -38,7 +30,7 @@ User::checkLogin();
 <!-------UPLOADEN VAN AFBEELDING------->
 
 <div class="upload">
-<h3>Upload hier een foto</h3>
+<h3>Upload your foto</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
   <p>Choose your filter</p>
     <select name="filter" >
@@ -65,18 +57,18 @@ User::checkLogin();
 <div class="collection">
   <?php foreach ($posts as $p): ?>
   <div class="collection__item">
-  <p id="date"><?php echo $timeago; ?></p>
+ 
 
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
         <div class="profile--small ">
-         <a href="user.profiel.php?id=<?php echo $p['user_id']; ?>" > <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> </a>
+         <a href="userProfile.php?id=<?php echo $p['user_id']; ?>" > <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> </a>
         </div>
         <p><?php echo $p['image_text']; ?></p>
-        <div><a href="#" data-id="<?php echo $post->id ?>" class="like">Like</a> <span class='likes'><?php echo $post->getLikes(); ?></span></div>
+        <!--<div><a href="#" data-id="<?php; // echo $post->id;?>" class="like">Like</a> <span class='likes'><?php //echo $post->getLikes();?></span></div>-->
 
-        <p id="date"><?php echo  $p['images_date']; ?></p>
-         
+        <!--<p id="date"><?php //echo  $p['images_date'];?></p>--->
+          <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['images_date']))); ?></p>
       </div>
 
 
@@ -101,13 +93,22 @@ User::checkLogin();
 
 $(document).ready(function(){
 
+    var allcount = Number($('#all').val());
+    console.log (allcount);
+    if (allcount <= 20){
+        $('#load--more').text("No more posts").attr("disabled", true);
+        $('#load--more').css("background","#F4F4F4");
+    }else {
+        $("#load--more").text("Load more");
+    }
 // Load more data
 $('#load--more').click(function(){
     var row = Number($('#row').val());
     var allcount = Number($('#all').val());
     var rowperpage = 3;
     row = row + rowperpage;
-    console.log (row);
+    console.log (allcount);
+   
     if(row <= allcount){
         $("#row").val(row);
 
@@ -132,6 +133,7 @@ $('#load--more').click(function(){
 
                         // Change the text and background
                         $('#load--more').text("No more posts");
+                        $('#load--more').off('click');
                         $('#load--more').css("background","#273B09");
                     }else{
                         $("#load--more").text("Load more");

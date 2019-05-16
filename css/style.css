@@ -254,6 +254,7 @@ a.navbar__link
   background-color: #709255;
   color: #fff;
   font-size: 18px;
+  border:none;
 }
 
 #load--more:hover{
@@ -274,3 +275,12 @@ a.navbar__link
   color: black;
   margin: 0 10px 0 10px;
 }
+.form__error{
+  text-align: center;
+  width: 50%;
+  margin-bottom: 20px;
+  margin: auto;
+  padding: 10px;
+  color:tomato;
+}
+
