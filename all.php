@@ -32,7 +32,7 @@ if (empty($allPosts)) {
          
         </div>
         <p><?php echo $p['image_text']; ?></p>
-        <p id="date"><?php echo  $p['date']; ?></p>
+        <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['date']))); ?></p>
           
       </div>
       <div class='likeContainer'>
