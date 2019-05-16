@@ -10,9 +10,9 @@ $colors = Post::getColors($_GET['id']);
 $filters = Post::getFilters();
 
 if (!empty($posts)) {
-	$show = true;
+    $show = true;
 } else {
-	$error = true;
+    $error = true;
 }
 ?>
 <!DOCTYPE html>
@@ -71,7 +71,7 @@ if (!empty($posts)) {
     if (!empty($_POST)) {
         try {
             $comment = new Comment();
-            $comment->setText($_POST['comment']);
+            $comment->setText(htmlspecialchars(($_POST['comment'])));
             $comment->Save();
         } catch (\Throwable $th) {
             //throw $th;
