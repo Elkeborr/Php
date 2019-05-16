@@ -1,12 +1,18 @@
 <?php
-//session_start();
-
-  //Connectie klasses
+//Connectie klasses
 include_once 'bootstrap.php';
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
+User::checkLogin();
+$searchResult = Post::search(strtolower($_GET['search']));
 
-  $searchResult = Post::search(strtolower($_GET['search']));
+$filters = Post::getFilters();
+
+if (!empty($posts)) {
+    $show = true;
+} else {
+    $error = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -37,7 +43,7 @@ include_once 'bootstrap.php';
           <img class="profile--imageSmall" src="<?php echo  $value['profileImg']; ?>"> 
         </div>
         <p><?php echo $value['image_text']; ?></p>
-        <p id="date"><?php echo $value['date']; ?></p>
+        <p id="date"><?php echo Post::getTimeAgo(strtotime(date($value['date']))); ?></p>
         <button>Like</button>   
       </div>
   </div>

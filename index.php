@@ -2,7 +2,12 @@
   //Connectie klasses
 require_once 'bootstrap.php';
 
-// Controleren of we al ingelogd zijn, functie van gemaakt
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+    //Controleren of we al ingelogd zijn, functie van gemaakt
+ User::checkLogin();
+
 
   $posts = Post::get();
   $post = count($posts);
@@ -21,7 +26,7 @@ require_once 'bootstrap.php';
 <html lang="en">
 <head>
     <?php include_once 'includes/head.inc.php'; ?>
-    <title>Plantspiratie</title>
+    <title>Plantspiration</title>
 </head>
 <body>
 
@@ -30,7 +35,7 @@ require_once 'bootstrap.php';
 <!-------UPLOADEN VAN AFBEELDING------->
 
 <div class="upload">
-<h3>Upload your foto</h3>
+<h3>Upload here your picture...</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
   <p>Choose your filter</p>
     <select name="filter" >
@@ -67,7 +72,6 @@ require_once 'bootstrap.php';
         <p><?php echo $p['image_text']; ?></p>
         <!--<div><a href="#" data-id="<?php; // echo $post->id;?>" class="like">Like</a> <span class='likes'><?php //echo $post->getLikes();?></span></div>-->
 
-        <!--<p id="date"><?php //echo  $p['images_date'];?></p>--->
           <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['images_date']))); ?></p>
       </div>
 

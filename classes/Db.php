@@ -18,11 +18,19 @@ abstract class Db
             return self::$conn;
         } else {
             $config = self::getConfig();
-            $database = $config['database'];
-            $user = $config['user'];
-            $password = $config['password'];
+            $database = $config['db_database'];
+            $server = $config['db_servername'];
+            $user = $config['db_user'];
+            $password = $config['db_password'];
+            $port = $config['db_port'];
 
-            self::$conn = new PDO('mysql:host=localhost;dbname='.$database.';charset=utf8mb4', $user, $password, null);
+            try {
+                self::$conn = new PDO('mysql:host='.$server.';dbname='.$database.';port='.$port.';charset=utf8mb4', $user, $password);
+                self::$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (Exception $e) {
+                var_dump($e);
+                die();
+            }
 
             return self::$conn;
         }

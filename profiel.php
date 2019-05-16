@@ -6,6 +6,15 @@ require_once 'bootstrap.php';
 $bio = User::bio();
 $posts = Post::getOwnPosts();
 User::updateBio();
+
+
+$filters = Post::getFilters();
+
+if (!empty($posts)) {
+    $show = true;
+} else {
+    $error = true;
+}
 ?>
 
 
@@ -54,7 +63,7 @@ User::updateBio();
   <!------------------------PASSWOORD EN EMAIL WIJZIGEN--------------------------->
 
   <div class="wijzigen">
-  <h3> Settinfs </h3>
+  <h3> Settings </h3>
 
 
 <a href="changePassword.php">Change password</a>
@@ -63,6 +72,8 @@ User::updateBio();
 
   </div>
 
+
+<!-----------------------POSTS----------------------->
 </div>
 <div class="post--container">
 
@@ -74,7 +85,9 @@ User::updateBio();
           <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
         </div>
         <p><?php echo $p['image_text']; ?></p>
-        <p id="date"><?php echo  $p['date']; ?></p>
+        <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['date']))); ?></p>
+        <button>Delete</button>
+      
       </div>
       <!--<button>Delete</button>
       <button>Edit</button>-->
