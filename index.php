@@ -2,7 +2,11 @@
   //Connectie klasses
 require_once 'bootstrap.php';
 
-// Controleren of we al ingelogd zijn, functie van gemaakt
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+    //Controleren of we al ingelogd zijn, functie van gemaakt
+ User::checkLogin();
 
   $posts = Post::get();
   $post = count($posts);
