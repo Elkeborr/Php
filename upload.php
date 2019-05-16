@@ -16,10 +16,10 @@ if (isset($_FILES['image'])) {
         //for error messages: see http://php.net/manual/en/features.fileupload.errors.php
         switch ($_FILES['image']['error']) {
         case 1:
-        $msg = 'U mag maximaal 2MB opladen.';
+        $msg = 'You can upload max2MB.';
         break;
         default:
-        $msg = 'Sorry, uw upload kon niet worden verwerkt.';
+        $msg = 'Sorry, upload did not succeed.';
             echo "<button onclick=\"location.href='index.php'\">Try again</button>";
         }
     } else {
@@ -59,10 +59,10 @@ if (isset($_FILES['image'])) {
 
                 header('location:index.php');
             } else {
-                $msg = 'Sorry, de upload is mislukt.';
+                $msg = 'Sorry, upload failed.';
             }
         } else {
-            $msg = 'Sorry, enkel afbeeldingen zijn toegestaan.';
+            $msg = 'Sorry, only images allowed.';
         }
     }
     //echo $msg.'<br />';

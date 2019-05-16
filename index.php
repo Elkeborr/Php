@@ -8,6 +8,7 @@ ini_set('display_errors', 1);
     //Controleren of we al ingelogd zijn, functie van gemaakt
  User::checkLogin();
 
+
   $posts = Post::get();
   $post = count($posts);
 
@@ -25,7 +26,7 @@ ini_set('display_errors', 1);
 <html lang="en">
 <head>
     <?php include_once 'includes/head.inc.php'; ?>
-    <title>Plantspiratie</title>
+    <title>Plantspiration</title>
 </head>
 <body>
 
@@ -34,7 +35,7 @@ ini_set('display_errors', 1);
 <!-------UPLOADEN VAN AFBEELDING------->
 
 <div class="upload">
-<h3>Upload your foto</h3>
+<h3>Upload here your picture...</h3>
   <form enctype="multipart/form-data" action="upload.php" method="POST" class="form"> 
   <p>Choose your filter</p>
     <select name="filter" >
@@ -71,7 +72,6 @@ ini_set('display_errors', 1);
         <p><?php echo $p['image_text']; ?></p>
         <!--<div><a href="#" data-id="<?php; // echo $post->id;?>" class="like">Like</a> <span class='likes'><?php //echo $post->getLikes();?></span></div>-->
 
-        <!--<p id="date"><?php //echo  $p['images_date'];?></p>--->
           <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['images_date']))); ?></p>
       </div>
 

@@ -6,7 +6,14 @@ ini_set('display_errors', 1);
 
 $posts = Post::detailPagina($_GET['id']);
 $colors = Post::getColors($_GET['id']);
-$timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
+
+$filters = Post::getFilters();
+
+if (!empty($posts)) {
+	$show = true;
+} else {
+	$error = true;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,12 +31,14 @@ $timeago = Post::getTimeAgo(strtotime($_GET['posts.date']));
 
 <div class="collection__detail">
 	<?php foreach ($posts as $c): ?>
-	<p id="date"> <?php echo $timeago; ?> </p>
 
 	<a href="detail.php?id=<?php echo $c['id']; ?>" ><img src="<?php echo $c['image']; ?>" alt="Post" class="collection--image  <?php echo $c['name']; ?>"></a>
 	<p><?php echo $c['image_text']; ?></p>
+	<p id="date"><?php echo Post::getTimeAgo(strtotime(date($c['date']))); ?></p>
+
 	<div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $c['profileImg']; ?>"> 
+
         </div>
 		<button>Like</button>
 

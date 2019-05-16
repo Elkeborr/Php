@@ -361,4 +361,63 @@ class User
 
         return $detailUser;
     }
+
+    public static function changeEmail(){
+        $conn = Db::getInstance();
+
+        if (isset($_POST['submit'])) {
+            $newemail = $_POST['newemail'];
+            $password = $_POST['password'];
+            
+            if (empty($password)) {
+                echo "<font color='red'>Password field is empty!</font><br/>";
+            } else {
+                $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+                $stm->execute();
+                $id = $stm->fetch(PDO::FETCH_COLUMN);
+            
+                $insert = $conn->prepare("UPDATE users SET email = '".$newemail."'WHERE users.id='".$id."';");
+                $insert->bindParam(':email', $newemail);
+                $insert->execute();
+                header('Location:index.php');
+
+
+            }
+        return $insert;
+    }
+
+    }
+
+    public static function changePassword(){
+        $conn = Db::getInstance();
+
+
+        if (isset($_POST['submit'])) {
+            $oldpassword = $_POST['oldpassword'];
+            $newpassword = $_POST['newpassword'];
+
+            /* Het gebruik bewust vertragen door het passwoord meerdere
+            keren te laten encrypteren  */
+            $options = [
+            'cost' => 12, //2^12
+            ];
+            $newpassword = password_hash($newpassword, PASSWORD_DEFAULT, $options);
+            
+            if (empty($oldpassword)) {
+                echo "<font color='red'>Old password is empty!</font><br/>";
+            } else {
+                $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+                $stm->execute();
+                $id = $stm->fetch(PDO::FETCH_COLUMN);
+            
+                $insert = $conn->prepare("UPDATE users SET password = '".$newpassword."'WHERE users.id='".$id."';");
+                $insert->bindParam(':password', $newpassword);
+                $insert->execute();
+
+            }
+            return $insert;
+
+    }
+
+    }
 }

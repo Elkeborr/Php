@@ -54,12 +54,12 @@ if ($check == true) {
 <?php foreach ($posts as $p): ?>
   <div class="collection__item">
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
+      <p><?php echo $p['image_text']; ?></p>
+      <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['date']))); ?></p>
       <div class='item--container'>
         <div class="profile--small ">
           <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
         </div>
-        <p><?php echo $p['image_text']; ?></p>
-        <p id="date"><?php echo  $p['date']; ?></p>
      
       
       </div>
