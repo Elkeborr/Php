@@ -261,10 +261,16 @@ a.navbar__link
   transition: 0.3s;
 }
 /*-----------------------------------------------------*/
-.like{
+.likeContainer{
 
   display: block;
+  margin: 10px 0px 0 0;
   
  
 }
+.likes{
 
+  font-size: 1em;
+  color: black;
+  margin: 0 10px 0 10px;
+}

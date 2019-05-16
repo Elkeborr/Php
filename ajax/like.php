@@ -1,12 +1,12 @@
 <?php
     // ajax/like.php
     if (!empty($_POST)) {
-        $postId = $_POST['postId'];
-        $userId =1;
+        $postId = $_POST['postid'];
+        $userId =$_POST['userId'];
 
         require_once '../bootstrap.php';
         $l = new Like();
-        $l->setPostId($postId);
+        $l->setPostId($postid);
         $l->setUserId($userId);
         $l->save();
 

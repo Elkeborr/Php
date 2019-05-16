@@ -21,12 +21,16 @@ $allPosts = Post::getAll();
       <div class='item--container'>
         <div class="profile--small ">
          <a href="user.profiel.php?id=<?php echo $p['user_id']; ?>" > <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> </a>
+         
         </div>
         <p><?php echo $p['image_text']; ?></p>
         <p id="date"><?php echo  $p['date']; ?></p>
-        <a href="#" data-id="<?php echo $post->id ?>" class="like">Like</a> <span class='likes'><?php echo $post->getLikes(); ?></span>
-
+          
       </div>
+      <div class='likeContainer'>
+            <a href="#" data-id="<?php echo $post->id ?>" class='like' >Like</a>
+            <span class='likes'><?php echo $post->getLikes(); ?>0</span>
+        </div>
   </div>
 <?php endforeach; ?> 
 </div>
