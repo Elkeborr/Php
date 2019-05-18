@@ -8,11 +8,6 @@ $searchResult = Post::search(strtolower($_GET['search']));
 
 $filters = Post::getFilters();
 
-if (!empty($posts)) {
-    $show = true;
-} else {
-    $error = true;
-}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +21,7 @@ if (!empty($posts)) {
 <?php include_once 'includes/nav.inc.php'; ?>
 
 <div class="container--search">
-<h3><?php echo  $_GET['search']; ?></h3>
+<h3><?php echo  htmlspecialchars($_GET['search']); ?></h3>
 
 <!-------AFBEELDINGEN SHOWEN------->
 

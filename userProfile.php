@@ -41,7 +41,7 @@ if ($check == true) {
 <p><?php echo $u['firstName'],' ' ,$u['lastName']; ?></p>
 <p><span class="followers"><?php echo $allFollowers; ?></span> Followers</p>
 <p> <span><?php echo $allFollows; ?></span>  Following</p>
-<button id="follow" data-id="<?php echo $u['id']; ?>"><?php echo $button; ?></button>
+<button class=""id="follow" data-id="<?php echo $u['id']; ?>"><?php echo $button; ?></button>
 </div>
   <!------------------------PROFIELTEKST--------------------------->
   <div class="biografie">
@@ -73,14 +73,21 @@ if ($check == true) {
 
 <script>
 
+let button = $("#follow").html();
+
+
+if (button == "follow"){
+  $("#follow").addClass("follow");
+}else {
+  $("#follow").addClass("unfollow");
+}
+
 $("#follow").on("click",function(e){
 
 let user_id2= $(this).data('id');
 //console.log(user_id2);
 let allFollowers =  $(this).parent().find(".followers");
 let followers = allFollowers.html();
-//console.log(followers);
-
 
 $.ajax({
   method: "POST",
@@ -90,21 +97,16 @@ $.ajax({
 })
   .done(function( res ) {
     let button = $('#follow').html();
-    console.log(button)
    if(res.status == "success"){
-     if(button == "follow"){
       followers ++;
+      $("#follow").addClass("unfollow");
       allFollowers.html(followers);
-    $("#follow").html("unfollow");
-     }else {
-      followers --;
-      allFollowers.html(followers);
-      $("#follow").html("follow");
-   }
-  }else {
+      $("#follow").html("unfollow");
+     }
+  else {
      console.log("error");
    }
-   } );
+   });
 
 
 

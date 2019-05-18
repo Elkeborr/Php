@@ -8,7 +8,6 @@ ini_set('display_errors', 1);
     //Controleren of we al ingelogd zijn, functie van gemaakt
  User::checkLogin();
 
-
   $posts = Post::get();
   $post = count($posts);
 
@@ -66,9 +65,9 @@ ini_set('display_errors', 1);
 
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
-        <div class="profile--small ">
-         <a href="userProfile.php?id=<?php echo $p['user_id']; ?>" > <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> </a>
-        </div>
+      <a href="userProfile.php?id=<?php echo $p['user_id']; ?>" > <div class="profile--small ">
+          <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
+        </div></a>
         <p><?php echo $p['image_text']; ?></p>
         <!--<div><a href="#" data-id="<?php; // echo $post->id;?>" class="like">Like</a> <span class='likes'><?php //echo $post->getLikes();?></span></div>-->
 

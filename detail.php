@@ -9,11 +9,6 @@ $colors = Post::getColors($_GET['id']);
 
 $filters = Post::getFilters();
 
-if (!empty($posts)) {
-    $show = true;
-} else {
-    $error = true;
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

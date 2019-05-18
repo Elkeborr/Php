@@ -105,20 +105,13 @@ font-size: 1em;
 }
 
 .formComment__btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 20px;
-  width: 20%;
-  height: 50px;
-  border-radius: 10px;
-  background: #709255;
-  color: #fff;
-  font-size: 18px;
-  margin-top: 16px;
+  color: white;
+  background-color: #709255;
+  padding: 5px 15px ;
+  border: none;
 }
 .formComment__btn:hover {
-  background: #333333;
+ background-color:#273B09;
 }
 .formComment__input {
       display: block;
@@ -300,3 +293,16 @@ a.navbar__link
   text-align: center;
   }
 
+.follow{
+color: white;
+background-color: #709255;
+padding: 5px 15px ;
+border: none;
+}
+
+.unfollow{
+color: white;
+background-color:#273B09;
+padding: 5px 15px ;
+border: none;
+}

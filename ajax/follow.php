@@ -3,7 +3,7 @@
 include_once '../bootstrap.php';
 
 if (!empty($_POST)) {
-    $user_id2 = $_POST['user_id2'];
+    $user_id2 = htmlspecialchars($_POST['user_id2']);
     $check = Follow::checkFollow($user_id2);
     if ($check == false) {
         try {
@@ -21,7 +21,6 @@ if (!empty($_POST)) {
                 'message' => 'Something went wrong ',
                 ];
         }
-
         echo json_encode($result);
     } else {
         try {

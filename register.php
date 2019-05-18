@@ -15,11 +15,11 @@ if (!empty($_POST['submit'])) {
     } else {
         // Gegevens in de classe user steken
         $user = new  User();
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->setFirstName($_POST['firstname']);
-        $user->setLastName($_POST['lastname']);
-        $user->setUserName($_POST['username']);
+        $user->setEmail(htmlspecialchars($_POST['email']));
+        $user->setPassword(htmlspecialchars($_POST['password']));
+        $user->setFirstName(htmlspecialchars($_POST['firstname']));
+        $user->setLastName(htmlspecialchars($_POST['lastname']));
+        $user->setUserName(htmlspecialchars($_POST['username']));
 
         if ($user->register()) {
             $_SESSION['email'] = $email;
@@ -33,14 +33,8 @@ if (!empty($_POST['submit'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/login.css">
-
-    <title>Registreer</title>
+    <?php include_once 'includes/head.inc.php'; ?>
+    <title>Register</title>
 </head>
 <body>
 <div class="container--login">
@@ -66,19 +60,19 @@ if (!empty($_POST['submit'])) {
 				<div class="form__field">
 					<label for="email">Email</label>
 					<input type="text" id="email" name="email" value="<?php if (isset($_POST['email'])) {
-    echo $_POST['email'];
+    echo htmlspecialchars($_POST['email']);
 }?>">
                 </div>
                 <div class="form__field">
 					<label for="firstname">Firstname</label>
 					<input type="text" id="firstname" name="firstname" value="<?php if (isset($_POST['firstname'])) {
-    echo $_POST['firstname'];
+    echo htmlspecialchars($_POST['firstname']);
 }?>">
                 </div>
                 <div class="form__field">
 					<label for="lastname">Lastname</label>
 					<input type="text" id="lastname" name="lastname"value="<?php if (isset($_POST['lastname'])) {
-    echo $_POST['lastname'];
+    echo htmlspecialchars($_POST['lastname']);
 }?>">
                 </div>
 
@@ -89,7 +83,7 @@ if (!empty($_POST['submit'])) {
                 <div class="form__field">
 					<label for="username">Username</label>
 					<input type="text" id="username" name="username" value="<?php if (isset($_POST['username'])) {
-    echo $_POST['username'];
+    echo htmlspecialchars($_POST['username']);
 }?>">
 				</div>
 				<div class="form__field">
@@ -103,6 +97,9 @@ if (!empty($_POST['submit'])) {
 					<input type="submit" name="submit" value="Sign me up!" >	
 				</div>
 			</form>
+			<div class="link"> 
+			<p> <a href="login.php"> Back to login</a></p>
+</div>
 		</div>
 	</div>
 </div>
@@ -126,8 +123,13 @@ $("#email").on("keyup", function (e){
   		.done((function (res)  {
 		if(res.status == "mistake"){
         $("#email_error").html(res.message);
-        }
+        } else if (res.status == "copy"){
+			$("#email_error").html(res.message);
+		}else if (res.status == "success"){
+			$("#email_error").html(res.message);
+		}
     }));
+
     e.preventDefault();
         });
              
