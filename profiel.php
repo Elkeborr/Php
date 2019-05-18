@@ -89,27 +89,18 @@ if (!empty($posts)) {
         <button>Delete</button>
       
       </div>
-      <button>Delete</button>
-      <button>Edit</button>
+      <!--<button>Delete</button>
+      <button>Edit</button>-->
+
+      <form enctype="multipart/form-data" action="deleteEdit.php" method="POST"> 
+        <input type="submit" value="delete" name="delete" /><br>
+        <input type="submit" value="edit" name="edit"/>  
+      </form> 
   </div>
 <?php endforeach; ?> 
 
 </div>
-<?php
-if(isset($_SESSION['username']))
-{
-$id=$_GET['id'];
-$username=$_GET['username'];
-$stmt = $pdo->prepare("DELETE FROM `post` WHERE `id`='$id' and `userid`='" . $_SESSION["userid"] . "';");
-$stmt->execute(['id' => $id]);
-if($query1 || $query2)
-{
-header('location:search.php');
-}
-else { echo "You did not make this post";
-}
-}
-?>
+
     
 </body>
 </html>
