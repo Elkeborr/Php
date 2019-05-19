@@ -3,7 +3,7 @@
 require_once '../bootstrap.php';
 
 if (!empty($_POST)) {
-    $text = $_POST['text'];
+    $text = htmlspecialchars($_POST['text']);
 
     try {
         $e = User::EmailAvailable($text);

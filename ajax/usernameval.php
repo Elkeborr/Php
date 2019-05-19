@@ -3,7 +3,7 @@
 require_once '../bootstrap.php';
 
 if (!empty($_POST)) {
-    $name = $_POST['name'];
+    $name = htmlspecialchars($_POST['name']);
 
     try {
         $e = User::UsernameAvailable($name);

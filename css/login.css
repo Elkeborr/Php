@@ -17,8 +17,7 @@
   align-items: stretch;
   flex-direction: row-reverse;
   }
-  
-.form--login{
+  .form--login{
     padding-left: 30px;
     padding-right: 30px;
     min-height: 100vh;
@@ -27,8 +26,9 @@
     background: #ffff;
     padding: 173px 55px 55px 55px;
   }
+
   
-  .foto--login {
+.foto--login{
     background-image: url('../images/hero_login.jpg');
     width: calc(100% - 560px);
     background-repeat: no-repeat;
@@ -167,6 +167,15 @@
     padding:83px 55px 55px 55px;
   }
 
+  .link{
+    text-align: center;
+  
+  }
+  .link a{
+    text-decoration: none;
+    color:#273B09;
+  }
+
   /*MEDIAQUERIES*/
     @media (max-width: 992px) {
       .form--login {
@@ -178,16 +187,19 @@
       .foto--login {
         width: 50%;
       }
+
+    
     }
     
     @media (max-width: 768px) {
       .form--login {
         width: 100%;
       }
-    
+  
       .foto--login {
         display: none;
       }
+      
     }
     
     @media (max-width: 576px) {
@@ -195,6 +207,10 @@
         padding-left: 15px;
         padding-right: 15px;
         padding-top: 70px;
+
       }
+
+ 
+  
     }
     
