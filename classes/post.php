@@ -330,4 +330,31 @@ class Post
 
         return  $posts;
     }
+
+    public static function deleteEdit()
+    {
+        $conn = Db::getInstance();
+
+
+        if(isset($_POST['submit'])){
+           
+            $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+            $stm->execute();
+            $userid = $stm->fetch(PDO::FETCH_COLUMN);
+
+            $stm = $conn->prepare("DELETE FROM posts WHERE posts.id,posts.image_text,posts.image,posts.date WHERE posts.id = $postsid");
+            $insert->bindParam(':bio', $bio);
+            $insert->execute();
+            
+        if($stm->execute())
+        {
+        $msg = 'Uw post is verwijderd.';
+        header('location:profiel.php');
+        }
+        else { 
+        $msg = 'Something went wrong.';
+        }
+        }
+
+    }
 }

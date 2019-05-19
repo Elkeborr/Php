@@ -9,6 +9,7 @@ ini_set('display_errors', 1);
  User::checkLogin();
 
 
+
   $posts = Post::get();
   $post = count($posts);
 

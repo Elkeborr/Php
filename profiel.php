@@ -6,7 +6,7 @@ require_once 'bootstrap.php';
 $bio = User::bio();
 $posts = Post::getOwnPosts();
 User::updateBio();
-
+Post::deleteEdit();
 
 $filters = Post::getFilters();
 
@@ -86,13 +86,13 @@ if (!empty($posts)) {
         </div>
         <p><?php echo $p['image_text']; ?></p>
         <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['date']))); ?></p>
-        <button>Delete</button>
+        
       
       </div>
       <!--<button>Delete</button>
       <button>Edit</button>-->
 
-      <form enctype="multipart/form-data" action="deleteEdit.php" method="POST"> 
+      <form enctype="multipart/form-data" action="" method="POST"> 
         <input type="submit" value="delete" name="delete" /><br>
         <input type="submit" value="edit" name="edit"/>  
       </form> 
