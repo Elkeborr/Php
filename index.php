@@ -5,10 +5,10 @@ require_once 'bootstrap.php';
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-    //Controleren of we al ingelogd zijn, functie van gemaakt
- User::checkLogin();
-
-
+    //Controleren of we al ingelogd zijn
+    if (!isset($_SESSION['email'])) {
+        header('Location: login.php');
+    }
 
   $posts = Post::get();
   $post = count($posts);

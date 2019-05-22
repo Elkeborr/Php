@@ -103,14 +103,18 @@ class Post
 
     public static function detectColors($image, $num, $level = 5)
     {
+        // aantal kleuren
         $level = (int) $level;
+        // een array voor het pallet
         $palette = array();
+        // de afbeelding
         $size = getimagesize($image);
         if (!$size) {
             return false;
         }
         switch ($size['mime']) {
       case 'image/jpeg':
+      // returns an image identifier representing the image obtained from the given filename.
         $img = imagecreatefromjpeg($image);
         break;
       case 'image/png':
@@ -125,6 +129,7 @@ class Post
         if (!$img) {
             return false;
         }
+        // inde hoogte en breedte de foto afgaan en daar de 5 meest primare kleuren zoeken
         for ($i = 0; $i < $size[0]; $i += $level) {
             for ($j = 0; $j < $size[1]; $j += $level) {
                 $thisColor = imagecolorat($img, $i, $j);
@@ -142,7 +147,13 @@ class Post
     {
         $conn = Db::getInstance();
         $stmt = $conn->prepare("SELECT posts.id,posts.image,posts.image_text,posts.date,filters.name,users.profileImg FROM users,colors,posts,filters 
-        WHERE posts.image_text like '%$search%' AND filters.id =posts.filter_id AND users.id=posts.user_id UNION SELECT posts.id,posts.image,posts.image_text,posts.date,filters.name,users.profileImg FROM users,colors,posts,filters WHERE colors.color like '%$search%' AND filters.id =posts.filter_id AND users.id=posts.user_id AND posts.id=colors.post_id");
+        WHERE posts.image_text like CONCAT('%', :search, '%')
+        AND filters.id =posts.filter_id AND users.id=posts.user_id 
+        UNION SELECT posts.id,posts.image,posts.image_text,posts.date,filters.name,users.profileImg 
+        FROM users,colors,posts,filters WHERE colors.color like 
+        CONCAT('%', :search, '%') AND filters.id =posts.filter_id AND users.id=posts.user_id 
+        AND posts.id=colors.post_id");
+        $stmt->bindParam(':search', $search);
         $stmt->execute();
         $search = $stmt->fetchAll();
 
@@ -266,31 +277,32 @@ class Post
         return  $posts;
     }
 
-    public static function deleteEdit()
-    {
-        $conn = Db::getInstance();
+    /*  public static function deleteEdit()
+      {
+          $conn = Db::getInstance();
 
 
-        if(isset($_POST['submit'])){
-           
-            $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
-            $stm->execute();
-            $userid = $stm->fetch(PDO::FETCH_COLUMN);
-
-            $stm = $conn->prepare("DELETE FROM posts WHERE posts.id,posts.image_text,posts.image,posts.date WHERE posts.id = $postsid");
-            $insert->bindParam(':bio', $bio);
-            $insert->execute();
-            
-        if($stm->execute())
-        {
-        $msg = 'Uw post is verwijderd.';
-        header('location:profiel.php');
-        }
-        else { 
-        $msg = 'Something went wrong.';
-        }
-        }
+          if(isset($_POST['submit'])){
 
     }
 
+              $stm = $conn->prepare("SELECT id FROM users WHERE email = '".$_SESSION['email']."'");
+              $stm->execute();
+              $userid = $stm->fetch(PDO::FETCH_COLUMN);
+
+              $stm = $conn->prepare("DELETE FROM posts WHERE posts.id,posts.image_text,posts.image,posts.date WHERE posts.id = $postsid");
+              $insert->bindParam(':bio', $bio);
+              $insert->execute();
+
+          if($stm->execute())
+          {
+          $msg = 'Uw post is verwijderd.';
+          header('location:profiel.php');
+          }
+          else {
+          $msg = 'Something went wrong.';
+          }
+          }
+
+      }*/
 }

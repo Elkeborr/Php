@@ -3,9 +3,8 @@
 include_once 'bootstrap.php';
 
 // Controleren of we al ingelogd zijn, functie van gemaakt
-User::checkLogin();
-$searchResult = Post::search(strtolower($_GET['search']));
 
+$searchResult = Post::search(strtolower($_GET['search']));
 $filters = Post::getFilters();
 
 ?>

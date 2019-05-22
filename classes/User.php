@@ -228,17 +228,6 @@ class User
         }
     }
 
-    /* controle van de login*/
-    public static function checkLogin()
-    {
-        if (isset($_SESSION)) {
-            // session_start();
-        }
-        if (!isset($_SESSION['email'])) {
-            header('Location: login.php');
-        }
-    }
-
     /*emailcheck*/
     public static function EmailAvailable($email)
     {
@@ -341,8 +330,9 @@ class User
                 $stm->execute();
                 $id = $stm->fetch(PDO::FETCH_COLUMN);
 
-                $insert = $conn->prepare("UPDATE users SET bio = '".$bio."'WHERE users.id='".$id."';");
+                $insert = $conn->prepare('UPDATE users SET bio = :bio WHERE users.id=:id');
                 $insert->bindParam(':bio', $bio);
+                $insert->bindParam(':id', $id);
                 $insert->execute();
             }
 
@@ -377,7 +367,7 @@ class User
                 $stm->execute();
                 $id = $stm->fetch(PDO::FETCH_COLUMN);
 
-                $insert = $conn->prepare("UPDATE users SET email = '".$newemail."'WHERE users.id='".$id."';");
+                $insert = $conn->prepare("UPDATE users SET email = :email WHERE users.id='".$id."';");
                 $insert->bindParam(':email', $newemail);
                 $insert->execute();
                 header('Location:index.php');
@@ -409,7 +399,7 @@ class User
                 $stm->execute();
                 $id = $stm->fetch(PDO::FETCH_COLUMN);
 
-                $insert = $conn->prepare("UPDATE users SET password = '".$newpassword."'WHERE users.id='".$id."';");
+                $insert = $conn->prepare("UPDATE users SET password = :password WHERE users.id='".$id."';");
                 $insert->bindParam(':password', $newpassword);
                 $insert->execute();
             }
