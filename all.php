@@ -4,7 +4,6 @@ require_once 'bootstrap.php';
 
 $allPosts = Post::getAll();
 
-
 if (empty($allPosts)) {
     $error = true;
 }
@@ -40,7 +39,7 @@ if (empty($allPosts)) {
           
       </div>
      
-        <div><a href="all.php" data-id="<?php echo $p['id']; ?>" id='likebtn' class="like">Like</a> <span class='likes'><?php echo $post->getLikes($p['id']); ?></span> people like this </div>
+        <div><a href="all.php" data-id="<?php echo $p['id']; ?>" id='likebtn' class="like">Like</a> <span class='likes'><?php echo Post::getLikes($p['id']); ?></span> people like this </div>
         
   
   </div>

@@ -12,7 +12,7 @@ ini_set('display_errors', 1);
 
   $posts = Post::get();
   $post = count($posts);
-    
+
   $filters = Post::getFilters();
 
   if (!empty($posts)) {
@@ -75,7 +75,7 @@ ini_set('display_errors', 1);
          
           <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['images_date']))); ?></p>
       </div>
-        <div><a href="index.php" data-id="<?php echo $p['id']; ?>" id='likebtn' class="like">Like</a> <span class='likes'><?php echo $post->getLikes($p['id']); ?></span> people like this </div>
+        <div><a href="index.php" data-id="<?php echo $p['id']; ?>" id='likebtn' class="like">Like</a> <span class='likes'><?php echo Post::getLikes($p['id']); ?></span> people like this </div>
         
            
 

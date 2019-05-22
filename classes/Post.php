@@ -160,15 +160,15 @@ class Post
         return $search;
     }
 
-    public  function getLikes($id)
+    public static function getLikes($id)
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("SELECT count(*) AS count FROM likes WHERE posts_id = :post.id");
-        $statement->bindValue(':post.id', $id);
+        $statement = $conn->prepare('SELECT count(*) AS count FROM likes WHERE likes.post_id = :post_id');
+        $statement->bindParam(':post_id', $id);
         $statement->execute();
-        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        $result = $statement->fetch(PDO::FETCH_COLUMN);
 
-        return $result['count'];
+        return $result;
     }
 
     public static function getColors($id)
