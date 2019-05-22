@@ -103,14 +103,18 @@ class Post
 
     public static function detectColors($image, $num, $level = 5)
     {
+        // aantal kleuren
         $level = (int) $level;
+        // een array voor het pallet
         $palette = array();
+        // de afbeelding
         $size = getimagesize($image);
         if (!$size) {
             return false;
         }
         switch ($size['mime']) {
       case 'image/jpeg':
+      // returns an image identifier representing the image obtained from the given filename.
         $img = imagecreatefromjpeg($image);
         break;
       case 'image/png':
@@ -125,6 +129,7 @@ class Post
         if (!$img) {
             return false;
         }
+        // inde hoogte en breedte de foto afgaan en daar de 5 meest primare kleuren zoeken
         for ($i = 0; $i < $size[0]; $i += $level) {
             for ($j = 0; $j < $size[1]; $j += $level) {
                 $thisColor = imagecolorat($img, $i, $j);

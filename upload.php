@@ -54,6 +54,7 @@ if (isset($_FILES['image'])) {
                 $postId->execute();
                 $post_id = $postId->fetch(PDO::FETCH_COLUMN);
 
+                //kleuren aanspreken en opslagen tijdens de upload
                 $img = $newfilename;
                 $palette = Post::detectColors($img, 5, 1);
 

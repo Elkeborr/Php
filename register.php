@@ -8,10 +8,6 @@ if (!empty($_POST['submit'])) {
     if (empty($_POST['email']) || empty($_POST['password']) || empty($_POST['firstname'])
     || empty($_POST['lastname']) || empty($_POST['username'])) {
         $error = true;
-        if (!empty($_SESSION['error']['message'])) {
-            $error = $_SESSION['error']['message'];
-            unset($_SESSION['error']);
-        }
     } else {
         // Gegevens in de classe user steken
         $user = new  User();
@@ -22,7 +18,6 @@ if (!empty($_POST['submit'])) {
         $user->setUserName(htmlspecialchars($_POST['username']));
 
         if ($user->register()) {
-            session_start();
             $_SESSION['email'] = $email;
             header('Location:index.php');
         }
@@ -116,9 +111,13 @@ if (!empty($_POST['submit'])) {
 $("#email").on("keyup", function (e){
 	var text = $("#email").val();
 	$.ajax({
+		// welke methode
 	    method: "POST",
+		//naar waar (wat je moet uitvoeren)
 		url: "ajax/emailval.php",
+		//wat je gaat sturen van data 
 		data: {text: text},
+		// welk type van data 
 		dataType: 'json'
 		})
   		.done((function (res)  {
