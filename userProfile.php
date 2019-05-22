@@ -85,7 +85,7 @@ if (button == "follow"){
 $("#follow").on("click",function(e){
 
 let user_id2= $(this).data('id');
-//console.log(user_id2);
+
 let allFollowers =  $(this).parent().find(".followers");
 let followers = allFollowers.html();
 

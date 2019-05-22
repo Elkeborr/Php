@@ -6,7 +6,8 @@ require_once 'bootstrap.php';
 $bio = User::bio();
 $posts = Post::getOwnPosts();
 User::updateBio();
-Post::deleteEdit();
+
+//Post::deleteEdit();
 
 $filters = Post::getFilters();
 
@@ -21,15 +22,7 @@ if (!empty($posts)) {
 <!DOCTYPE html>
 <html lang="en" class="profiel">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Profile</title>
-
-  <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/filters.css">
-	<link rel="stylesheet" href="css/profiel.css">
+<?php include_once 'includes/head.inc.php'; ?>
 </head>
 <body>
 <?php include_once 'includes/nav.inc.php'; ?>

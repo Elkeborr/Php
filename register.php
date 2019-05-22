@@ -22,6 +22,7 @@ if (!empty($_POST['submit'])) {
         $user->setUserName(htmlspecialchars($_POST['username']));
 
         if ($user->register()) {
+            session_start();
             $_SESSION['email'] = $email;
             header('Location:index.php');
         }
@@ -126,7 +127,7 @@ $("#email").on("keyup", function (e){
         } else if (res.status == "copy"){
 			$("#email_error").html(res.message);
 		}else if (res.status == "success"){
-			$("#email_error").html(res.message);
+		
 		}
     }));
 
