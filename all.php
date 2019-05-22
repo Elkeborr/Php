@@ -46,7 +46,7 @@ if (empty($allPosts)) {
 </div>
 <script>
          // index.php script
-        $("a.like").on("click", function(e){
+    /*    $("a.like").on("click", function(e){
             // op welke post?
             var postId = $(this).data('id');
             var elLikes = $(this).parent().find(".likes");
@@ -66,7 +66,7 @@ if (empty($allPosts)) {
             });
  
             e.preventDefault();
-        });
+        });*/
     </script>
 
     
