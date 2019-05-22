@@ -12,7 +12,7 @@ ini_set('display_errors', 1);
 
   $posts = Post::get();
   $post = count($posts);
-
+    
   $filters = Post::getFilters();
 
   if (!empty($posts)) {
@@ -71,11 +71,13 @@ ini_set('display_errors', 1);
           <img class="profile--imageSmall" src="<?php echo  $p['profileImg']; ?>"> 
         </div></a>
         <p><?php echo $p['image_text']; ?></p>
-        <!--<div><a href="#" data-id="<?php; // echo $post->id;?>" class="like">Like</a> <span class='likes'><?php //echo $post->getLikes();?></span></div>-->
 
+         
           <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['images_date']))); ?></p>
       </div>
-
+        <div><a href="index.php" data-id="<?php echo $p['id']; ?>" id='likebtn' class="like">Like</a> <span class='likes'><?php echo $post->getLikes($p['id']); ?></span> people like this </div>
+        
+           
 
 
   </div>
@@ -170,27 +172,32 @@ $('#load--more').click(function(){
             
 
         // index.php script
-        $("a.like").on("click", function(e){
-            // op welke post?
-            var postId = $(this).data('id');
-            var elLikes = $(this).parent().find(".likes");
-            var likes = elLikes.html();
- 
-            $.ajax({
-                method: "POST",
-                url: "ajax/like.php",
-                data: { postId: postId },
-                dataType: "json"
-            })
-            .done(function( res ) {
-                if(res.status == "success") {
-                    likes++;
-                    elLikes.html(likes);
-                }
-            });
- 
-            e.preventDefault();
-        });
-  
+        $("a.like").on("click", function(e) {
+            var postId = $(this).data("id");
+            var link = $(this);
+
+        $.ajax({
+            method: "POST",
+            url: "ajax/like.php",
+            data: { postId: postId, }, 
+            dataType: 'json'
+        })
+        .done(function( res ) {
+            if (res.status == "liked") {
+                var likes = link.next().html();
+                likes++;
+                link.next().html(likes);	
+        } else if (res.status == "unliked") {
+            var likes = link.next().html();
+            likes--;
+            link.next().html(likes);	
+        }
+    });
+
+    e.preventDefault();
+    
+});
+
+
 
 </script>

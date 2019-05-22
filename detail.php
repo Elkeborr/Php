@@ -35,8 +35,7 @@ $filters = Post::getFilters();
           <img class="profile--imageSmall" src="<?php echo  $c['profileImg']; ?>"> 
 
         </div>
-		<button>Like</button>
-
+		
 
 	  <div class="clearfix">
 	  

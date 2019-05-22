@@ -4,6 +4,7 @@ require_once 'bootstrap.php';
 
 $allPosts = Post::getAll();
 
+
 if (empty($allPosts)) {
     $error = true;
 }
@@ -24,6 +25,7 @@ if (empty($allPosts)) {
 <div class="collection">
 
 <?php foreach ($allPosts as $p): ?>
+
   <div class="collection__item">
       <a href="detail.php?id=<?php echo $p['id']; ?>" > <img class="collection--image  <?php echo $p['name']; ?>" src="<?php echo $p['image']; ?>" alt="Post"></a>
       <div class='item--container'>
@@ -37,36 +39,42 @@ if (empty($allPosts)) {
         <p id="date"><?php echo Post::getTimeAgo(strtotime(date($p['date']))); ?></p>
           
       </div>
-      <!--   <div class='likeContainer'>
-         <a href="#" data-id="<?php //echo $post->id;?>" class='like' >Like</a>
-            <span class='likes'><?php //echo $post->getLikes();?>0</span>
-        </div>-->
+     
+        <div><a href="all.php" data-id="<?php echo $p['id']; ?>" id='likebtn' class="like">Like</a> <span class='likes'><?php echo $post->getLikes($p['id']); ?></span> people like this </div>
+        
+  
   </div>
 <?php endforeach; ?> 
 </div>
 <script>
          // index.php script
-        $("a.like").on("click", function(e){
-            // op welke post?
-            var postId = $(this).data('id');
-            var elLikes = $(this).parent().find(".likes");
-            var likes = elLikes.html();
- 
-            $.ajax({
-                method: "POST",
-                url: "ajax/like.php",
-                data: { postId: postId },
-                dataType: "json"
-            })
-            .done(function( res ) {
-                if(res.status == "success") {
-                    likes++;
-                    elLikes.html(likes);
-                }
-            });
- 
-            e.preventDefault();
-        });
+                $("a.like").on("click", function(e) {
+            var postId = $(this).data("id");
+            var link = $(this);
+
+        $.ajax({
+            method: "POST",
+            url: "ajax/like.php",
+            data: { postId: postId, }, 
+            dataType: 'json'
+        })
+        .done(function( res ) {
+            if (res.status == "liked") {
+                var likes = link.next().html();
+                likes++;
+                link.next().html(likes);	
+        } else if (res.status == "unliked") {
+            var likes = link.next().html();
+            likes--;
+            link.next().html(likes);	
+        }
+    });
+
+    e.preventDefault();
+    
+});
+
+
     </script>
 
     

@@ -1,6 +1,6 @@
 <?php
 
-//namespace phpProject;
+
 
 class Like
 {
@@ -47,15 +47,45 @@ class Like
         return $this;
     }
 
-    public function save()
+    private static function addLike()
     {
-        // @todo: hook in a new function that checks if a user has already liked a post
+        $conn = db::getInstance();
+        $query = "INSERT into likes (posts_id, users_id) values (:posts_id, :users_id)";
+        $statement = $conn->prepare($query);
+        $statement->bindValue(':posts_id', $this->getPostId());
+        $statement->bindValue(':users_id', $this->getUserId());
+        $statement->execute();
+    }
 
-        $conn = Db::getInstance();
-        $statement = $conn->prepare('INSERT into likes (post_id, user_id, date_created) values (:postid, :userid, NOW())');
-        $statement->bindValue(':postid', $this->getPostId());
-        $statement->bindValue(':userid', $this->getUserId());
+    private static function deleteLike()
+    {
+        $conn = db::getInstance();
+        $query = 'DELETE FROM likes WHERE posts_id = :posts_id AND users_id =:users_id';
+        $statement = $conn->prepare($query);
+        $statement->bindValue(':posts_id', $this->getPostId());
+        $statement->bindValue(':users_id', $this->getUserId());
+        $statement->execute();
+    }
 
-        return $statement->execute();
+    public static function checkLike()
+    {
+        $conn = db::getInstance();
+        $query = 'SELECT COUNT(*) FROM likes WHERE posts_id=:posts_id AND users_id=:users_id';
+        $statement = $conn->prepare($query);
+        $statement->bindValue(':posts_id', $this->getPostId());
+        $statement->bindValue(':user_id', $this->getUserId());
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        if ($result[0]['COUNT(*)'] == 0) {
+            $this->addLike();
+
+            return 'liked';
+        } else {
+            $this->deleteLike();
+
+            return 'unliked';
+        }
+
+        return $result;
     }
 }

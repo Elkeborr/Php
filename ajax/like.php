@@ -1,20 +1,26 @@
 <?php
-    // ajax/like.php
+    require_once '../bootstrap.php';
+
     if (!empty($_POST)) {
-        $postId = $_POST['postid'];
-        $userId =$_POST['userId'];
+        $postId = $_POST['postId'];
+        $userId = $_SESSION['users'][0];
 
-        require_once '../bootstrap.php';
         $l = new Like();
-        $l->setPostId($postid);
+        $l->setPostId($postId);
         $l->setUserId($userId);
-        $l->save();
+        $liked = $l->checkLike();
 
-        // JSON
-        $result = [
-            'status' => 'success',
-            'message' => 'Like has been saved.',
-        ];
+        if ($liked == 'liked') {
+            $result = [
+                'status' => 'liked',
+                'message' => 'Like was saved',
+            ];
+        } elseif ($liked == 'unliked') {
+            $result = [
+                'status' => 'unliked',
+                'message' => 'Like was deleted',
+            ];
+        }
 
         echo json_encode($result);
     }
