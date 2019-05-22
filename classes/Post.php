@@ -147,11 +147,11 @@ class Post
     {
         $conn = Db::getInstance();
         $stmt = $conn->prepare("SELECT posts.id,posts.image,posts.image_text,posts.date,filters.name,users.profileImg FROM users,colors,posts,filters 
-        WHERE posts.image_text like '%:search%' 
+        WHERE posts.image_text like CONCAT('%', :search, '%')
         AND filters.id =posts.filter_id AND users.id=posts.user_id 
         UNION SELECT posts.id,posts.image,posts.image_text,posts.date,filters.name,users.profileImg 
         FROM users,colors,posts,filters WHERE colors.color like 
-        '%:search%' AND filters.id =posts.filter_id AND users.id=posts.user_id 
+        CONCAT('%', :search, '%') AND filters.id =posts.filter_id AND users.id=posts.user_id 
         AND posts.id=colors.post_id");
         $stmt->bindParam(':search', $search);
         $stmt->execute();
