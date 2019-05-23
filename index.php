@@ -102,12 +102,12 @@ $(document).ready(function(){
 
     var allcount = Number($('#all').val());
     console.log (allcount);
-    if (allcount <= 20){
+   /* if (allcount <= 20){
         $('#load--more').text("No more posts").attr("disabled", true);
         $('#load--more').css("background","#F4F4F4");
     }else {
         $("#load--more").text("Load more");
-    }
+    }*/
 // Load more data
 $('#load--more').click(function(){
     var row = Number($('#row').val());
